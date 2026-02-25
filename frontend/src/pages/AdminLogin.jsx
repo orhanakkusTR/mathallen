@@ -9,6 +9,8 @@ import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
+
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -48,9 +50,11 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-stone-900 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30">
-            <ShoppingBasket className="w-8 h-8 text-white" />
-          </div>
+          <img 
+            src={LOGO_URL} 
+            alt="Mathallen Malmö" 
+            className="h-16 w-auto mx-auto mb-4"
+          />
           <h1 className="text-2xl font-bold text-white">Mathallen Admin</h1>
           <p className="text-stone-400 mt-1">Logga in för att hantera erbjudanden</p>
         </div>
@@ -70,7 +74,7 @@ export default function AdminLogin() {
                   onChange={(e) => setUsername(e.target.value)}
                   required
                   placeholder="admin"
-                  className="pl-10 bg-stone-700 border-stone-600 text-white placeholder:text-stone-500 focus:border-orange-500 focus:ring-orange-500 rounded-xl"
+                  className="pl-10 bg-stone-700 border-stone-600 text-white placeholder:text-stone-500 focus:border-red-500 focus:ring-red-500 rounded-xl"
                   data-testid="admin-username-input"
                 />
               </div>
@@ -89,7 +93,7 @@ export default function AdminLogin() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="pl-10 pr-10 bg-stone-700 border-stone-600 text-white placeholder:text-stone-500 focus:border-orange-500 focus:ring-orange-500 rounded-xl"
+                  className="pl-10 pr-10 bg-stone-700 border-stone-600 text-white placeholder:text-stone-500 focus:border-red-500 focus:ring-red-500 rounded-xl"
                   data-testid="admin-password-input"
                 />
                 <button
@@ -106,7 +110,7 @@ export default function AdminLogin() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-6 font-semibold"
+              className="w-full bg-red-600 hover:bg-red-700 text-white rounded-xl py-6 font-semibold"
               data-testid="admin-login-button"
             >
               {loading ? (

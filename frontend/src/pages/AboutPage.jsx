@@ -37,15 +37,15 @@ export default function AboutPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-orange-50 to-amber-50 py-16 md:py-24">
+      <section className="bg-gradient-to-br from-red-50 to-stone-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-orange-600 font-medium text-sm mb-4 bg-orange-100 px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
               <Heart className="w-4 h-4" />
               Om oss
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
-              Din lokala stormarknad sedan <span className="text-orange-500">1985</span>
+              Din lokala stormarknad sedan <span className="text-red-600">1985</span>
             </h1>
             <p className="text-lg md:text-xl text-stone-600 leading-relaxed">
               Mathallen Malmö är en uppskattad och välbesökt stormarknad i Malmö som 
@@ -135,11 +135,11 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <div
                 key={value.title}
-                className="bg-white rounded-2xl p-8 border border-stone-100 hover:border-orange-200 transition-colors group"
+                className="bg-white rounded-2xl p-8 border border-stone-100 hover:border-red-200 transition-colors group"
                 data-testid={`about-value-${index}`}
               >
-                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center mb-6 group-hover:bg-orange-500 transition-colors">
-                  <value.icon className="w-7 h-7 text-orange-500 group-hover:text-white transition-colors" />
+                <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mb-6 group-hover:bg-red-600 transition-colors">
+                  <value.icon className="w-7 h-7 text-red-600 group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="text-xl font-semibold text-stone-900 mb-3">
                   {value.title}
@@ -167,7 +167,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-orange-200 transform md:-translate-x-1/2" />
+              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-red-200 transform md:-translate-x-1/2" />
               
               {milestones.map((milestone, index) => (
                 <div
@@ -178,12 +178,12 @@ export default function AboutPage() {
                   data-testid={`milestone-${index}`}
                 >
                   {/* Dot */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-orange-500 rounded-full transform -translate-x-1/2 z-10" />
+                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2 z-10" />
                   
                   {/* Content */}
                   <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
                     <div className="bg-stone-50 rounded-xl p-6">
-                      <span className="text-orange-500 font-bold text-lg">{milestone.year}</span>
+                      <span className="text-red-600 font-bold text-lg">{milestone.year}</span>
                       <p className="text-stone-700 mt-1">{milestone.event}</p>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ export default function AboutPage() {
             <Button
               asChild
               size="lg"
-              className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8"
+              className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8"
               data-testid="about-cta-contact"
             >
               <Link to="/kontakt">

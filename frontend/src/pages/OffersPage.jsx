@@ -52,23 +52,23 @@ export default function OffersPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 py-12 md:py-20">
+      <section className="bg-gradient-to-br from-red-50 to-stone-50 py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div>
-              <span className="inline-flex items-center gap-2 text-amber-700 font-medium text-sm mb-4 bg-amber-100 px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 text-red-700 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
                 <Tag className="w-4 h-4" />
                 Veckans bästa priser
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-4">
-                Veckans <span className="text-orange-500">erbjudanden</span>
+                Veckans <span className="text-red-600">erbjudanden</span>
               </h1>
               <p className="text-lg text-stone-600 max-w-xl">
                 Ta del av våra senaste kampanjer och spara pengar på dina favoritprodukter.
               </p>
             </div>
             <div className="flex items-center gap-2 bg-white rounded-full px-5 py-3 shadow-sm border border-stone-100">
-              <Calendar className="w-5 h-5 text-orange-500" />
+              <Calendar className="w-5 h-5 text-red-600" />
               <span className="font-semibold text-stone-900">Gäller {currentWeek}</span>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function OffersPage() {
               {filteredOffers.map((offer, index) => (
                 <div
                   key={offer.id}
-                  className="offer-card bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-amber-200 hover-lift group"
+                  className="offer-card bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover-lift group"
                   data-testid={`offer-item-${index}`}
                 >
                   <div className="relative mb-4">
@@ -130,11 +130,11 @@ export default function OffersPage() {
                         className="w-full aspect-square object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full aspect-square bg-gradient-to-br from-orange-100 to-amber-100 rounded-xl flex items-center justify-center">
-                        <ShoppingBasket className="w-12 h-12 text-orange-300" />
+                      <div className="w-full aspect-square bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center">
+                        <ShoppingBasket className="w-12 h-12 text-red-300" />
                       </div>
                     )}
-                    <span className="absolute top-2 right-2 bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full shadow-sm offer-tag">
+                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm offer-tag">
                       ERBJUDANDE
                     </span>
                   </div>
@@ -146,7 +146,7 @@ export default function OffersPage() {
                       {offer.product_name}
                     </h3>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-orange-500">
+                      <span className="text-3xl font-bold text-red-600">
                         {offer.offer_price}:-
                       </span>
                       <span className="text-sm text-stone-500">/{offer.unit}</span>
@@ -201,11 +201,11 @@ export default function OffersPage() {
             </div>
             <div className="flex items-center gap-4">
               <div className="text-center px-6 py-4 bg-stone-800 rounded-xl">
-                <p className="text-3xl font-bold text-amber-400">100+</p>
+                <p className="text-3xl font-bold text-red-500">100+</p>
                 <p className="text-stone-400 text-sm">Produkter i sortimentet</p>
               </div>
               <div className="text-center px-6 py-4 bg-stone-800 rounded-xl">
-                <p className="text-3xl font-bold text-amber-400">35+</p>
+                <p className="text-3xl font-bold text-red-500">35+</p>
                 <p className="text-stone-400 text-sm">År av erfarenhet</p>
               </div>
             </div>

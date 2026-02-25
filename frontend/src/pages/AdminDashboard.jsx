@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  ShoppingBasket,
   LogOut,
   Plus,
   Edit2,
@@ -10,7 +9,6 @@ import {
   Package,
   Mail,
   Calendar,
-  X,
   Save,
   Eye,
   EyeOff,
@@ -39,6 +37,7 @@ import { toast } from "sonner";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
 
 const categories = [
   "Färska frukter & grönsaker",
@@ -209,22 +208,20 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Header */}
-      <header className="bg-stone-900 text-white py-4 sticky top-0 z-50">
+      <header className="bg-red-600 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
-              <ShoppingBasket className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h1 className="font-bold">Mathallen Admin</h1>
-              <p className="text-stone-400 text-xs">Hantera erbjudanden</p>
-            </div>
+            <img 
+              src={LOGO_URL} 
+              alt="Mathallen Malmö" 
+              className="h-10 w-auto"
+            />
           </div>
           <div className="flex items-center gap-4">
             <a
               href="/"
               target="_blank"
-              className="text-stone-400 hover:text-white text-sm transition-colors"
+              className="text-red-100 hover:text-white text-sm transition-colors"
               data-testid="view-site-link"
             >
               Visa webbplatsen →
@@ -233,7 +230,7 @@ export default function AdminDashboard() {
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="text-stone-400 hover:text-white hover:bg-stone-800"
+              className="text-red-100 hover:text-white hover:bg-red-700"
               data-testid="logout-button"
             >
               <LogOut className="w-4 h-4 mr-2" />
@@ -245,12 +242,11 @@ export default function AdminDashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
-        {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-xl p-6 shadow-sm" data-testid="stat-active-offers">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
-                <Tag className="w-6 h-6 text-orange-500" />
+              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                <Tag className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-stone-900">
@@ -308,7 +304,7 @@ export default function AdminDashboard() {
               <h2 className="text-xl font-semibold text-stone-900">Alla erbjudanden</h2>
               <Button
                 onClick={openCreateDialog}
-                className="bg-orange-500 hover:bg-orange-600 text-white rounded-xl"
+                className="bg-red-600 hover:bg-red-700 text-white rounded-xl"
                 data-testid="create-offer-button"
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -349,7 +345,7 @@ export default function AdminDashboard() {
                       </td>
                       <td className="py-4 px-6 text-stone-600 hidden md:table-cell">{offer.category}</td>
                       <td className="py-4 px-6">
-                        <span className="font-semibold text-orange-500">{offer.offer_price}:-</span>
+                        <span className="font-semibold text-red-600">{offer.offer_price}:-</span>
                         {offer.original_price && (
                           <span className="text-stone-400 text-sm ml-1 line-through">
                             {offer.original_price}:-
@@ -586,7 +582,7 @@ export default function AdminDashboard() {
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                 Avbryt
               </Button>
-              <Button type="submit" className="bg-orange-500 hover:bg-orange-600" data-testid="save-offer-button">
+              <Button type="submit" className="bg-red-600 hover:bg-red-700" data-testid="save-offer-button">
                 <Save className="w-4 h-4 mr-2" />
                 {editingOffer ? "Spara ändringar" : "Skapa erbjudande"}
               </Button>

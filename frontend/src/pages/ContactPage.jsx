@@ -43,15 +43,15 @@ export default function ContactPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-stone-100 to-orange-50 py-12 md:py-20">
+      <section className="bg-gradient-to-br from-stone-100 to-red-50 py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-orange-600 font-medium text-sm mb-4 bg-orange-100 px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
               <MapPin className="w-4 h-4" />
               Kontakta oss
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
-              Hitta till <span className="text-orange-500">Mathallen</span>
+              Hitta till <span className="text-red-600">Mathallen</span>
             </h1>
             <p className="text-lg md:text-xl text-stone-600 leading-relaxed">
               Vi finns i centrala Malmö och välkomnar dig varje dag. 
@@ -73,8 +73,8 @@ export default function ContactPage() {
               
               <div className="space-y-6 mb-10">
                 <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-address">
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-orange-500" />
+                  <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Adress</h3>
@@ -86,32 +86,32 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-phone">
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-orange-500" />
+                  <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Telefon</h3>
-                    <a href="tel:+46401234567" className="text-orange-600 hover:text-orange-700 font-medium">
+                    <a href="tel:+46401234567" className="text-red-600 hover:text-red-700 font-medium">
                       040-123 45 67
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-email">
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-orange-500" />
+                  <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">E-post</h3>
-                    <a href="mailto:info@mathallen.se" className="text-orange-600 hover:text-orange-700 font-medium">
+                    <a href="mailto:info@mathallen.se" className="text-red-600 hover:text-red-700 font-medium">
                       info@mathallen.se
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-hours">
-                  <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-orange-500" />
+                  <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Öppettider</h3>
@@ -179,7 +179,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="Ditt namn"
-                      className="rounded-xl border-stone-200 focus:border-orange-500 focus:ring-orange-500"
+                      className="rounded-xl border-stone-200 focus:border-red-500 focus:ring-red-500"
                       data-testid="contact-name-input"
                     />
                   </div>
@@ -196,7 +196,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       placeholder="din@email.se"
-                      className="rounded-xl border-stone-200 focus:border-orange-500 focus:ring-orange-500"
+                      className="rounded-xl border-stone-200 focus:border-red-500 focus:ring-red-500"
                       data-testid="contact-email-input"
                     />
                   </div>
@@ -212,7 +212,7 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="070-123 45 67"
-                      className="rounded-xl border-stone-200 focus:border-orange-500 focus:ring-orange-500"
+                      className="rounded-xl border-stone-200 focus:border-red-500 focus:ring-red-500"
                       data-testid="contact-phone-input"
                     />
                   </div>
@@ -229,7 +229,7 @@ export default function ContactPage() {
                       required
                       placeholder="Hur kan vi hjälpa dig?"
                       rows={5}
-                      className="rounded-xl border-stone-200 focus:border-orange-500 focus:ring-orange-500 resize-none"
+                      className="rounded-xl border-stone-200 focus:border-red-500 focus:ring-red-500 resize-none"
                       data-testid="contact-message-input"
                     />
                   </div>
@@ -238,7 +238,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={loading}
                     size="lg"
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-6 text-lg font-semibold shadow-lg shadow-orange-500/20"
+                    className="w-full bg-red-600 hover:bg-red-700 text-white rounded-full py-6 text-lg font-semibold shadow-lg shadow-red-500/20"
                     data-testid="contact-submit-button"
                   >
                     {loading ? (

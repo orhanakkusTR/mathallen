@@ -36,15 +36,15 @@ export default function CategoriesPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-stone-100 to-orange-50 py-12 md:py-20">
+      <section className="bg-gradient-to-br from-stone-100 to-red-50 py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-orange-600 font-medium text-sm mb-4 bg-orange-100 px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
               <ShoppingBasket className="w-4 h-4" />
               Vårt sortiment
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
-              Allt du behöver, <span className="text-orange-500">under ett tak</span>
+              Allt du behöver, <span className="text-red-600">under ett tak</span>
             </h1>
             <p className="text-lg md:text-xl text-stone-600 leading-relaxed">
               Upptäck vårt breda utbud av färska produkter, dagligvaror och specialiteter. 
@@ -70,7 +70,7 @@ export default function CategoriesPage() {
                 return (
                   <div
                     key={category.id}
-                    className="category-card group relative rounded-2xl overflow-hidden bg-white border border-stone-100 hover:border-orange-200 shadow-sm hover:shadow-xl transition-all duration-300"
+                    className="category-card group relative rounded-2xl overflow-hidden bg-white border border-stone-100 hover:border-red-200 shadow-sm hover:shadow-xl transition-all duration-300"
                     data-testid={`category-card-${index}`}
                   >
                     <div className="aspect-[4/3] overflow-hidden">
@@ -81,27 +81,27 @@ export default function CategoriesPage() {
                           className="category-card-image w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center">
-                          <IconComponent className="w-20 h-20 text-orange-300" />
+                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
+                          <IconComponent className="w-20 h-20 text-red-300" />
                         </div>
                       )}
                     </div>
                     <div className="p-6">
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <h3 className="text-xl font-semibold text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">
+                          <h3 className="text-xl font-semibold text-stone-900 mb-2 group-hover:text-red-600 transition-colors">
                             {category.name}
                           </h3>
                           <p className="text-stone-600 text-sm leading-relaxed">
                             {category.description}
                           </p>
                         </div>
-                        <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500 transition-colors">
-                          <IconComponent className="w-6 h-6 text-orange-500 group-hover:text-white transition-colors" />
+                        <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 transition-colors">
+                          <IconComponent className="w-6 h-6 text-red-600 group-hover:text-white transition-colors" />
                         </div>
                       </div>
                       <div className="mt-4 pt-4 border-t border-stone-100">
-                        <span className="inline-flex items-center text-sm font-medium text-orange-600 group-hover:text-orange-700">
+                        <span className="inline-flex items-center text-sm font-medium text-red-600 group-hover:text-red-700">
                           Finns i butik
                           <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                         </span>
@@ -160,12 +160,12 @@ export default function CategoriesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-orange-500 to-amber-500">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-red-600 to-red-700">
         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Redo att handla?
           </h2>
-          <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto">
             Besök oss på Storgatan 45 i Malmö och upptäck hela vårt sortiment. 
             Glöm inte att kolla veckans erbjudanden!
           </p>
@@ -173,7 +173,7 @@ export default function CategoriesPage() {
             <Button
               asChild
               size="lg"
-              className="bg-white text-orange-600 hover:bg-stone-100 rounded-full px-8"
+              className="bg-white text-red-600 hover:bg-stone-100 rounded-full px-8"
               data-testid="categories-cta-offers"
             >
               <Link to="/erbjudanden">
