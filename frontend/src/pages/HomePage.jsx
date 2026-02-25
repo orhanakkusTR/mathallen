@@ -96,13 +96,18 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="animate-fade-in-up stagger-3">
-                  <div className="relative rounded-2xl overflow-hidden aspect-square shadow-xl bg-red-600 flex items-center justify-center">
-                    <div className="text-center p-4">
-                      <p className="text-white font-bold text-2xl md:text-3xl">Nya</p>
-                      <p className="text-red-100 font-semibold">erbjudanden</p>
-                      <p className="text-white font-bold text-lg mt-1">varje vecka!</p>
+                  <Link 
+                    to="/erbjudanden"
+                    className="relative rounded-2xl overflow-hidden aspect-square shadow-xl bg-red-600 flex flex-col items-center justify-center p-4 hover:bg-red-700 transition-colors group"
+                    data-testid="hero-weekly-offer-box"
+                  >
+                    <p className="text-white/80 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
+                    <p className="text-white font-bold text-2xl md:text-3xl">VECKA {new Date().toLocaleDateString('sv-SE', { week: 'numeric' }).split(' ')[0] || Math.ceil((new Date() - new Date(new Date().getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000))}</p>
+                    <div className="mt-3 flex items-center gap-1 text-white/90 text-xs md:text-sm font-medium group-hover:text-white transition-colors">
+                      <span>Se veckans erbjudanden</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
