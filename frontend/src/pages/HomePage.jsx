@@ -83,15 +83,18 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 animate-fade-in-up stagger-1">
                   <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
+                    {/* Video - replace src with your own video URL */}
+                    <img
+                      src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                      alt="Familj handlar i Mathallen"
                       className="w-full h-full object-cover"
-                    >
-                      <source src="/market-video.mp4" type="video/mp4" />
+                    />
+                    {/* 
+                    Uncomment below and add your video URL to enable video:
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                      <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
                     </video>
+                    */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
                       <p className="text-sm font-medium opacity-90">Varmt välkommen!</p>
