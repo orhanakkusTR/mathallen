@@ -6,6 +6,14 @@ import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+function getWeekNumber() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  const diff = now - start;
+  const oneWeek = 604800000;
+  return Math.ceil((diff + start.getDay() * 86400000) / oneWeek);
+}
+
 export default function HomePage() {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -102,7 +110,7 @@ export default function HomePage() {
                     data-testid="hero-weekly-offer-box"
                   >
                     <p className="text-white/80 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
-                    <p className="text-white font-bold text-2xl md:text-3xl">VECKA {new Date().toLocaleDateString('sv-SE', { week: 'numeric' }).split(' ')[0] || Math.ceil((new Date() - new Date(new Date().getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000))}</p>
+                    <p className="text-white font-bold text-2xl md:text-3xl">VECKA {getWeekNumber()}</p>
                     <div className="mt-3 flex items-center gap-1 text-white/90 text-xs md:text-sm font-medium group-hover:text-white transition-colors">
                       <span>Se veckans erbjudanden</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
