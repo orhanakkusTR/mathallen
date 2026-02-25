@@ -34,101 +34,93 @@ export default function HomePage() {
 
   return (
     <div className="page-transition">
-      {/* Hero Section - Bento Grid */}
-      <section className="bg-gradient-to-br from-red-50 to-stone-50 py-8 md:py-14">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
-            {/* Main hero text */}
-            <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
-              <div className="animate-fade-in-up">
-                <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
-                  <Leaf className="w-4 h-4" />
-                  Din lokala stormarknad
-                </span>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
-                  Välkommen till{" "}
-                  <span className="text-red-600">Mathallen</span> Malmö
-                </h1>
-                <p className="text-lg md:text-xl text-stone-600 mb-8 leading-relaxed">
-                  Kvalitet, prisvärdhet och attraktiva veckokampanjer – allt under samma tak. 
-                  Upptäck veckans bästa erbjudanden hos oss.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-red-500/20"
-                    data-testid="hero-offers-button"
-                  >
-                    <Link to="/erbjudanden">
-                      Se veckans erbjudanden
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="border-stone-200 bg-white hover:bg-stone-50 rounded-full px-8 py-6 text-lg font-medium"
-                    data-testid="hero-contact-button"
-                  >
-                    <Link to="/kontakt">Hitta till oss</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
+      {/* Hero Section - Full Width */}
+      <section className="relative h-[70vh] md:h-[80vh] lg:h-[85vh] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=1920"
+            alt="Mathallen Malmö"
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+        </div>
 
-            {/* Hero image - main */}
-            <div className="lg:col-span-7 order-1 lg:order-2">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2 animate-fade-in-up stagger-1">
-                  <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
-                    {/* Video - replace src with your own video URL */}
-                    <img
-                      src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                      alt="Familj handlar i Mathallen"
-                      className="w-full h-full object-cover"
-                    />
-                    {/* 
-                    Uncomment below and add your video URL to enable video:
-                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-                      <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
-                    </video>
-                    */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <p className="text-sm font-medium opacity-90">Varmt välkommen!</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="animate-fade-in-up stagger-2">
-                  <div className="relative rounded-2xl overflow-hidden aspect-square shadow-xl">
-                    <img
-                      src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                      alt="Färska frukter"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="animate-fade-in-up stagger-3">
-                  <Link 
-                    to="/erbjudanden"
-                    className="relative rounded-2xl overflow-hidden aspect-square shadow-xl bg-red-600 flex flex-col items-center justify-center p-4 hover:bg-red-700 transition-colors group"
-                    data-testid="hero-weekly-offer-box"
-                  >
-                    <p className="text-white/80 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
-                    <p className="text-white font-bold text-2xl md:text-3xl">VECKA {getWeekNumber()}</p>
-                    <div className="mt-3 flex items-center gap-1 text-white/90 text-xs md:text-sm font-medium group-hover:text-white transition-colors">
-                      <span>Se veckans erbjudanden</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                </div>
-              </div>
+        {/* Content */}
+        <div className="relative h-full max-w-7xl mx-auto px-4 md:px-8 flex items-center">
+          <div className="max-w-2xl animate-fade-in-up">
+            <span className="inline-flex items-center gap-2 text-white/90 font-medium text-sm mb-4 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+              <Leaf className="w-4 h-4" />
+              Din lokala stormarknad i Malmö
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+              Välkommen till{" "}
+              <span className="text-red-500">Mathallen</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
+              Kvalitet, prisvärdhet och attraktiva veckokampanjer – allt under samma tak.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg"
+                data-testid="hero-offers-button"
+              >
+                <Link to="/erbjudanden">
+                  Se veckans erbjudanden
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 rounded-full px-8 py-6 text-lg font-medium"
+                data-testid="hero-contact-button"
+              >
+                <Link to="/kontakt">Hitta till oss</Link>
+              </Button>
             </div>
           </div>
+
+          {/* Weekly Offer Card - Floating */}
+          <Link 
+            to="/erbjudanden"
+            className="hidden lg:flex absolute right-8 xl:right-16 bottom-16 flex-col items-center justify-center w-44 h-44 bg-red-600 hover:bg-red-700 transition-colors rounded-2xl shadow-2xl text-white group"
+            data-testid="hero-weekly-offer-box"
+          >
+            <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
+            <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
+            <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
+              <span>Se alla</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
+
+      {/* Mobile Weekly Offer - Only shown on mobile/tablet */}
+      <div className="lg:hidden px-4 -mt-8 relative z-10 mb-8">
+        <Link 
+          to="/erbjudanden"
+          className="flex items-center justify-between bg-red-600 hover:bg-red-700 transition-colors rounded-2xl p-5 shadow-xl text-white"
+          data-testid="hero-weekly-offer-mobile"
+        >
+          <div>
+            <p className="text-white/80 text-xs font-medium uppercase tracking-wider">Erbjudanden</p>
+            <p className="text-white font-bold text-2xl">VECKA {getWeekNumber()}</p>
+          </div>
+          <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
+            <span>Se veckans erbjudanden</span>
+            <ArrowRight className="w-5 h-5" />
+          </div>
+        </Link>
+      </div>
 
       {/* Values Section - Visual Cards */}
       <section className="py-12 md:py-20 bg-white">
