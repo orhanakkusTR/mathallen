@@ -62,10 +62,10 @@ export default function Header() {
                 key={link.href}
                 to={link.href}
                 data-testid={`nav-${link.href.replace("/", "") || "home"}`}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-base font-semibold transition-colors ${
                   location.pathname === link.href
                     ? "text-red-600 bg-red-50"
-                    : "text-stone-600 hover:text-red-600 hover:bg-stone-50"
+                    : "text-stone-700 hover:text-red-600 hover:bg-stone-50"
                 }`}
               >
                 {link.label}
