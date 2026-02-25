@@ -369,7 +369,7 @@ export default function HomePage() {
             Besök oss idag!
           </h2>
           <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto">
-            Vi finns på Storgatan 45 i centrala Malmö. Välkommen in för att 
+            Vi finns på Lantmannagatan 59 i Malmö. Välkommen in för att 
             upptäcka veckans bästa erbjudanden och färska produkter.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
