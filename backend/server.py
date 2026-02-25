@@ -1,15 +1,19 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import asyncio
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, EmailStr
+from typing import List, Optional
 import uuid
-from datetime import datetime, timezone
-
+from datetime import datetime, timezone, timedelta
+import jwt
+import bcrypt
+import resend
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -19,52 +23,302 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
-app = FastAPI()
+# Resend setup
+resend.api_key = os.environ.get('RESEND_API_KEY', '')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
+STORE_EMAIL = os.environ.get('STORE_EMAIL', 'info@mathallen.se')
+
+# JWT settings
+JWT_SECRET = os.environ.get('JWT_SECRET', 'mathallen-secret-key-2024')
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_HOURS = 24
+
+security = HTTPBearer()
+
+# Create the main app
+app = FastAPI(title="Mathallen Malmö API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
+# ============== MODELS ==============
+
+class AdminUser(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    username: str
+    password_hash: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+class AdminLogin(BaseModel):
+    username: str
+    password: str
 
-# Add your routes to the router instead of directly to app
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+
+class Offer(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    product_name: str
+    original_price: Optional[float] = None
+    offer_price: float
+    unit: str = "st"
+    image_url: Optional[str] = None
+    category: str
+    week_number: int
+    year: int
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class OfferCreate(BaseModel):
+    product_name: str
+    original_price: Optional[float] = None
+    offer_price: float
+    unit: str = "st"
+    image_url: Optional[str] = None
+    category: str
+    week_number: int
+    year: int
+    is_active: bool = True
+
+class OfferUpdate(BaseModel):
+    product_name: Optional[str] = None
+    original_price: Optional[float] = None
+    offer_price: Optional[float] = None
+    unit: Optional[str] = None
+    image_url: Optional[str] = None
+    category: Optional[str] = None
+    week_number: Optional[int] = None
+    year: Optional[int] = None
+    is_active: Optional[bool] = None
+
+class Category(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    image_url: Optional[str] = None
+    icon: str = "Package"
+
+class ContactMessage(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    message: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    is_read: bool = False
+
+class ContactMessageCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    message: str
+
+# ============== AUTH HELPERS ==============
+
+def hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def verify_password(password: str, password_hash: str) -> bool:
+    return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8'))
+
+def create_token(user_id: str) -> str:
+    payload = {
+        "sub": user_id,
+        "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_EXPIRATION_HOURS),
+        "iat": datetime.now(timezone.utc)
+    }
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    try:
+        payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        user_id = payload.get("sub")
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        admin = await db.admins.find_one({"id": user_id}, {"_id": 0})
+        if admin is None:
+            raise HTTPException(status_code=401, detail="Admin not found")
+        return admin
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+# ============== ROUTES ==============
+
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Välkommen till Mathallen Malmö API"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
+# ---- AUTH ----
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+@api_router.post("/auth/login", response_model=TokenResponse)
+async def admin_login(login_data: AdminLogin):
+    admin = await db.admins.find_one({"username": login_data.username}, {"_id": 0})
+    if not admin or not verify_password(login_data.password, admin["password_hash"]):
+        raise HTTPException(status_code=401, detail="Ogiltigt användarnamn eller lösenord")
+    token = create_token(admin["id"])
+    return TokenResponse(access_token=token)
+
+@api_router.get("/auth/me")
+async def get_current_user(admin = Depends(get_current_admin)):
+    return {"id": admin["id"], "username": admin["username"]}
+
+# ---- OFFERS ----
+
+@api_router.get("/offers", response_model=List[Offer])
+async def get_offers(week: Optional[int] = None, year: Optional[int] = None, active_only: bool = True):
+    query = {}
+    if week:
+        query["week_number"] = week
+    if year:
+        query["year"] = year
+    if active_only:
+        query["is_active"] = True
     
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
+    offers = await db.offers.find(query, {"_id": 0}).sort("created_at", -1).to_list(100)
+    for offer in offers:
+        if isinstance(offer.get('created_at'), str):
+            offer['created_at'] = datetime.fromisoformat(offer['created_at'])
+    return offers
+
+@api_router.get("/offers/current", response_model=List[Offer])
+async def get_current_offers():
+    now = datetime.now(timezone.utc)
+    current_week = now.isocalendar()[1]
+    current_year = now.year
     
-    return status_checks
+    offers = await db.offers.find(
+        {"week_number": current_week, "year": current_year, "is_active": True},
+        {"_id": 0}
+    ).to_list(100)
+    
+    for offer in offers:
+        if isinstance(offer.get('created_at'), str):
+            offer['created_at'] = datetime.fromisoformat(offer['created_at'])
+    return offers
+
+@api_router.post("/offers", response_model=Offer)
+async def create_offer(offer_data: OfferCreate, admin = Depends(get_current_admin)):
+    offer = Offer(**offer_data.model_dump())
+    doc = offer.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.offers.insert_one(doc)
+    return offer
+
+@api_router.put("/offers/{offer_id}", response_model=Offer)
+async def update_offer(offer_id: str, offer_data: OfferUpdate, admin = Depends(get_current_admin)):
+    update_dict = {k: v for k, v in offer_data.model_dump().items() if v is not None}
+    if not update_dict:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    
+    result = await db.offers.update_one({"id": offer_id}, {"$set": update_dict})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Offer not found")
+    
+    updated = await db.offers.find_one({"id": offer_id}, {"_id": 0})
+    if isinstance(updated.get('created_at'), str):
+        updated['created_at'] = datetime.fromisoformat(updated['created_at'])
+    return updated
+
+@api_router.delete("/offers/{offer_id}")
+async def delete_offer(offer_id: str, admin = Depends(get_current_admin)):
+    result = await db.offers.delete_one({"id": offer_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Offer not found")
+    return {"message": "Offer deleted"}
+
+# ---- CATEGORIES ----
+
+@api_router.get("/categories", response_model=List[Category])
+async def get_categories():
+    categories = await db.categories.find({}, {"_id": 0}).to_list(20)
+    if not categories:
+        # Return default categories if none exist
+        return [
+            Category(id="1", name="Färska frukter & grönsaker", description="Handplockade frukter och grönsaker varje dag", image_url="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", icon="Apple"),
+            Category(id="2", name="Dagligvaror", description="Allt du behöver för vardagen", image_url="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", icon="ShoppingBasket"),
+            Category(id="3", name="Kött & chark", description="Färskt kött och kvalitetschark", image_url="https://images.pexels.com/photos/1927383/pexels-photo-1927383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", icon="Beef"),
+            Category(id="4", name="Mejeri", description="Mjölk, ost och andra mejeriprodukter", image_url="https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", icon="Milk"),
+            Category(id="5", name="Specialprodukter", description="Unika produkter från hela världen", image_url="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", icon="Sparkles"),
+        ]
+    return categories
+
+# ---- CONTACT ----
+
+@api_router.post("/contact")
+async def submit_contact(contact_data: ContactMessageCreate):
+    contact = ContactMessage(**contact_data.model_dump())
+    doc = contact.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.contact_messages.insert_one(doc)
+    
+    # Send email notification
+    if resend.api_key:
+        try:
+            html_content = f"""
+            <html>
+            <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #F97316;">Nytt meddelande från Mathallen webbsida</h2>
+                <p><strong>Från:</strong> {contact.name}</p>
+                <p><strong>E-post:</strong> {contact.email}</p>
+                <p><strong>Telefon:</strong> {contact.phone or 'Ej angiven'}</p>
+                <hr style="border: 1px solid #E7E5E4;">
+                <p><strong>Meddelande:</strong></p>
+                <p style="background: #FAFAF9; padding: 15px; border-radius: 8px;">{contact.message}</p>
+                <hr style="border: 1px solid #E7E5E4;">
+                <p style="color: #78716C; font-size: 12px;">Skickat: {contact.created_at.strftime('%Y-%m-%d %H:%M')}</p>
+            </body>
+            </html>
+            """
+            
+            params = {
+                "from": SENDER_EMAIL,
+                "to": [STORE_EMAIL],
+                "subject": f"Kontaktformulär: {contact.name}",
+                "html": html_content
+            }
+            
+            await asyncio.to_thread(resend.Emails.send, params)
+            logger.info(f"Contact email sent for {contact.email}")
+        except Exception as e:
+            logger.error(f"Failed to send email: {str(e)}")
+    
+    return {"message": "Tack för ditt meddelande! Vi återkommer så snart vi kan."}
+
+@api_router.get("/contact/messages", response_model=List[ContactMessage])
+async def get_contact_messages(admin = Depends(get_current_admin)):
+    messages = await db.contact_messages.find({}, {"_id": 0}).sort("created_at", -1).to_list(100)
+    for msg in messages:
+        if isinstance(msg.get('created_at'), str):
+            msg['created_at'] = datetime.fromisoformat(msg['created_at'])
+    return messages
+
+# ---- ADMIN SETUP ----
+
+@api_router.post("/setup/admin")
+async def setup_admin():
+    """Create initial admin user if none exists"""
+    existing = await db.admins.find_one({})
+    if existing:
+        raise HTTPException(status_code=400, detail="Admin already exists")
+    
+    admin = AdminUser(
+        username="admin",
+        password_hash=hash_password("mathallen2024")
+    )
+    doc = admin.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.admins.insert_one(doc)
+    return {"message": "Admin created", "username": "admin", "password": "mathallen2024"}
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -76,13 +330,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
