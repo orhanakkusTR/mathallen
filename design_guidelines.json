@@ -1,0 +1,119 @@
+{
+  "brand_identity": {
+    "name": "Mathallen Malmö",
+    "core_values": ["Community", "Freshness", "Warmth", "Simplicity"],
+    "emotional_tone": "Inviting, Trustworthy, Local, energetic but grounded",
+    "theme_mode": "light",
+    "design_archetype": "Organic & Earthy"
+  },
+  "typography": {
+    "font_family_headings": "Manrope, sans-serif",
+    "font_family_body": "Public Sans, sans-serif",
+    "usage_rules": {
+      "headings": "Use Manrope for all headings (h1-h6). Weight: SemiBold (600) to ExtraBold (800). Letter-spacing: tight for large text.",
+      "body": "Use Public Sans for all body text. Weight: Regular (400) or Medium (500). Line-height: relaxed (1.6).",
+      "accents": "Use uppercase + wide tracking (0.1em) for eyebrows/labels."
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]",
+      "h2": "text-4xl md:text-5xl font-semibold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-semibold",
+      "body_lg": "text-lg md:text-xl text-muted-foreground",
+      "body": "text-base text-stone-700"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": "#F97316",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#FBBF24",
+      "secondary_foreground": "#1C1917",
+      "background": "#FAFAF9",
+      "foreground": "#1C1917",
+      "muted": "#F5F5F4",
+      "muted_foreground": "#78716C",
+      "card": "#FFFFFF",
+      "card_foreground": "#1C1917",
+      "border": "#E7E5E4",
+      "accent": "#FFedd5",
+      "accent_foreground": "#9A3412",
+      "destructive": "#EF4444",
+      "destructive_foreground": "#FFFFFF"
+    },
+    "gradients": {
+      "hero_warm": "bg-gradient-to-br from-orange-50 to-amber-50",
+      "button_hover": "hover:bg-orange-600 transition-colors"
+    },
+    "rules": {
+      "backgrounds": "Use Stone-50 (#FAFAF9) as the main page background. Pure white (#FFFFFF) only for cards/surfaces.",
+      "text": "Never use pure black. Use Stone-900 (#1C1917) for headings and Stone-600 (#57534E) for body.",
+      "accents": "Use Orange-500 for primary actions. Use Amber-400 for 'Offer/Discount' tags."
+    }
+  },
+  "visual_enhancers": {
+    "border_radius": {
+      "default": "rounded-xl",
+      "cards": "rounded-2xl",
+      "buttons": "rounded-full"
+    },
+    "shadows": {
+      "card": "shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300",
+      "dropdown": "shadow-xl border border-stone-100"
+    },
+    "textures": {
+      "organic_noise": "Use a subtle noise overlay (opacity 0.03) on the main background to reduce digital sterility."
+    },
+    "animations": {
+      "hover_lift": "hover:-translate-y-1 transition-transform duration-300",
+      "image_reveal": "animate-in fade-in zoom-in-95 duration-700"
+    }
+  },
+  "layout_strategies": {
+    "marketing_hero": "Bento Grid (Mode A). Mix of 3 shapes: Hero Image (Family shopping), Text Block (Welcome), Side Block (Weekly Highlight).",
+    "offers_grid": "Masonry-style grid for 'Weekly Offers'. Cards should look like digital coupons with dashed borders or 'ticket' notches.",
+    "container": "max-w-7xl mx-auto px-4 md:px-8",
+    "spacing": "Generous. Section gap: py-20 or py-32. Element gap: gap-6 or gap-8."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-orange-600 rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-orange-500/20",
+      "secondary": "bg-white text-stone-900 border border-stone-200 hover:bg-stone-50 rounded-full px-6 py-4 font-medium"
+    },
+    "cards": {
+      "feature": "bg-white rounded-2xl p-8 border border-stone-100 shadow-sm hover:border-orange-200 transition-colors group",
+      "offer": "bg-yellow-50 rounded-xl p-6 border-2 border-dashed border-yellow-200 relative overflow-hidden"
+    },
+    "navigation": {
+      "style": "Floating glass header. bg-white/80 backdrop-blur-md border-b border-stone-100/50.",
+      "links": "text-stone-600 hover:text-orange-600 font-medium transition-colors"
+    }
+  },
+  "media": {
+    "image_urls": {
+      "hero_main": "https://images.unsplash.com/photo-1753354868473-94c8ac971269?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGZhbWlseSUyMGdyb2NlcnklMjBzaG9wcGluZ3xlbnwwfHx8fDE3NzIwNTI0NTd8MA&ixlib=rb-4.1.0&q=85",
+      "hero_secondary": "https://images.unsplash.com/photo-1690293319115-7c444db81c7d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHw0fHxmcmVzaCUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBjcmF0ZXxlbnwwfHx8fDE3NzIwNTI0NTZ8MA&ixlib=rb-4.1.0&q=85",
+      "bakery_feature": "https://images.unsplash.com/photo-1763207291761-e27bb059d851?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMGJha2VyeSUyMGRpc3BsYXklMjB3YXJtJTIwbGlnaHRpbmd8ZW58MHx8fHwxNzcyMDUyNDU1fDA&ixlib=rb-4.1.0&q=85",
+      "store_interior": "https://images.pexels.com/photos/10360444/pexels-photo-10360444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "family_shopping": "https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "fresh_vegetables": "https://images.pexels.com/photos/1691180/pexels-photo-1691180.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    "icons": "Use Lucide React icons. Style: Stroke width 1.5px (Thin/Elegant). Color: Stone-600 or Orange-500 for accents."
+  },
+  "instructions_to_main_agent": [
+    "Install fonts: Manrope and Public Sans from Google Fonts via simple CSS import in index.css.",
+    "Implement the 'Bento Grid' hero section on the homepage as the first visual anchor.",
+    "The 'Weekly Offers' page must feel like a digital flyer—use the dashed border style defined in components.",
+    "Use the specific Hex codes provided in colors.palette. Do NOT use default Tailwind colors.",
+    "Ensure the Admin Panel shares the same DNA but uses a denser layout (Mode B grid).",
+    "For the Map: Use a styled Google Maps iframe (grayscale or desaturated) to match the site aesthetic.",
+    "Do NOT build e-commerce features (cart, checkout). All 'Buy' buttons should be 'View Offer' or 'Find in Store'.",
+    "Use 'sonner' for all toast notifications (e.g., Contact Form success)."
+  ],
+  "universal_guidelines": [
+    "Don't make generic centered layouts.",
+    "Create depth through layered design elements.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Every interaction needs micro-animations.",
+    "Use 'data-testid' for all interactive elements."
+  ]
+}
