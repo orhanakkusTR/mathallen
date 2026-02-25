@@ -46,7 +46,7 @@ export default function AboutPage() {
           </div>
           
           {/* Right - Image (full bleed) */}
-          <div className="relative h-48 md:h-auto order-1 md:order-2">
+          <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2">
             <img
               src="https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               alt="Mathallen butik"
@@ -91,28 +91,14 @@ export default function AboutPage() {
                   <img
                     src="https://images.pexels.com/photos/10360444/pexels-photo-10360444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                     alt="Mathallen interiör"
-                    className="w-full h-48 object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden shadow-lg mt-8">
-                  <img
-                    src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Färska produkter"
-                    className="w-full h-48 object-cover"
+                    className="w-full aspect-square object-cover"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-lg">
                   <img
-                    src="https://images.pexels.com/photos/1927383/pexels-photo-1927383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Kött och chark"
-                    className="w-full h-48 object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden shadow-lg mt-8">
-                  <img
-                    src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Familj handlar"
-                    className="w-full h-48 object-cover"
+                    src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    alt="Färska produkter"
+                    className="w-full aspect-square object-cover"
                   />
                 </div>
               </div>
