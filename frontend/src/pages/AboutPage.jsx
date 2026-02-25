@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket } from "lucide-react";
+import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 
