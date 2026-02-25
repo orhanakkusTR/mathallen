@@ -100,6 +100,9 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
+
+        {/* Bottom red gradient blur */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-red-600/80 via-red-600/40 to-transparent backdrop-blur-[2px]" />
       </section>
 
       {/* Mobile Weekly Offer - Only shown on mobile/tablet */}
