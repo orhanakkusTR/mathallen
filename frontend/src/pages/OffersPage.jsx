@@ -83,9 +83,9 @@ export default function OffersPage() {
                 </div>
               ))}
             </div>
-          ) : filteredOffers.length > 0 ? (
+          ) : offers.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {filteredOffers.map((offer, index) => (
+              {offers.map((offer, index) => (
                 <div
                   key={offer.id}
                   className="offer-card bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover-lift group"
