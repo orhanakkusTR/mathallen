@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Leaf, Tag, Users, ShoppingBasket, CheckCircle } from "lucide-react";
+import { ArrowRight, Leaf, Tag, Users, ShoppingBasket, CheckCircle, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 
