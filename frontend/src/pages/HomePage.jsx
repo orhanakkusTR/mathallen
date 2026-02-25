@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       {/* Hero Section - Full Width */}
-      <section className="relative min-h-[calc(100vh-88px)] md:min-h-[calc(100vh-96px)] overflow-hidden">
+      <section className="relative h-[85vh] max-h-[900px] overflow-hidden bg-stone-900">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
