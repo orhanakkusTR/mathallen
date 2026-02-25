@@ -22,6 +22,7 @@ export default function HomePage() {
     const fetchOffers = async () => {
       try {
         const response = await axios.get(`${API}/offers/current`);
+        // Always show max 4 offers on homepage
         setOffers(response.data.slice(0, 4));
       } catch (error) {
         console.error("Error fetching offers:", error);

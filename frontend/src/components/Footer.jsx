@@ -87,7 +87,6 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">
                   Lantmannagatan 59,<br />
-                  Lugna gatan 2,<br />
                   214 48 Malmö
                 </span>
               </li>
