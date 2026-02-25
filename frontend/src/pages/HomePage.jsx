@@ -111,24 +111,24 @@ export default function HomePage() {
       </section>
 
       {/* Values Section - Visual Cards */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block text-red-600 font-semibold text-sm uppercase tracking-wider mb-4">
+          <div className="text-center mb-10 md:mb-14">
+            <span className="inline-block text-red-600 font-semibold text-sm uppercase tracking-wider mb-3">
               Våra löften till dig
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-900 mb-4">
               Varför välja Mathallen?
             </h2>
-            <p className="text-stone-600 text-lg max-w-2xl mx-auto">
+            <p className="text-stone-600 text-base md:text-lg max-w-2xl mx-auto">
               Vi kombinerar kvalitet och prisvärdhet för att ge dig den bästa shoppingupplevelsen i Malmö.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
             {/* Färskhet */}
             <div 
-              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[3/4] cursor-pointer"
               data-testid="value-card-0"
             >
               <img
@@ -136,21 +136,21 @@ export default function HomePage() {
                 alt="Färska produkter"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
-                  <Leaf className="w-6 h-6" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 text-white">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-2 md:mb-3">
+                  <Leaf className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Färskhet</h3>
-                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Dagliga leveranser garanterar att du alltid får de färskaste produkterna. Våra grönsaker och frukter plockas med omsorg.
+                <h3 className="text-lg md:text-xl font-bold mb-1">Färskhet</h3>
+                <p className="text-white/90 text-xs md:text-sm leading-relaxed line-clamp-3">
+                  Dagliga leveranser garanterar färska produkter varje dag.
                 </p>
               </div>
             </div>
 
             {/* Prisvärdhet */}
             <div 
-              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[3/4] cursor-pointer"
               data-testid="value-card-1"
             >
               <img
@@ -158,21 +158,21 @@ export default function HomePage() {
                 alt="Bra priser"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
-                  <Tag className="w-6 h-6" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 text-white">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-2 md:mb-3">
+                  <Tag className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Prisvärdhet</h3>
-                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Bra priser utan att kompromissa med kvaliteten. Veckans erbjudanden ger dig ännu mer värde för pengarna.
+                <h3 className="text-lg md:text-xl font-bold mb-1">Prisvärdhet</h3>
+                <p className="text-white/90 text-xs md:text-sm leading-relaxed line-clamp-3">
+                  Bra priser och veckans erbjudanden ger mer värde.
                 </p>
               </div>
             </div>
 
             {/* Lokal service */}
             <div 
-              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[3/4] cursor-pointer"
               data-testid="value-card-2"
             >
               <img
@@ -180,21 +180,21 @@ export default function HomePage() {
                 alt="Personlig service"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
-                  <Users className="w-6 h-6" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 text-white">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-2 md:mb-3">
+                  <Users className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Lokal service</h3>
-                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Vårt vänliga team står redo att hjälpa dig. Personlig service med ett leende – varje gång du besöker oss.
+                <h3 className="text-lg md:text-xl font-bold mb-1">Lokal service</h3>
+                <p className="text-white/90 text-xs md:text-sm leading-relaxed line-clamp-3">
+                  Personlig service med ett leende varje gång.
                 </p>
               </div>
             </div>
 
             {/* Brett sortiment */}
             <div 
-              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[3/4] cursor-pointer"
               data-testid="value-card-3"
             >
               <img
@@ -202,14 +202,14 @@ export default function HomePage() {
                 alt="Brett sortiment"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
-                  <ShoppingBasket className="w-6 h-6" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5 text-white">
+                <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-2 md:mb-3">
+                  <ShoppingBasket className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Brett sortiment</h3>
-                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Från vardagsvaror till internationella specialiteter – allt du behöver finns under vårt tak.
+                <h3 className="text-lg md:text-xl font-bold mb-1">Brett sortiment</h3>
+                <p className="text-white/90 text-xs md:text-sm leading-relaxed line-clamp-3">
+                  Allt du behöver finns under vårt tak.
                 </p>
               </div>
             </div>
