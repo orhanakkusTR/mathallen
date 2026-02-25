@@ -144,10 +144,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-16 md:py-24 bg-stone-50">
+      {/* Values Section - Visual Cards */}
+      <section className="py-12 md:py-16 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
               Våra värderingar
             </h2>
@@ -155,24 +155,83 @@ export default function AboutPage() {
               Fyra pelare som guidar oss i allt vi gör
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <div
-                key={value.title}
-                className="bg-white rounded-2xl p-8 border border-stone-100 hover:border-red-200 transition-colors group"
-                data-testid={`about-value-${index}`}
-              >
-                <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mb-6 group-hover:bg-red-600 transition-colors">
-                  <value.icon className="w-7 h-7 text-red-600 group-hover:text-white transition-colors" />
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {/* Kvalitet */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
+              <img
+                src="https://images.pexels.com/photos/1656663/pexels-photo-1656663.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Kvalitet"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
+                  <Award className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <h3 className="text-xl font-semibold text-stone-900 mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-stone-600 leading-relaxed">
-                  {value.description}
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Kvalitet</h3>
+                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
+                  Vi väljer endast de bästa produkterna från pålitliga leverantörer.
                 </p>
               </div>
-            ))}
+            </div>
+
+            {/* Prisvärdhet */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
+              <img
+                src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Prisvärdhet"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
+                  <Heart className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Prisvärdhet</h3>
+                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
+                  Bra priser utan att kompromissa med kvaliteten.
+                </p>
+              </div>
+            </div>
+
+            {/* Kundfokus */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
+              <img
+                src="https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Kundfokus"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
+                  <Users className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Kundfokus</h3>
+                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
+                  Din shoppingupplevelse är vår prioritet.
+                </p>
+              </div>
+            </div>
+
+            {/* Lokalt engagemang */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
+              <img
+                src="https://images.pexels.com/photos/2252584/pexels-photo-2252584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Lokalt engagemang"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
+                  <Leaf className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Lokalt</h3>
+                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
+                  Vi stödjer lokala producenter i Malmö.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
