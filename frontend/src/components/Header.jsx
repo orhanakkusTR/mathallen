@@ -25,12 +25,13 @@ export default function Header() {
           <div className="flex items-center gap-3 sm:gap-6">
             <span className="flex items-center gap-1.5 sm:gap-2">
               <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-200" />
-              <span>Malmö</span>
+              <span className="hidden sm:inline">Lantmannagatan 59, Malmö</span>
+              <span className="sm:hidden">Malmö</span>
             </span>
             <span className="flex items-center gap-1.5 sm:gap-2">
               <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-200" />
-              <span className="hidden sm:inline">Mån-Lör: 08-21, Sön: 10-20</span>
-              <span className="sm:hidden">08-21</span>
+              <span className="hidden sm:inline">Öppet: 07:00–22:00</span>
+              <span className="sm:hidden">07–22</span>
             </span>
           </div>
           <div className="text-red-100 font-medium">

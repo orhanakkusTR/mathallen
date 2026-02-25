@@ -79,8 +79,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Adress</h3>
                     <p className="text-stone-600">
-                      Storgatan 45<br />
-                      211 34 Malmö
+                      Lantmannagatan 59,<br />
+                      Lugna gatan 2,<br />
+                      214 48 Malmö
                     </p>
                   </div>
                 </div>
@@ -91,8 +92,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Telefon</h3>
-                    <a href="tel:+46401234567" className="text-red-600 hover:text-red-700 font-medium">
-                      040-123 45 67
+                    <a href="tel:+46409244220" className="text-red-600 hover:text-red-700 font-medium">
+                      040-92 44 20
                     </a>
                   </div>
                 </div>
@@ -116,9 +117,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">Öppettider</h3>
                     <div className="text-stone-600 space-y-1">
-                      <p>Måndag - Fredag: 08:00 - 21:00</p>
-                      <p>Lördag: 08:00 - 21:00</p>
-                      <p>Söndag: 10:00 - 20:00</p>
+                      <p>Alla dagar: 07:00 - 22:00</p>
                     </div>
                   </div>
                 </div>
@@ -128,7 +127,7 @@ export default function ContactPage() {
               <div className="rounded-2xl overflow-hidden shadow-lg border border-stone-200" data-testid="contact-map">
                 <iframe
                   title="Mathallen Malmö Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.7826842742745!2d13.000291076892692!3d55.60392997329389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a15aafee1a3f%3A0x8a3c3f8f1e5c6e7a!2sStorgatan%2C%20Malm%C3%B6%2C%20Sweden!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
                   width="100%"
                   height="300"
                   style={{ border: 0, filter: "saturate(0.9) contrast(1.05)" }}

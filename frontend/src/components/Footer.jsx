@@ -86,14 +86,15 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">
-                  Storgatan 45<br />
-                  211 34 Malmö
+                  Lantmannagatan 59,<br />
+                  Lugna gatan 2,<br />
+                  214 48 Malmö
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-red-500 flex-shrink-0" />
-                <a href="tel:+46401234567" className="text-sm hover:text-red-400 transition-colors">
-                  040-123 45 67
+                <a href="tel:+46409244220" className="text-sm hover:text-red-400 transition-colors">
+                  040-92 44 20
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -114,16 +115,8 @@ export default function Footer() {
               <Clock className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
               <div className="text-sm space-y-2">
                 <div className="flex justify-between gap-4">
-                  <span>Måndag - Fredag</span>
-                  <span className="text-white">08:00 - 21:00</span>
-                </div>
-                <div className="flex justify-between gap-4">
-                  <span>Lördag</span>
-                  <span className="text-white">08:00 - 21:00</span>
-                </div>
-                <div className="flex justify-between gap-4">
-                  <span>Söndag</span>
-                  <span className="text-white">10:00 - 20:00</span>
+                  <span>Alla dagar</span>
+                  <span className="text-white">07:00 - 22:00</span>
                 </div>
               </div>
             </div>
