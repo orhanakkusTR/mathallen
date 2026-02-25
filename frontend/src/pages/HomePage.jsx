@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Leaf, Tag, Users, ShoppingBasket, CheckCircle, Star, ExternalLink } from "lucide-react";
+import { ArrowRight, Leaf, Tag, Users, ShoppingBasket, CheckCircle, Star, ExternalLink, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
