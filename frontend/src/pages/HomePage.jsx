@@ -310,6 +310,117 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Customer Reviews */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-stone-600 font-medium">4.8 / 5</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900">
+                Vad våra kunder tycker
+              </h2>
+            </div>
+            <Button
+              asChild
+              className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6"
+              data-testid="write-review-button"
+            >
+              <a href="#" target="_blank" rel="noopener noreferrer">
+                Skriv ett omdöme
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </a>
+            </Button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Review 1 */}
+            <div className="bg-stone-50 rounded-2xl p-6 border border-stone-100" data-testid="review-1">
+              <div className="flex items-center gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-stone-700 mb-4 leading-relaxed">
+                "Fantastisk butik med ett brett sortiment! Personalen är alltid hjälpsam och 
+                veckans erbjudanden är verkligen prisvärda. Vår familjs favoritbutik!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                  <span className="text-red-600 font-semibold">AK</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-stone-900 text-sm">Anna Karlsson</p>
+                  <p className="text-stone-500 text-xs">2 veckor sedan</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Review 2 */}
+            <div className="bg-stone-50 rounded-2xl p-6 border border-stone-100" data-testid="review-2">
+              <div className="flex items-center gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-stone-700 mb-4 leading-relaxed">
+                "Bästa stormarknaden i Malmö! Fräscha grönsaker, bra kött och alltid 
+                trevlig service. Har handlat här i över 10 år och kommer fortsätta."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                  <span className="text-blue-600 font-semibold">ML</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-stone-900 text-sm">Magnus Lindqvist</p>
+                  <p className="text-stone-500 text-xs">1 månad sedan</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Review 3 */}
+            <div className="bg-stone-50 rounded-2xl p-6 border border-stone-100" data-testid="review-3">
+              <div className="flex items-center gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className={`w-4 h-4 ${i < 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-stone-200 text-stone-200'}`} />
+                ))}
+              </div>
+              <p className="text-stone-700 mb-4 leading-relaxed">
+                "Gillar verkligen deras färskvaror och charkuteriavdelning. Priserna är 
+                rimliga och kampanjerna är alltid värda att kolla in. Rekommenderas!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                  <span className="text-green-600 font-semibold">SN</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-stone-900 text-sm">Sofia Nilsson</p>
+                  <p className="text-stone-500 text-xs">3 veckor sedan</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Google Reviews Badge */}
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex items-center gap-3 bg-stone-100 rounded-full px-5 py-3">
+              <img 
+                src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
+                alt="Google" 
+                className="h-5 w-auto"
+              />
+              <span className="text-stone-600 text-sm font-medium">Omdömen från Google</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Shop With Us */}
       <section className="py-12 md:py-16 bg-stone-900 text-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
