@@ -42,21 +42,32 @@ export default function ContactPage() {
 
   return (
     <div className="page-transition">
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-stone-100 to-red-50 py-12 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
+      {/* Hero - Split Layout */}
+      <section className="relative bg-stone-900 overflow-hidden">
+        <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
+          {/* Left - Content */}
+          <div className="flex flex-col justify-center px-6 md:px-8 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-16 py-12 md:py-16 order-2 md:order-1">
+            <span className="inline-flex items-center gap-2 text-red-400 font-medium text-sm mb-4 bg-red-500/10 px-4 py-2 rounded-full w-fit">
               <MapPin className="w-4 h-4" />
               Kontakta oss
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
-              Hitta till <span className="text-red-600">Mathallen</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4 md:mb-6">
+              Hitta till <span className="text-red-500">Mathallen</span>
             </h1>
-            <p className="text-lg md:text-xl text-stone-600 leading-relaxed">
+            <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg">
               Vi finns i centrala Malmö och välkomnar dig varje dag. 
               Har du frågor? Tveka inte att höra av dig!
             </p>
+          </div>
+          
+          {/* Right - Image (full bleed) */}
+          <div className="relative h-48 md:h-auto order-1 md:order-2">
+            <img
+              src="https://images.unsplash.com/photo-1753354868473-94c8ac971269?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1200"
+              alt="Mathallen Malmö"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-stone-900/60 via-transparent to-transparent md:from-stone-900 md:via-transparent md:to-transparent" />
           </div>
         </div>
       </section>
