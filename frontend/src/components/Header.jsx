@@ -7,7 +7,6 @@ const navLinks = [
   { href: "/", label: "Hem" },
   { href: "/om-oss", label: "Om oss" },
   { href: "/erbjudanden", label: "Veckans erbjudanden" },
-  { href: "/sortiment", label: "Sortiment" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
