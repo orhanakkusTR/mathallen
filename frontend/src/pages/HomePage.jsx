@@ -34,19 +34,19 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       {/* Hero Section - Bento Grid */}
-      <section className="bg-gradient-to-br from-orange-50 to-amber-50 py-12 md:py-20">
+      <section className="bg-gradient-to-br from-red-50 to-stone-50 py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
             {/* Main hero text */}
             <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1">
               <div className="animate-fade-in-up">
-                <span className="inline-flex items-center gap-2 text-orange-600 font-medium text-sm mb-4 bg-orange-100 px-4 py-2 rounded-full">
+                <span className="inline-flex items-center gap-2 text-red-600 font-medium text-sm mb-4 bg-red-100 px-4 py-2 rounded-full">
                   <Leaf className="w-4 h-4" />
                   Din lokala stormarknad
                 </span>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-stone-900 tracking-tight leading-[1.1] mb-6">
                   Välkommen till{" "}
-                  <span className="text-orange-500">Mathallen</span> Malmö
+                  <span className="text-red-600">Mathallen</span> Malmö
                 </h1>
                 <p className="text-lg md:text-xl text-stone-600 mb-8 leading-relaxed">
                   Kvalitet, prisvärdhet och attraktiva veckokampanjer – allt under samma tak. 
@@ -56,7 +56,7 @@ export default function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-orange-500/20"
+                    className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-red-500/20"
                     data-testid="hero-offers-button"
                   >
                     <Link to="/erbjudanden">
@@ -103,11 +103,11 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="animate-fade-in-up stagger-3">
-                  <div className="relative rounded-2xl overflow-hidden aspect-square shadow-xl bg-amber-400 flex items-center justify-center">
+                  <div className="relative rounded-2xl overflow-hidden aspect-square shadow-xl bg-red-600 flex items-center justify-center">
                     <div className="text-center p-4">
-                      <p className="text-amber-900 font-bold text-2xl md:text-3xl">Nya</p>
-                      <p className="text-amber-800 font-semibold">erbjudanden</p>
-                      <p className="text-amber-900 font-bold text-lg mt-1">varje vecka!</p>
+                      <p className="text-white font-bold text-2xl md:text-3xl">Nya</p>
+                      <p className="text-red-100 font-semibold">erbjudanden</p>
+                      <p className="text-white font-bold text-lg mt-1">varje vecka!</p>
                     </div>
                   </div>
                 </div>
@@ -135,8 +135,8 @@ export default function HomePage() {
                 className={`bg-stone-50 rounded-2xl p-6 md:p-8 text-center hover-lift animate-fade-in-up stagger-${index + 1}`}
                 data-testid={`value-card-${index}`}
               >
-                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-7 h-7 text-orange-500" />
+                <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="w-7 h-7 text-red-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-stone-900 mb-2">{value.title}</h3>
                 <p className="text-stone-600 text-sm">{value.description}</p>
@@ -147,7 +147,7 @@ export default function HomePage() {
       </section>
 
       {/* Current Offers Preview */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-orange-50">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-red-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
             <div>
@@ -161,7 +161,7 @@ export default function HomePage() {
             <Button
               asChild
               variant="outline"
-              className="rounded-full border-orange-200 hover:bg-orange-50"
+              className="rounded-full border-red-200 hover:bg-red-50"
               data-testid="view-all-offers-button"
             >
               <Link to="/erbjudanden">
@@ -186,7 +186,7 @@ export default function HomePage() {
               {offers.map((offer, index) => (
                 <div
                   key={offer.id}
-                  className={`bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-amber-200 hover-lift animate-fade-in-up stagger-${index + 1}`}
+                  className={`bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover-lift animate-fade-in-up stagger-${index + 1}`}
                   data-testid={`offer-card-${index}`}
                 >
                   <div className="relative mb-4">
@@ -197,17 +197,17 @@ export default function HomePage() {
                         className="w-full aspect-square object-cover rounded-xl"
                       />
                     ) : (
-                      <div className="w-full aspect-square bg-orange-100 rounded-xl flex items-center justify-center">
-                        <ShoppingBasket className="w-12 h-12 text-orange-300" />
+                      <div className="w-full aspect-square bg-red-100 rounded-xl flex items-center justify-center">
+                        <ShoppingBasket className="w-12 h-12 text-red-300" />
                       </div>
                     )}
-                    <span className="absolute top-2 right-2 bg-amber-400 text-amber-900 text-xs font-bold px-2 py-1 rounded-full">
+                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
                       ERBJUDANDE
                     </span>
                   </div>
                   <h3 className="font-semibold text-stone-900 mb-1">{offer.product_name}</h3>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-orange-500">
+                    <span className="text-2xl font-bold text-red-600">
                       {offer.offer_price} kr
                     </span>
                     <span className="text-sm text-stone-500">/{offer.unit}</span>
@@ -236,7 +236,7 @@ export default function HomePage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Malmös favoritbutik sedan{" "}
-                <span className="text-amber-400">1985</span>
+                <span className="text-red-500">1985</span>
               </h2>
               <p className="text-stone-300 text-lg mb-8 leading-relaxed">
                 Med över 35 års erfarenhet har vi byggt upp ett förtroende hos 
@@ -251,7 +251,7 @@ export default function HomePage() {
                   "Attraktiva veckokampanjer",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-amber-400 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
                     <span className="text-stone-200">{item}</span>
                   </li>
                 ))}
@@ -259,7 +259,7 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-amber-400 hover:bg-amber-500 text-stone-900 rounded-full px-8"
+                className="bg-red-600 hover:bg-red-700 text-white rounded-full px-8"
                 data-testid="about-cta-button"
               >
                 <Link to="/om-oss">Läs mer om oss</Link>
@@ -273,9 +273,9 @@ export default function HomePage() {
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-orange-500 text-white rounded-2xl p-6 shadow-xl hidden md:block">
+              <div className="absolute -bottom-6 -left-6 bg-red-600 text-white rounded-2xl p-6 shadow-xl hidden md:block">
                 <p className="text-4xl font-bold">35+</p>
-                <p className="text-orange-100">års erfarenhet</p>
+                <p className="text-red-100">års erfarenhet</p>
               </div>
             </div>
           </div>
@@ -283,12 +283,12 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-orange-500 to-amber-500">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-red-600 to-red-700">
         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Besök oss idag!
           </h2>
-          <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto">
             Vi finns på Storgatan 45 i centrala Malmö. Välkommen in för att 
             upptäcka veckans bästa erbjudanden och färska produkter.
           </p>
@@ -296,7 +296,7 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
-              className="bg-white text-orange-600 hover:bg-stone-100 rounded-full px-8"
+              className="bg-white text-red-600 hover:bg-stone-100 rounded-full px-8"
               data-testid="cta-contact-button"
             >
               <Link to="/kontakt">Hitta till oss</Link>
