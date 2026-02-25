@@ -1,8 +1,29 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Award, Users, Leaf, ArrowRight } from "lucide-react";
+import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function AboutPage() {
+  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const response = await axios.get(`${API}/offers/current`);
+        setOffers(response.data.slice(0, 4));
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOffers();
+  }, []);
+
   const values = [
     {
       icon: Award,
@@ -24,14 +45,6 @@ export default function AboutPage() {
       title: "Lokalt engagemang",
       description: "Vi stödjer lokala producenter och är stolta över att vara en del av Malmö-samhället.",
     },
-  ];
-
-  const milestones = [
-    { year: "1985", event: "Mathallen grundas i centrala Malmö" },
-    { year: "1995", event: "Expansion med nytt bageri och charkdisk" },
-    { year: "2005", event: "Renovering och modernisering av butiken" },
-    { year: "2015", event: "Lansering av veckokampanjer" },
-    { year: "2024", event: "Digital närvaro och ny webbplats" },
   ];
 
   return (
@@ -164,44 +177,86 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-16 md:py-24 bg-white">
+      {/* Veckans erbjudanden */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
-              Vår resa
-            </h2>
-            <p className="text-stone-600 text-lg">
-              Från liten lokal butik till Malmös favorit
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">
+                Veckans erbjudanden
+              </h2>
+              <p className="text-stone-600">
+                Ta del av våra bästa priser just nu
+              </p>
+            </div>
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full border-red-200 hover:bg-red-50"
+              data-testid="view-all-offers-button"
+            >
+              <Link to="/erbjudanden">
+                Se alla erbjudanden
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
           </div>
-          <div className="max-w-3xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-red-200 transform md:-translate-x-1/2" />
-              
-              {milestones.map((milestone, index) => (
-                <div
-                  key={milestone.year}
-                  className={`relative flex items-center mb-8 last:mb-0 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                  data-testid={`milestone-${index}`}
-                >
-                  {/* Dot */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-red-600 rounded-full transform -translate-x-1/2 z-10" />
-                  
-                  {/* Content */}
-                  <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                    <div className="bg-stone-50 rounded-xl p-6">
-                      <span className="text-red-600 font-bold text-lg">{milestone.year}</span>
-                      <p className="text-stone-700 mt-1">{milestone.event}</p>
-                    </div>
-                  </div>
+
+          {loading ? (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="bg-stone-50 rounded-2xl p-6 animate-pulse">
+                  <div className="w-full aspect-square bg-stone-200 rounded-xl mb-4" />
+                  <div className="h-4 bg-stone-200 rounded w-3/4 mb-2" />
+                  <div className="h-6 bg-stone-200 rounded w-1/2" />
                 </div>
               ))}
             </div>
-          </div>
+          ) : offers.length > 0 ? (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {offers.map((offer, index) => (
+                <div
+                  key={offer.id}
+                  className="bg-stone-50 rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover:shadow-lg transition-shadow"
+                  data-testid={`offer-card-${index}`}
+                >
+                  <div className="relative mb-4">
+                    {offer.image_url ? (
+                      <img
+                        src={offer.image_url}
+                        alt={offer.product_name}
+                        className="w-full aspect-square object-cover rounded-xl"
+                      />
+                    ) : (
+                      <div className="w-full aspect-square bg-red-100 rounded-xl flex items-center justify-center">
+                        <ShoppingBasket className="w-12 h-12 text-red-300" />
+                      </div>
+                    )}
+                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      ERBJUDANDE
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-stone-900 mb-1">{offer.product_name}</h3>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-bold text-red-600">
+                      {offer.offer_price} kr
+                    </span>
+                    <span className="text-sm text-stone-500">/{offer.unit}</span>
+                  </div>
+                  {offer.original_price && (
+                    <p className="text-sm text-stone-400 line-through">
+                      Ord. pris {offer.original_price} kr
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-stone-50 rounded-2xl">
+              <ShoppingBasket className="w-16 h-16 text-stone-300 mx-auto mb-4" />
+              <p className="text-stone-500">Inga aktiva erbjudanden just nu. Kom tillbaka snart!</p>
+            </div>
+          )}
         </div>
       </section>
 
