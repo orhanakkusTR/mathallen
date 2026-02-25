@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { ShoppingBasket, MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,14 +13,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6" data-testid="footer-logo">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
-                <ShoppingBasket className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h2 className="text-xl font-bold text-white">Mathallen</h2>
-                <p className="text-xs text-stone-500">MALMÖ</p>
-              </div>
+            <Link to="/" className="flex items-center mb-6" data-testid="footer-logo">
+              <img 
+                src={LOGO_URL} 
+                alt="Mathallen Malmö" 
+                className="h-14 w-auto"
+              />
             </Link>
             <p className="text-stone-400 text-sm leading-relaxed mb-6">
               Din lokala stormarknad i Malmö. Kvalitet, prisvärdhet och attraktiva 
@@ -29,7 +29,7 @@ export default function Footer() {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-orange-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-red-600 transition-colors"
                 data-testid="social-facebook"
                 aria-label="Facebook"
               >
@@ -39,7 +39,7 @@ export default function Footer() {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-orange-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-red-600 transition-colors"
                 data-testid="social-instagram"
                 aria-label="Instagram"
               >
@@ -55,22 +55,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/om-oss" className="hover:text-orange-400 transition-colors text-sm" data-testid="footer-about">
+                <Link to="/om-oss" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-about">
                   Om Mathallen
                 </Link>
               </li>
               <li>
-                <Link to="/erbjudanden" className="hover:text-orange-400 transition-colors text-sm" data-testid="footer-offers">
+                <Link to="/erbjudanden" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-offers">
                   Veckans erbjudanden
                 </Link>
               </li>
               <li>
-                <Link to="/sortiment" className="hover:text-orange-400 transition-colors text-sm" data-testid="footer-categories">
+                <Link to="/sortiment" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-categories">
                   Vårt sortiment
                 </Link>
               </li>
               <li>
-                <Link to="/kontakt" className="hover:text-orange-400 transition-colors text-sm" data-testid="footer-contact">
+                <Link to="/kontakt" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-contact">
                   Kontakta oss
                 </Link>
               </li>
@@ -84,21 +84,21 @@ export default function Footer() {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">
                   Storgatan 45<br />
                   211 34 Malmö
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-orange-400 flex-shrink-0" />
-                <a href="tel:+46401234567" className="text-sm hover:text-orange-400 transition-colors">
+                <Phone className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <a href="tel:+46401234567" className="text-sm hover:text-red-400 transition-colors">
                   040-123 45 67
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-orange-400 flex-shrink-0" />
-                <a href="mailto:info@mathallen.se" className="text-sm hover:text-orange-400 transition-colors">
+                <Mail className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <a href="mailto:info@mathallen.se" className="text-sm hover:text-red-400 transition-colors">
                   info@mathallen.se
                 </a>
               </li>
@@ -111,7 +111,7 @@ export default function Footer() {
               Öppettider
             </h3>
             <div className="flex items-start gap-3 mb-4">
-              <Clock className="w-5 h-5 text-orange-400 flex-shrink-0 mt-0.5" />
+              <Clock className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
               <div className="text-sm space-y-2">
                 <div className="flex justify-between gap-4">
                   <span>Måndag - Fredag</span>
@@ -127,8 +127,8 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-            <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
-              <p className="text-orange-400 text-xs font-medium">
+            <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+              <p className="text-red-400 text-xs font-medium">
                 Välkommen in!
               </p>
             </div>
