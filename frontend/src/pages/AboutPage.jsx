@@ -24,29 +24,6 @@ export default function AboutPage() {
     fetchOffers();
   }, []);
 
-  const values = [
-    {
-      icon: Award,
-      title: "Kvalitet",
-      description: "Vi väljer endast de bästa produkterna från pålitliga leverantörer. Kvalitet är grunden i allt vi gör.",
-    },
-    {
-      icon: Heart,
-      title: "Prisvärdhet",
-      description: "Bra priser utan att kompromissa med kvaliteten. Vi tror att alla förtjänar tillgång till bra mat.",
-    },
-    {
-      icon: Users,
-      title: "Kundfokus",
-      description: "Din shoppingupplevelse är vår prioritet. Vi lyssnar, anpassar och förbättrar ständigt.",
-    },
-    {
-      icon: Leaf,
-      title: "Lokalt engagemang",
-      description: "Vi stödjer lokala producenter och är stolta över att vara en del av Malmö-samhället.",
-    },
-  ];
-
   return (
     <div className="page-transition">
       {/* Hero - Split Layout */}
