@@ -65,11 +65,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/sortiment" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-categories">
-                  Vårt sortiment
-                </Link>
-              </li>
-              <li>
                 <Link to="/kontakt" className="hover:text-red-400 transition-colors text-sm" data-testid="footer-contact">
                   Kontakta oss
                 </Link>

@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/sonner";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import OffersPage from "@/pages/OffersPage";
-import CategoriesPage from "@/pages/CategoriesPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
@@ -23,7 +22,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/om-oss" element={<AboutPage />} />
             <Route path="/erbjudanden" element={<OffersPage />} />
-            <Route path="/sortiment" element={<CategoriesPage />} />
             <Route path="/kontakt" element={<ContactPage />} />
           </Route>
           <Route path="/admin" element={<AdminLogin />} />
