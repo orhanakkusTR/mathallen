@@ -28,17 +28,17 @@ export default function AboutPage() {
     <div className="page-transition">
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
-        <div className="grid lg:grid-cols-2 min-h-[400px] lg:min-h-[500px]">
+        <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
           {/* Left - Content */}
-          <div className="flex flex-col justify-center px-6 md:px-12 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-16 py-16 lg:py-20 order-2 lg:order-1">
+          <div className="flex flex-col justify-center px-6 md:px-8 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-16 py-12 md:py-16 order-2 md:order-1">
             <span className="inline-flex items-center gap-2 text-red-400 font-medium text-sm mb-4 bg-red-500/10 px-4 py-2 rounded-full w-fit">
               <Heart className="w-4 h-4" />
               Om oss
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4 md:mb-6">
               Din lokala stormarknad sedan <span className="text-red-500">1985</span>
             </h1>
-            <p className="text-lg text-stone-300 leading-relaxed max-w-lg">
+            <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg">
               Mathallen Malmö är en uppskattad och välbesökt stormarknad i Malmö som 
               kombinerar hög kvalitet, rimliga priser och attraktiva veckokampanjer 
               under ett och samma tak.
@@ -46,13 +46,13 @@ export default function AboutPage() {
           </div>
           
           {/* Right - Image (full bleed) */}
-          <div className="relative h-64 lg:h-auto order-1 lg:order-2">
+          <div className="relative h-48 md:h-auto order-1 md:order-2">
             <img
               src="https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               alt="Mathallen butik"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/50 to-transparent lg:bg-gradient-to-r lg:from-stone-900 lg:via-transparent lg:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-stone-900/60 via-transparent to-transparent md:from-stone-900 md:via-transparent md:to-transparent" />
           </div>
         </div>
       </section>
