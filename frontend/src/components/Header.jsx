@@ -22,20 +22,20 @@ export default function Header() {
       {/* Top bar */}
       <div className="bg-red-600 text-white py-2 text-xs sm:text-sm">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-6">
+          <Link to="/kontakt" className="flex items-center gap-2 sm:gap-6 hover:text-red-100 transition-colors">
             <span className="flex items-center gap-1 sm:gap-2">
               <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-red-200 flex-shrink-0" />
               <span className="hidden sm:inline">Lantmannagatan 59, Malmö</span>
-              <span className="sm:hidden truncate">Lantmannagatan 59</span>
+              <span className="sm:hidden">Lantmannagatan 59, Malmö</span>
             </span>
             <span className="flex items-center gap-1 sm:gap-2">
               <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-red-200 flex-shrink-0" />
-              <span>07–22</span>
+              <span className="hidden sm:inline">Öppet: 07–22</span>
+              <span className="sm:hidden">07–22</span>
             </span>
-          </div>
-          <div className="text-red-100 font-medium flex-shrink-0">
-            <span className="hidden sm:inline">Nya erbjudanden varje vecka!</span>
-            <span className="sm:hidden">Erbjudanden!</span>
+          </Link>
+          <div className="text-red-100 font-medium flex-shrink-0 hidden sm:block">
+            Nya erbjudanden varje vecka!
           </div>
         </div>
       </div>
