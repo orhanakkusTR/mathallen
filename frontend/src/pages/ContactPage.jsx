@@ -79,24 +79,10 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div>
               <h2 className="text-2xl font-bold text-stone-900 mb-8">
-                Besöksinformation
+                Kontaktinformation
               </h2>
               
-              <div className="space-y-6 mb-10">
-                <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-address">
-                  <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-red-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-stone-900 mb-1">Adress</h3>
-                    <p className="text-stone-600">
-                      Lantmannagatan 59,<br />
-                      Lugna gatan 2,<br />
-                      214 48 Malmö
-                    </p>
-                  </div>
-                </div>
-
+              <div className="space-y-6">
                 <div className="flex items-start gap-4 p-4 bg-stone-50 rounded-xl" data-testid="contact-phone">
                   <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-6 h-6 text-red-600" />
@@ -132,20 +118,6 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Map */}
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-stone-200" data-testid="contact-map">
-                <iframe
-                  title="Mathallen Malmö Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0, filter: "saturate(0.9) contrast(1.05)" }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
               </div>
             </div>
 
@@ -269,6 +241,86 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Two Stores Section */}
+      <section className="bg-stone-100">
+        <div className="grid md:grid-cols-2">
+          {/* Store 1 - Mathallen Malmö */}
+          <div className="bg-stone-900 text-white" data-testid="store-malmo">
+            <div className="p-8 md:p-12">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Malmö</h3>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-stone-300">
+                    Lantmannagatan 59, Lugna gatan 2,<br />
+                    214 48 Malmö
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-red-400 flex-shrink-0" />
+                  <a href="tel:+46409244220" className="text-stone-300 hover:text-white transition-colors">
+                    040-92 44 20
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-red-400 flex-shrink-0" />
+                  <p className="text-stone-300">Alla dagar: 07:00 - 22:00</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[300px] md:h-[350px]">
+              <iframe
+                title="Mathallen Malmö Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "grayscale(0.3) contrast(1.05)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+
+          {/* Store 2 - Mathallen Lugnet */}
+          <div className="bg-red-600 text-white" data-testid="store-lugnet">
+            <div className="p-8 md:p-12">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Lugnet</h3>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-red-200 flex-shrink-0 mt-0.5" />
+                  <p className="text-red-100">
+                    Lugna gatan 2,<br />
+                    211 60 Malmö
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-red-200 flex-shrink-0" />
+                  <a href="tel:+46409244220" className="text-red-100 hover:text-white transition-colors">
+                    040-92 44 20
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-red-200 flex-shrink-0" />
+                  <p className="text-red-100">Alla dagar: 07:00 - 22:00</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[300px] md:h-[350px]">
+              <iframe
+                title="Mathallen Lugnet Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.8!2d13.0050!3d55.6000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLugna%20gatan%202%2C%20211%2060%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "grayscale(0.3) contrast(1.05)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
   );
 }
