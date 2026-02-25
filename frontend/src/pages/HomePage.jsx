@@ -83,11 +83,22 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 animate-fade-in-up stagger-1">
                   <div className="relative rounded-2xl overflow-hidden aspect-[16/9] shadow-2xl">
-                    <img
-                      src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                      alt="Familj handlar i Mathallen"
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="w-full h-full object-cover"
-                    />
+                      poster="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    >
+                      <source src="https://videos.pexels.com/video-files/4117807/4117807-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+                      {/* Fallback image */}
+                      <img
+                        src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="Mathallen butik"
+                        className="w-full h-full object-cover"
+                      />
+                    </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
                       <p className="text-sm font-medium opacity-90">Varmt välkommen!</p>
