@@ -89,15 +89,8 @@ export default function HomePage() {
                       muted
                       playsInline
                       className="w-full h-full object-cover"
-                      poster="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                     >
-                      <source src="https://videos.pexels.com/video-files/4117807/4117807-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-                      {/* Fallback image */}
-                      <img
-                        src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                        alt="Mathallen butik"
-                        className="w-full h-full object-cover"
-                      />
+                      <source src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
