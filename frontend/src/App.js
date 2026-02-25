@@ -10,13 +10,15 @@ import ContactPage from "@/pages/ContactPage";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 
-// Layout
+// Layout & Utils
 import Layout from "@/components/Layout";
+import ScrollToTop from "@/components/ScrollToTop";
 
 function App() {
   return (
     <div className="App min-h-screen bg-background">
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
