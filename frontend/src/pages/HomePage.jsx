@@ -24,13 +24,6 @@ export default function HomePage() {
     fetchOffers();
   }, []);
 
-  const values = [
-    { icon: Leaf, title: "Färskhet", description: "Dagliga leveranser av färska produkter" },
-    { icon: Tag, title: "Prisvärdhet", description: "Bra priser på alla dina favoriter" },
-    { icon: Users, title: "Lokal service", description: "Personlig service med ett leende" },
-    { icon: ShoppingBasket, title: "Brett sortiment", description: "Allt du behöver under ett tak" },
-  ];
-
   return (
     <div className="page-transition">
       {/* Hero Section - Bento Grid */}
