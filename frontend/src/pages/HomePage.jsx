@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       {/* Hero Section - Full Width */}
-      <section className="relative h-[80vh] min-h-[600px] max-h-[800px] overflow-hidden bg-stone-900">
+      <section className="relative h-[calc(100vh-112px)] min-h-[500px] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -100,9 +100,6 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
-
-        {/* Bottom red gradient blur */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-red-600 via-red-600/60 to-transparent" />
       </section>
 
       {/* Mobile Weekly Offer - Only shown on mobile/tablet */}
