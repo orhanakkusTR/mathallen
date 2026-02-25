@@ -117,31 +117,109 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-16 md:py-24 bg-white">
+      {/* Values Section - Visual Cards */}
+      <section className="py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
+          <div className="text-center mb-16">
+            <span className="inline-block text-red-600 font-semibold text-sm uppercase tracking-wider mb-4">
+              Våra löften till dig
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-stone-900 mb-6">
               Varför välja Mathallen?
             </h2>
             <p className="text-stone-600 text-lg max-w-2xl mx-auto">
-              Vi kombinerar kvalitet och prisvärdhet för att ge dig den bästa shoppingupplevelsen.
+              Vi kombinerar kvalitet och prisvärdhet för att ge dig den bästa shoppingupplevelsen i Malmö.
             </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <div
-                key={value.title}
-                className={`bg-stone-50 rounded-2xl p-6 md:p-8 text-center hover-lift animate-fade-in-up stagger-${index + 1}`}
-                data-testid={`value-card-${index}`}
-              >
-                <div className="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-7 h-7 text-red-600" />
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Färskhet */}
+            <div 
+              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              data-testid="value-card-0"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1552825896-8059df63a1fb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBjb2xvcmZ1bHxlbnwwfHx8fDE3NzIwNTQ4NTJ8MA&ixlib=rb-4.1.0&q=85"
+                alt="Färska produkter"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
+                  <Leaf className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-semibold text-stone-900 mb-2">{value.title}</h3>
-                <p className="text-stone-600 text-sm">{value.description}</p>
+                <h3 className="text-2xl font-bold mb-2">Färskhet</h3>
+                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Dagliga leveranser garanterar att du alltid får de färskaste produkterna. Våra grönsaker och frukter plockas med omsorg.
+                </p>
               </div>
-            ))}
+            </div>
+
+            {/* Prisvärdhet */}
+            <div 
+              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              data-testid="value-card-1"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1693505628207-dbeb3d882c92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxncm9jZXJ5JTIwc2hvcHBpbmclMjBiYXNrZXQlMjBkaXNjb3VudCUyMHNhbGV8ZW58MHx8fHwxNzcyMDU0ODUyfDA&ixlib=rb-4.1.0&q=85"
+                alt="Bra priser"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
+                  <Tag className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Prisvärdhet</h3>
+                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Bra priser utan att kompromissa med kvaliteten. Veckans erbjudanden ger dig ännu mer värde för pengarna.
+                </p>
+              </div>
+            </div>
+
+            {/* Lokal service */}
+            <div 
+              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              data-testid="value-card-2"
+            >
+              <img
+                src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                alt="Personlig service"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
+                  <Users className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Lokal service</h3>
+                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Vårt vänliga team står redo att hjälpa dig. Personlig service med ett leende – varje gång du besöker oss.
+                </p>
+              </div>
+            </div>
+
+            {/* Brett sortiment */}
+            <div 
+              className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              data-testid="value-card-3"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1760463921690-9bec0cc7d434?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxzdXBlcm1hcmtldCUyMGFpc2xlJTIwcHJvZHVjdHMlMjB2YXJpZXR5fGVufDB8fHx8MTc3MjA1NDg1NXww&ixlib=rb-4.1.0&q=85"
+                alt="Brett sortiment"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:bg-red-600 transition-colors">
+                  <ShoppingBasket className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Brett sortiment</h3>
+                <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Från vardagsvaror till internationella specialiteter – allt du behöver finns under vårt tak.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
