@@ -73,7 +73,7 @@ export default function OffersPage() {
           </div>
           
           {/* Right - Image (full bleed) */}
-          <div className="relative h-48 md:h-auto order-1 md:order-2">
+          <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2">
             <img
               src="https://images.unsplash.com/photo-1632175771754-4c413217669f?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1200"
               alt="Veckans erbjudanden"

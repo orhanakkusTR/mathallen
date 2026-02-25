@@ -54,7 +54,7 @@ export default function CategoriesPage() {
           </div>
           
           {/* Right - Image (full bleed) */}
-          <div className="relative h-48 md:h-auto order-1 md:order-2">
+          <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2">
             <img
               src="https://images.pexels.com/photos/12081286/pexels-photo-12081286.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
               alt="Vårt sortiment"
