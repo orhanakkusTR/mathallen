@@ -118,6 +118,24 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* Veckans erbjudanden box */}
+                <Link 
+                  to="/erbjudanden"
+                  className="block mt-2 p-6 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl text-white hover:from-red-700 hover:to-red-800 transition-all group"
+                  data-testid="contact-offers-box"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-red-200 text-sm font-medium mb-1">Missa inte</p>
+                      <h3 className="text-2xl font-bold mb-2">Veckans erbjudanden</h3>
+                      <p className="text-red-100 text-sm">Se våra bästa priser just nu →</p>
+                    </div>
+                    <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Tag className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
 
