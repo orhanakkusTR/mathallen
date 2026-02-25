@@ -90,7 +90,7 @@ export default function HomePage() {
                       playsInline
                       className="w-full h-full object-cover"
                     >
-                      <source src="https://static.videezy.com/system/resources/previews/000/041/040/original/vegetables.mp4" type="video/mp4" />
+                      <source src="/market-video.mp4" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
