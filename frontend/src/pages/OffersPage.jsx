@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
-import { Tag, Calendar, ShoppingBasket, Filter } from "lucide-react";
+import { Tag, Calendar, ShoppingBasket } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -15,7 +8,6 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 export default function OffersPage() {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const currentWeek = new Date().toLocaleDateString("sv-SE", {
     year: "numeric",
@@ -42,12 +34,6 @@ export default function OffersPage() {
     };
     fetchOffers();
   }, []);
-
-  const categories = ["all", ...new Set(offers.map((o) => o.category))];
-  
-  const filteredOffers = selectedCategory === "all" 
-    ? offers 
-    : offers.filter((o) => o.category === selectedCategory);
 
   return (
     <div className="page-transition">
@@ -80,32 +66,6 @@ export default function OffersPage() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-stone-900/60 via-transparent to-transparent md:from-stone-900 md:via-transparent md:to-transparent" />
-          </div>
-        </div>
-      </section>
-
-      {/* Filters */}
-      <section className="py-6 bg-white border-b border-stone-100 sticky top-[132px] z-30">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-4">
-            <Filter className="w-5 h-5 text-stone-400" />
-            <span className="text-sm text-stone-600 hidden sm:inline">Filtrera:</span>
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-48 rounded-full" data-testid="category-filter">
-                <SelectValue placeholder="Alla kategorier" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Alla kategorier</SelectItem>
-                {categories.filter(c => c !== "all").map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <span className="ml-auto text-sm text-stone-500">
-              {filteredOffers.length} erbjudanden
-            </span>
           </div>
         </div>
       </section>
