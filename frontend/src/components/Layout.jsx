@@ -6,8 +6,8 @@ export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      {/* pt accounts for fixed header height: mobile ~97px, desktop ~121px */}
-      <main className="flex-1 pt-[97px] md:pt-[121px]">
+      {/* pt accounts for fixed header height */}
+      <main className="flex-1 pt-[93px] md:pt-[117px]">
         <Outlet />
       </main>
       <Footer />
