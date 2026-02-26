@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { MessageCircle, X, Send, Bot, MapPin, Clock, Phone, User, Mail, ChevronRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ const QUICK_ACTIONS = [
 ];
 
 export default function ChatBot() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState("welcome"); // welcome, chat, form, success
   const [formData, setFormData] = useState({ name: "", email: "" });
@@ -33,7 +35,13 @@ export default function ChatBot() {
   const messagesEndRef = useRef(null);
 
   const handleQuickAction = (actionId) => {
-    setView(actionId);
+    if (actionId === "location") {
+      // Navigate to contact page and close chatbot
+      setIsOpen(false);
+      navigate("/kontakt");
+    } else {
+      setView(actionId);
+    }
   };
 
   const handleSubmitLead = async (e) => {
@@ -53,13 +61,13 @@ export default function ChatBot() {
   };
 
   const renderWelcome = () => (
-    <div className="p-5 space-y-4">
-      <div className="text-center mb-6">
-        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-          <Bot className="w-8 h-8 text-red-600" />
+    <div className="p-4 space-y-3">
+      <div className="text-center mb-4">
+        <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+          <Bot className="w-6 h-6 text-red-600" />
         </div>
-        <h3 className="font-bold text-stone-900 text-lg">Välkommen! 👋</h3>
-        <p className="text-stone-500 text-sm mt-1">Hur kan vi hjälpa dig idag?</p>
+        <h3 className="font-bold text-stone-900 text-base">Välkommen! 👋</h3>
+        <p className="text-stone-500 text-xs mt-1">Hur kan vi hjälpa dig idag?</p>
       </div>
 
       <div className="space-y-2">
@@ -67,25 +75,25 @@ export default function ChatBot() {
           <button
             key={action.id}
             onClick={() => handleQuickAction(action.id)}
-            className="w-full flex items-center gap-3 p-3 bg-stone-50 hover:bg-stone-100 rounded-xl transition-colors text-left group"
+            className="w-full flex items-center gap-2 p-2.5 bg-stone-50 hover:bg-stone-100 rounded-lg transition-colors text-left group"
           >
-            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow">
-              <action.icon className="w-5 h-5 text-red-600" />
+            <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center shadow-sm group-hover:shadow">
+              <action.icon className="w-4 h-4 text-red-600" />
             </div>
-            <span className="font-medium text-stone-700 flex-1">{action.label}</span>
-            <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-red-600" />
+            <span className="font-medium text-stone-700 flex-1 text-sm">{action.label}</span>
+            <ChevronRight className="w-3 h-3 text-stone-400 group-hover:text-red-600" />
           </button>
         ))}
       </div>
 
-      <div className="pt-4 border-t border-stone-100">
+      <div className="pt-3 border-t border-stone-100">
         <button
           onClick={() => setView("form")}
-          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-3 rounded-lg transition-colors text-sm"
         >
           Lämna dina uppgifter
         </button>
-        <p className="text-center text-xs text-stone-400 mt-2">
+        <p className="text-center text-xs text-stone-400 mt-1.5">
           Så kontaktar vi dig
         </p>
       </div>
@@ -93,31 +101,31 @@ export default function ChatBot() {
   );
 
   const renderHours = () => (
-    <div className="p-5 space-y-4">
-      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+    <div className="p-4 space-y-3">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-xs font-medium flex items-center gap-1 hover:gap-2 transition-all">
         ← Tillbaka
       </button>
       
-      <div className="bg-red-50 rounded-2xl p-5">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">
-            <Clock className="w-6 h-6 text-white" />
+      <div className="bg-red-50 rounded-xl p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-9 h-9 bg-red-600 rounded-lg flex items-center justify-center">
+            <Clock className="w-4 h-4 text-white" />
           </div>
           <div>
-            <h3 className="font-bold text-stone-900">Öppettider</h3>
-            <p className="text-stone-500 text-sm">Alla våra butiker</p>
+            <h3 className="font-bold text-stone-900 text-sm">Öppettider</h3>
+            <p className="text-stone-500 text-xs">Alla våra butiker</p>
           </div>
         </div>
         
-        <div className="bg-white rounded-xl p-4">
+        <div className="bg-white rounded-lg p-3">
           <div className="flex justify-between items-center">
-            <span className="text-stone-600">Alla dagar</span>
-            <span className="font-bold text-stone-900 text-lg">07:00 - 22:00</span>
+            <span className="text-stone-600 text-sm">Alla dagar</span>
+            <span className="font-bold text-stone-900 text-sm">07:00 - 22:00</span>
           </div>
         </div>
       </div>
 
-      <p className="text-center text-stone-500 text-sm">
+      <p className="text-center text-stone-500 text-xs">
         Välkommen in! Vi ser fram emot ditt besök.
       </p>
     </div>
