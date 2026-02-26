@@ -18,8 +18,8 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 glass-header border-b border-stone-100/50">
-      {/* Top bar */}
+    <header className="sticky top-0 z-50">
+      {/* Top bar - Red */}
       <div className="bg-red-600 text-white py-2.5 text-sm">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Desktop */}
@@ -65,19 +65,22 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main header */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center group"
-            data-testid="logo-link"
-          >
-            <img 
-              src={LOGO_URL} 
-              alt="Mathallen Malmö" 
-              className="h-12 md:h-16 w-auto"
+      {/* Main header - White */}
+      <div className="bg-white shadow-sm border-b border-stone-100">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo with red background extension */}
+            <Link 
+              to="/" 
+              className="flex items-center group relative"
+              data-testid="logo-link"
+            >
+              {/* Red background behind logo */}
+              <div className="absolute -left-4 md:-left-8 -top-0 -bottom-0 w-[calc(100%+2rem)] md:w-[calc(100%+3rem)] bg-red-600 -z-10 hidden md:block" style={{height: 'calc(100% + 2.5rem)', top: '-1.25rem'}}></div>
+              <img 
+                src={LOGO_URL} 
+                alt="Mathallen Malmö" 
+                className="h-12 md:h-16 w-auto relative z-10"
             />
           </Link>
 
