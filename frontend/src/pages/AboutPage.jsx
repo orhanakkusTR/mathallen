@@ -65,21 +65,13 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
                 <p>
-                  Det började 1985 med en enkel vision: att skapa en plats där 
-                  Malmöborna kunde hitta kvalitetsprodukter till rimliga priser. 
-                  Idag, nästan fyra decennier senare, är den visionen fortfarande 
-                  kärnan i allt vi gör.
+                  Mathallen grundades 2020 med en tydlig ambition – att skapa en matbutik där Malmöbor och kunder från hela Skåne kan handla bra produkter till bra priser. Vi ville bygga en plats som speglar mångfalden i regionen och samla vardagens favoriter tillsammans med smaker från världens alla hörn under ett och samma tak.
                 </p>
                 <p>
-                  Genom åren har vi vuxit och utvecklats, men vi har aldrig glömt 
-                  våra rötter. Vi är fortfarande samma familjevänliga butik som 
-                  öppnade sina dörrar för första gången – bara större och bättre.
+                  Sedan starten har vi vuxit tillsammans med våra kunder. Genom ett brett sortiment, dagliga leveranser och personlig service har vi skapat en butik där kvalitet och prisvärdhet går hand i hand.
                 </p>
                 <p>
-                  Vårt engagemang för lokala producenter och hållbarhet har gjort 
-                  oss till en favorit bland medvetna konsumenter. Vi tror på att 
-                  stödja vårt samhälle och erbjuda produkter som man kan känna sig 
-                  trygg med.
+                  Vårt mål är enkelt: att vara en trygg och självklar matdestination för både Malmö och Skåne – en plats där du alltid hittar det du söker och känner dig välkommen varje gång du besöker oss.
                 </p>
               </div>
             </div>
