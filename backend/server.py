@@ -311,6 +311,42 @@ async def get_contact_messages(admin = Depends(get_current_admin)):
             msg['created_at'] = datetime.fromisoformat(msg['created_at'])
     return messages
 
+# ---- NEWSLETTER ----
+
+@api_router.post("/newsletter/subscribe")
+async def subscribe_newsletter(subscription: NewsletterSubscribe):
+    """Subscribe to newsletter"""
+    # Check if already subscribed
+    existing = await db.newsletter.find_one({"email": subscription.email})
+    if existing:
+        if existing.get('is_active'):
+            return {"message": "Du är redan prenumerant på vårt nyhetsbrev!"}
+        else:
+            # Reactivate subscription
+            await db.newsletter.update_one(
+                {"email": subscription.email},
+                {"$set": {"is_active": True, "subscribed_at": datetime.now(timezone.utc).isoformat()}}
+            )
+            return {"message": "Välkommen tillbaka! Din prenumeration är nu aktiv igen."}
+    
+    # Create new subscription
+    new_sub = NewsletterSubscription(email=subscription.email)
+    doc = new_sub.model_dump()
+    doc['subscribed_at'] = doc['subscribed_at'].isoformat()
+    await db.newsletter.insert_one(doc)
+    
+    logger.info(f"New newsletter subscription: {subscription.email}")
+    return {"message": "Tack! Du kommer nu få våra veckokampanjer via e-post."}
+
+@api_router.get("/newsletter/subscribers", response_model=List[NewsletterSubscription])
+async def get_newsletter_subscribers(admin = Depends(get_current_admin)):
+    """Get all newsletter subscribers (admin only)"""
+    subscribers = await db.newsletter.find({"is_active": True}, {"_id": 0}).sort("subscribed_at", -1).to_list(1000)
+    for sub in subscribers:
+        if isinstance(sub.get('subscribed_at'), str):
+            sub['subscribed_at'] = datetime.fromisoformat(sub['subscribed_at'])
+    return subscribers
+
 # ---- ADMIN SETUP ----
 
 @api_router.post("/setup/admin")
