@@ -502,7 +502,7 @@ export default function AboutPage() {
                 alt="Google" 
                 className="h-4 w-auto"
               />
-              <span className="text-stone-600 text-xs md:text-sm font-medium">240+ omdömen</span>
+              <span className="text-stone-600 text-xs md:text-sm font-medium">1630+ omdömen</span>
             </div>
             <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-stone-200">
               <svg className="h-4 w-auto" viewBox="0 0 24 24" fill="#1877F2">
