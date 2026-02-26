@@ -437,72 +437,29 @@ async def get_product_categories():
 
 # ---- CHATBOT ----
 
-STORE_INFO = """
-📍 **Mathallen Malmö**
-Lantmannagatan 59, 214 48 Malmö
-Tel: 040-92 44 20
+class LeadCapture(BaseModel):
+    name: str
+    email: EmailStr
 
-📍 **Mathallen Lugnet**
-Lugna gatan 2, 211 60 Malmö
-Tel: 040-92 44 20
-
-🕐 **Öppettider:** Alla dagar 07:00 - 22:00
-"""
-
-WELCOME_RESPONSES = {
-    "greeting": "Hej och välkommen till Mathallen! 👋 Jag är din virtuella assistent. Hur kan jag hjälpa dig idag?",
-    "hours": f"Vi har öppet alla dagar mellan 07:00 och 22:00. Välkommen in!\n{STORE_INFO}",
-    "location": f"Du hittar oss på två platser i Malmö:\n{STORE_INFO}",
-    "contact": f"Du kan nå oss på telefon 040-92 44 20. Här är våra butiker:\n{STORE_INFO}",
-    "default": f"Tack för din fråga! Välkommen till Mathallen - din lokala stormarknad i Malmö med färska produkter, bra priser och veckans bästa erbjudanden.\n{STORE_INFO}"
-}
-
-# Keywords for different response types
-GREETING_KEYWORDS = ["hej", "hallå", "tjena", "hejsan", "god dag", "hello", "hi", "morsning"]
-HOURS_KEYWORDS = ["öppet", "öppna", "stänger", "öppettider", "tider", "timmar", "när"]
-LOCATION_KEYWORDS = ["var", "hitta", "adress", "ligger", "vägen", "karta", "plats"]
-CONTACT_KEYWORDS = ["kontakt", "telefon", "ring", "nummer", "nå", "mail", "mejl"]
-
-def get_chat_response(query: str) -> str:
-    """Get appropriate response based on query"""
-    query_lower = query.lower().strip()
-    
-    # Check for greetings
-    if any(word in query_lower for word in GREETING_KEYWORDS):
-        return WELCOME_RESPONSES["greeting"]
-    
-    # Check for opening hours
-    if any(word in query_lower for word in HOURS_KEYWORDS):
-        return WELCOME_RESPONSES["hours"]
-    
-    # Check for location
-    if any(word in query_lower for word in LOCATION_KEYWORDS):
-        return WELCOME_RESPONSES["location"]
-    
-    # Check for contact
-    if any(word in query_lower for word in CONTACT_KEYWORDS):
-        return WELCOME_RESPONSES["contact"]
-    
-    # Default response
-    return WELCOME_RESPONSES["default"]
-
-@api_router.post("/chat")
-async def chat_search(query: ChatQuery):
-    """Virtual assistant chatbot"""
-    search_term = query.query.strip()
-    
-    if len(search_term) < 2:
-        return {
-            "found": True,
-            "message": WELCOME_RESPONSES["greeting"],
-        }
-    
-    response = get_chat_response(search_term)
-    
-    return {
-        "found": True,
-        "message": response,
+@api_router.post("/chat/lead")
+async def capture_lead(lead: LeadCapture):
+    """Capture customer lead from chatbot"""
+    doc = {
+        "id": str(uuid.uuid4()),
+        "name": lead.name,
+        "email": lead.email,
+        "source": "chatbot",
+        "created_at": datetime.now(timezone.utc).isoformat()
     }
+    await db.leads.insert_one(doc)
+    logger.info(f"New lead captured: {lead.email}")
+    return {"success": True, "message": "Tack! Vi har sparat dina uppgifter."}
+
+@api_router.get("/chat/leads")
+async def get_leads(admin = Depends(get_current_admin)):
+    """Get all captured leads (admin only)"""
+    leads = await db.leads.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
+    return leads
 
 # ---- ADMIN SETUP ----
 
