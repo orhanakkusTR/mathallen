@@ -95,45 +95,45 @@ export default function ShopPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-stone-50">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center text-stone-900 mb-12">
             Vad kan du förvänta dig?
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow border border-stone-100">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-5">
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="font-bold text-stone-900 mb-2">Samma kvalitet</h3>
-              <p className="text-stone-600 text-sm">
+              <h3 className="font-bold text-stone-900 text-lg text-center mb-3">Samma kvalitet</h3>
+              <p className="text-stone-600 text-sm text-center">
                 Alla produkter du älskar från våra butiker, nu tillgängliga online.
               </p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow border border-stone-100">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-5">
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-stone-900 mb-2">Bra priser</h3>
-              <p className="text-stone-600 text-sm">
+              <h3 className="font-bold text-stone-900 text-lg text-center mb-3">Bra priser</h3>
+              <p className="text-stone-600 text-sm text-center">
                 Samma förmånliga priser och veckans erbjudanden som i butik.
               </p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow border border-stone-100">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-5">
                 <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                 </svg>
               </div>
-              <h3 className="font-bold text-stone-900 mb-2">Hemleverans</h3>
-              <p className="text-stone-600 text-sm">
+              <h3 className="font-bold text-stone-900 text-lg text-center mb-3">Hemleverans</h3>
+              <p className="text-stone-600 text-sm text-center">
                 Bekväm leverans direkt till din dörr i Malmö-området.
               </p>
             </div>
