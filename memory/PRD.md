@@ -10,74 +10,99 @@ Build a corporate website for Mathallen Malmö - a local supermarket (stormarkna
 
 ## Core Requirements
 - Swedish language throughout
-- ~~Warm orange/yellow~~ **Red (#DC2626)** color scheme (updated per user request)
+- Red (#DC2626) color scheme
 - Mobile-first, accessible design
 - Admin panel for managing weekly campaigns
 - Contact form with email notifications
-- Google Maps integration (implemented)
+- Google Maps integration
 - No e-commerce (informational only)
 
 ## What's Been Implemented
 
-### Backend (FastAPI)
+### Backend (FastAPI + MongoDB)
 - ✅ Admin authentication (JWT tokens)
-- ✅ Offer CRUD operations (create, read, update, delete)
-- ✅ Contact form with Resend email integration (MOCKED - needs API key)
+- ✅ **Offers CRUD with MongoDB** (PERSISTENT - data survives restarts)
+- ✅ Contact messages stored in MongoDB
+- ✅ Newsletter subscriptions in MongoDB
+- ✅ Chatbot leads capture in MongoDB
 - ✅ Categories API with default data
 - ✅ Protected admin routes
 
 ### Frontend (React + Tailwind + Shadcn/UI)
-- ✅ Homepage with full-width hero image
-- ✅ About page (Om oss) with split-layout hero and values section with images
-- ✅ Weekly offers page (Veckans erbjudanden) with filtering and split-layout hero
-- ✅ Categories page (Sortiment) with product categories and split-layout hero
-- ✅ Contact page with form, Google Maps, and split-layout hero
+- ✅ Homepage with full-width hero video
+- ✅ About page (Om oss) with split-layout hero and values section
+- ✅ Weekly offers page (Veckans erbjudanden) with filtering
+- ✅ Contact page with 2 store locations and Google Maps iframes
 - ✅ Admin login page
-- ✅ Admin dashboard (static - needs UI for offer management)
+- ✅ **Full Admin Dashboard** (offers management, subscribers, messages)
+- ✅ Customer reviews section
+- ✅ Newsletter signup form
+- ✅ Cookie consent banner
+- ✅ **Interactive Chatbot** (lead generation, store info)
+- ✅ Payment method icons in footer (Visa, MC, Swish, Apple Pay)
 
-### Design Updates (2026-02-25)
-- ✅ Color scheme changed from orange to RED per user request
-- ✅ User-provided logo integrated in Header and Footer
-- ✅ Split-layout hero design applied to all interior pages
-- ✅ "Våra värderingar" section redesigned with image cards
-- ✅ Responsive layout fixed for tablet screens (md: breakpoint)
-- ✅ Mobile header optimized with contact info links
-- ✅ Homepage offers limited to 4 items
+### Recent Updates (2026-02-26)
+- ✅ **Chatbot text made smaller and more compact**
+- ✅ **Chatbot "Hitta oss" button now navigates to Contact page**
+- ✅ **Verified MongoDB persistence** - all data survives server restarts
+
+## Data Persistence Status
+| Collection | Storage | Status |
+|------------|---------|--------|
+| offers | MongoDB | ✅ PERSISTENT |
+| newsletter | MongoDB | ✅ PERSISTENT |
+| contact_messages | MongoDB | ✅ PERSISTENT |
+| leads | MongoDB | ✅ PERSISTENT |
+| admins | MongoDB | ✅ PERSISTENT |
 
 ## Admin Credentials
 - Username: `admin`
 - Password: `mathallen2024`
 
+## API Endpoints
+- `POST /api/auth/login` - Admin login
+- `GET /api/offers` - List all offers
+- `GET /api/offers/current` - Current week offers
+- `POST /api/offers` - Create offer (admin)
+- `PUT /api/offers/{id}` - Update offer (admin)
+- `DELETE /api/offers/{id}` - Delete offer (admin)
+- `POST /api/newsletter/subscribe` - Subscribe to newsletter
+- `GET /api/newsletter/subscribers` - List subscribers (admin)
+- `POST /api/contact` - Submit contact form
+- `GET /api/contact/messages` - List messages (admin)
+- `POST /api/chat/lead` - Capture chatbot lead
+- `GET /api/chat/leads` - List leads (admin)
+
 ## Prioritized Backlog
 
-### P0 (Critical) - Done
+### P0 (Critical) - DONE
 - [x] All core pages
 - [x] Admin authentication
-- [x] Offer management API
-- [x] Split-layout hero on all pages
-- [x] Responsive design (mobile, tablet, desktop)
+- [x] **Offer management with MongoDB persistence**
+- [x] Admin Dashboard UI
+- [x] Responsive design
 
-### P1 (High Priority)
-- [ ] Configure Resend API key for real email delivery
-- [ ] Migrate in-memory data to MongoDB for persistence
-- [ ] Build Admin Dashboard UI for offer CRUD operations
+### P1 (High Priority) - PENDING
+- [ ] Configure Resend API key for email delivery
+- [ ] Add real Google Maps review link
 
-### P2 (Medium Priority)
-- [ ] Hero video upload mechanism (external URLs blocked by CORS)
-- [ ] Newsletter subscription form
+### P2 (Medium Priority) - FUTURE
+- [ ] Hero video in .mp4 format (better browser support)
 - [ ] Multi-week offer scheduling
+- [ ] Enhanced Google Maps API integration
 
-### P3 (Low Priority)
+### P3 (Low Priority) - BACKLOG
 - [ ] Recipe suggestions
 - [ ] Loyalty program integration
-- [ ] Offer analytics
+- [ ] Offer analytics dashboard
 
-## Known Issues
-- ⚠️ Data is in-memory (offers, categories) - not persistent
-- ⚠️ Admin dashboard is static - needs UI implementation
-- ⚠️ External video URLs blocked by CORS in environment
+## Known Considerations
+- ⚠️ Hero video is .mov format (works but .mp4 would have better support)
+- ⚠️ Email sending requires RESEND_API_KEY to be configured
+- ⚠️ Google review link is placeholder (#)
 
-## Next Tasks
-1. Migrate in-memory data to MongoDB for persistence
-2. Build Admin Dashboard UI for managing offers
-3. Add Resend API key to enable contact form emails
+## Tech Stack
+- **Frontend:** React, Tailwind CSS, Shadcn/UI, Lucide React icons
+- **Backend:** FastAPI, PyJWT, Motor (async MongoDB)
+- **Database:** MongoDB (all collections persistent)
+- **Deployment:** Preview environment on Emergent Platform
