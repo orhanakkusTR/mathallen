@@ -133,6 +133,24 @@ class NewsletterSubscription(BaseModel):
 class NewsletterSubscribe(BaseModel):
     email: EmailStr
 
+# Product model for inventory
+class Product(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    category: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ProductCreate(BaseModel):
+    name: str
+    category: Optional[str] = None
+
+class ProductBulkCreate(BaseModel):
+    products: List[str]  # List of product names
+    category: Optional[str] = None
+
+class ChatQuery(BaseModel):
+    query: str
+
 # ============== AUTH HELPERS ==============
 
 def hash_password(password: str) -> str:
