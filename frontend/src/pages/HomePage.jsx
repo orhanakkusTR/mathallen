@@ -323,7 +323,7 @@ export default function HomePage() {
                       <div className="relative w-36 flex-shrink-0">
                         {offer.image_url ? (
                           <img
-                            src={offer.image_url}
+                            src={convertToDirectImageUrl(offer.image_url)}
                             alt={offer.product_name}
                             className="w-full h-full object-cover min-h-[140px]"
                           />
