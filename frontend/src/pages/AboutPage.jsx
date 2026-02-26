@@ -267,14 +267,15 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-3">
-              Från våra hyllor
+              Upptäck vårt sortiment
             </h2>
             <p className="text-stone-600 max-w-2xl mx-auto">
-              Upptäck vårt breda sortiment av färska produkter och kvalitetsvaror
+              Allt från färska råvaror och delikatesser till blommor och internationella specialiteter.
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {/* Färska frukter */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
                 src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -288,6 +289,7 @@ export default function AboutPage() {
               </div>
             </div>
             
+            {/* Grönsaker */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
                 src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -301,6 +303,7 @@ export default function AboutPage() {
               </div>
             </div>
             
+            {/* Kött & chark */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
                 src="https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -310,10 +313,11 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-4 left-4 text-white">
                 <p className="font-semibold text-lg">Kött & chark</p>
-                <p className="text-white/80 text-sm">Kvalitetsprodukter</p>
+                <p className="text-white/80 text-sm">Utvald kvalitet</p>
               </div>
             </div>
             
+            {/* Mejeri */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
                 src="https://images.pexels.com/photos/1435706/pexels-photo-1435706.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -324,6 +328,62 @@ export default function AboutPage() {
               <div className="absolute bottom-4 left-4 text-white">
                 <p className="font-semibold text-lg">Mejeri</p>
                 <p className="text-white/80 text-sm">Fräscht varje dag</p>
+              </div>
+            </div>
+
+            {/* Kolonial */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/458796/pexels-photo-458796.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Kolonial"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Kolonial</p>
+                <p className="text-white/80 text-sm">Basvaror & kryddor</p>
+              </div>
+            </div>
+
+            {/* Internationella varor */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/5951182/pexels-photo-5951182.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Internationella varor"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Internationella varor</p>
+                <p className="text-white/80 text-sm">Smaker från världen</p>
+              </div>
+            </div>
+
+            {/* Färska delikatesser */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.unsplash.com/photo-1719512039766-ca2f92cad537?auto=format&fit=crop&w=600&q=80"
+                alt="Färska delikatesser"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Färska delikatesser</p>
+                <p className="text-white/80 text-sm">Börek & Baklava</p>
+              </div>
+            </div>
+
+            {/* Blommor */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.unsplash.com/photo-1666508130265-3d5491525a34?auto=format&fit=crop&w=600&q=80"
+                alt="Blommor"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Blommor</p>
+                <p className="text-white/80 text-sm">För hem & fest</p>
               </div>
             </div>
           </div>
