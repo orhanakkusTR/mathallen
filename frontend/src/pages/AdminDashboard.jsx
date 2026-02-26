@@ -345,10 +345,6 @@ export default function AdminDashboard() {
               <Tag className="w-4 h-4 mr-2" />
               Erbjudanden
             </TabsTrigger>
-            <TabsTrigger value="products" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
-              <ShoppingBag className="w-4 h-4 mr-2" />
-              Produkter ({productTotal})
-            </TabsTrigger>
             <TabsTrigger value="subscribers" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
               <Users className="w-4 h-4 mr-2" />
               Prenumeranter
