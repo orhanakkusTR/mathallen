@@ -136,29 +136,23 @@ export default function HomePage() {
             data-testid="hero-weekly-offer-box"
           >
             <div className="relative">
-              {/* Spiral binding holes */}
-              <div className="absolute -top-3 left-0 right-0 flex justify-center gap-4 z-10">
-                <div className="w-4 h-4 rounded-full bg-stone-400 border-2 border-stone-500 shadow-inner"></div>
-                <div className="w-4 h-4 rounded-full bg-stone-400 border-2 border-stone-500 shadow-inner"></div>
-                <div className="w-4 h-4 rounded-full bg-stone-400 border-2 border-stone-500 shadow-inner"></div>
-                <div className="w-4 h-4 rounded-full bg-stone-400 border-2 border-stone-500 shadow-inner"></div>
-                <div className="w-4 h-4 rounded-full bg-stone-400 border-2 border-stone-500 shadow-inner"></div>
+              {/* Wire rings - metallic spiral */}
+              <div className="absolute -top-4 left-4 right-4 flex justify-between z-20">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="relative">
+                    <div className="w-6 h-10 border-[3px] border-stone-300 rounded-full bg-gradient-to-b from-stone-200 to-stone-400 shadow-md"></div>
+                  </div>
+                ))}
               </div>
               
-              {/* Wire rings */}
-              <div className="absolute -top-5 left-0 right-0 flex justify-center gap-4 z-20">
-                <div className="w-5 h-8 border-2 border-stone-500 rounded-full bg-transparent"></div>
-                <div className="w-5 h-8 border-2 border-stone-500 rounded-full bg-transparent"></div>
-                <div className="w-5 h-8 border-2 border-stone-500 rounded-full bg-transparent"></div>
-                <div className="w-5 h-8 border-2 border-stone-500 rounded-full bg-transparent"></div>
-                <div className="w-5 h-8 border-2 border-stone-500 rounded-full bg-transparent"></div>
-              </div>
+              {/* Top binding strip */}
+              <div className="absolute -top-1 left-0 right-0 h-4 bg-stone-700 rounded-t-lg z-10 shadow-md"></div>
               
               {/* Calendar page */}
-              <div className="w-44 h-44 bg-red-600 hover:bg-red-700 transition-colors rounded-xl shadow-2xl text-white flex flex-col items-center justify-center pt-2">
+              <div className="w-44 h-48 bg-red-600 hover:bg-red-700 transition-colors rounded-b-xl rounded-t-sm shadow-2xl text-white flex flex-col items-center justify-center pt-4">
                 <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
                 <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
-                <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
+                <div className="mt-3 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
                   <span>Se alla</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
