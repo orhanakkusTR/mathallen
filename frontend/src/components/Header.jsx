@@ -87,12 +87,17 @@ export default function Header() {
                 key={link.href}
                 to={link.href}
                 data-testid={`nav-${link.href.replace("/", "") || "home"}`}
-                className={`px-4 py-2 rounded-full text-base font-semibold transition-colors ${
+                className={`relative px-4 py-2 rounded-full text-base font-semibold transition-colors ${
                   location.pathname === link.href
                     ? "text-red-600 bg-red-50"
                     : "text-stone-700 hover:text-red-600 hover:bg-stone-50"
                 }`}
               >
+                {link.href === "/erbjudanden" && (
+                  <span className="absolute -top-2 -right-1 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+                    REA
+                  </span>
+                )}
                 {link.label}
               </Link>
             ))}
@@ -135,12 +140,17 @@ export default function Header() {
                 to={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 data-testid={`mobile-nav-${link.href.replace("/", "") || "home"}`}
-                className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                className={`relative px-4 py-3 rounded-xl text-base font-medium transition-colors ${
                   location.pathname === link.href
                     ? "text-red-600 bg-red-50"
                     : "text-stone-700 hover:bg-stone-50"
                 }`}
               >
+                {link.href === "/erbjudanden" && (
+                  <span className="absolute top-2 right-3 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                    REA
+                  </span>
+                )}
                 {link.label}
               </Link>
             ))}
