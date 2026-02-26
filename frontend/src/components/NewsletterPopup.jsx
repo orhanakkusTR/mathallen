@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X, Mail, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { X, Mail, ChevronLeft, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
