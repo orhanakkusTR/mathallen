@@ -480,7 +480,7 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-3">
                             {offer.image_url ? (
                               <img
-                                src={convertToDirectImageUrl(offer.image_url)}
+                                src={getImageUrl(offer.image_url)}
                                 alt={offer.product_name}
                                 className="w-12 h-12 rounded-lg object-cover border border-stone-100"
                               />
