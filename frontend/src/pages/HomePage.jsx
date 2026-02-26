@@ -121,7 +121,7 @@ export default function HomePage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 rounded-full px-8 py-6 text-lg font-medium"
+                className="border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/30 hover:text-white rounded-full px-8 py-6 text-lg font-medium"
                 data-testid="hero-contact-button"
               >
                 <Link to="/kontakt">Hitta till oss</Link>
