@@ -159,6 +159,8 @@ export default function Footer() {
           <a href="mailto:info@orvedo.com" className="hover:text-stone-300 transition-colors">info@orvedo.com</a>
           <span className="hidden md:inline text-stone-700">|</span>
           <a href="tel:+46723735555" className="hover:text-stone-300 transition-colors">072 373 55 55</a>
+          <span className="hidden md:inline text-stone-700">|</span>
+          <a href="tel:+46722822866" className="hover:text-stone-300 transition-colors">072 282 28 66</a>
         </div>
       </div>
     </footer>
