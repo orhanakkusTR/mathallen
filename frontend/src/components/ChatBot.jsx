@@ -132,51 +132,58 @@ export default function ChatBot() {
   );
 
   const renderLocation = () => (
-    <div className="p-5 space-y-4">
-      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+    <div className="p-4 space-y-3">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-xs font-medium flex items-center gap-1 hover:gap-2 transition-all">
         ← Tillbaka
       </button>
       
-      <h3 className="font-bold text-stone-900 text-lg">Våra butiker</h3>
+      <h3 className="font-bold text-stone-900 text-sm">Våra butiker</h3>
       
-      <div className="space-y-3">
+      <div className="space-y-2">
         {STORES.map((store, index) => (
-          <div key={index} className="bg-stone-50 rounded-xl p-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-white" />
+          <button 
+            key={index} 
+            className="w-full bg-stone-50 hover:bg-stone-100 rounded-lg p-3 text-left transition-colors"
+            onClick={() => {
+              setIsOpen(false);
+              navigate("/kontakt");
+            }}
+          >
+            <div className="flex items-start gap-2">
+              <div className="w-8 h-8 bg-red-600 rounded-md flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-stone-900">{store.name}</h4>
-                <p className="text-stone-500 text-sm mt-1">{store.address}</p>
+                <h4 className="font-semibold text-stone-900 text-sm">{store.name}</h4>
+                <p className="text-stone-500 text-xs mt-0.5">{store.address}</p>
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
   );
 
   const renderContact = () => (
-    <div className="p-5 space-y-4">
-      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+    <div className="p-4 space-y-3">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-xs font-medium flex items-center gap-1 hover:gap-2 transition-all">
         ← Tillbaka
       </button>
       
-      <h3 className="font-bold text-stone-900 text-lg">Kontakta oss</h3>
+      <h3 className="font-bold text-stone-900 text-sm">Kontakta oss</h3>
       
-      <div className="space-y-3">
+      <div className="space-y-2">
         {STORES.map((store, index) => (
-          <div key={index} className="bg-stone-50 rounded-xl p-4">
-            <h4 className="font-semibold text-stone-900 mb-2">{store.name}</h4>
+          <div key={index} className="bg-stone-50 rounded-lg p-3">
+            <h4 className="font-semibold text-stone-900 text-sm mb-1">{store.name}</h4>
             <a 
               href={`tel:${store.phone.replace(/-/g, '')}`}
-              className="flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+              className="flex items-center gap-1.5 text-red-600 hover:text-red-700 font-medium text-sm"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3 h-3" />
               {store.phone}
             </a>
-            <p className="text-stone-500 text-sm mt-1">{store.address}</p>
+            <p className="text-stone-500 text-xs mt-0.5">{store.address}</p>
           </div>
         ))}
       </div>
@@ -184,7 +191,7 @@ export default function ChatBot() {
       <div className="pt-2">
         <button
           onClick={() => setView("form")}
-          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-3 rounded-lg transition-colors text-sm"
         >
           Eller lämna dina uppgifter
         </button>
@@ -193,44 +200,44 @@ export default function ChatBot() {
   );
 
   const renderForm = () => (
-    <div className="p-5 space-y-4">
-      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+    <div className="p-4 space-y-3">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-xs font-medium flex items-center gap-1 hover:gap-2 transition-all">
         ← Tillbaka
       </button>
       
       <div className="text-center mb-2">
-        <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
-          <Mail className="w-7 h-7 text-red-600" />
+        <div className="w-11 h-11 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+          <Mail className="w-5 h-5 text-red-600" />
         </div>
-        <h3 className="font-bold text-stone-900 text-lg">Lämna dina uppgifter</h3>
-        <p className="text-stone-500 text-sm mt-1">Så hör vi av oss till dig</p>
+        <h3 className="font-bold text-stone-900 text-sm">Lämna dina uppgifter</h3>
+        <p className="text-stone-500 text-xs mt-0.5">Så hör vi av oss till dig</p>
       </div>
 
-      <form onSubmit={handleSubmitLead} className="space-y-3">
+      <form onSubmit={handleSubmitLead} className="space-y-2.5">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Namn</label>
+          <label className="block text-xs font-medium text-stone-700 mb-1">Namn</label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+            <User className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
             <Input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Ditt namn"
-              className="pl-10 rounded-xl"
+              className="pl-8 rounded-lg text-sm h-9"
               required
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">E-post</label>
+          <label className="block text-xs font-medium text-stone-700 mb-1">E-post</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+            <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
             <Input
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="din@email.se"
-              className="pl-10 rounded-xl"
+              className="pl-8 rounded-lg text-sm h-9"
               required
             />
           </div>
@@ -238,7 +245,7 @@ export default function ChatBot() {
         <Button
           type="submit"
           disabled={submitting}
-          className="w-full bg-red-600 hover:bg-red-700 text-white rounded-xl py-6 mt-2"
+          className="w-full bg-red-600 hover:bg-red-700 text-white rounded-lg py-5 mt-1 text-sm"
         >
           {submitting ? "Skickar..." : "Skicka"}
         </Button>
@@ -251,18 +258,18 @@ export default function ChatBot() {
   );
 
   const renderSuccess = () => (
-    <div className="p-5 text-center space-y-4">
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-        <CheckCircle className="w-8 h-8 text-green-600" />
+    <div className="p-4 text-center space-y-3">
+      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+        <CheckCircle className="w-6 h-6 text-green-600" />
       </div>
-      <h3 className="font-bold text-stone-900 text-lg">Tack!</h3>
-      <p className="text-stone-500">
+      <h3 className="font-bold text-stone-900 text-sm">Tack!</h3>
+      <p className="text-stone-500 text-xs">
         Vi har tagit emot dina uppgifter och hör av oss snart.
       </p>
       <Button
         onClick={() => setView("welcome")}
         variant="outline"
-        className="rounded-xl"
+        className="rounded-lg text-sm"
       >
         Tillbaka till start
       </Button>
@@ -300,24 +307,24 @@ export default function ChatBot() {
       {/* Chat Window */}
       {isOpen && (
         <div
-          className="fixed bottom-24 left-6 z-50 w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
+          className="fixed bottom-24 left-6 z-50 w-[300px] bg-white rounded-xl shadow-2xl overflow-hidden animate-scale-in"
           data-testid="chatbot-window"
         >
           {/* Header */}
-          <div className="bg-red-600 p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+          <div className="bg-red-600 p-3">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <Bot className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">Mathallens Assistent</h3>
+                <h3 className="font-semibold text-white text-sm">Mathallens Assistent</h3>
                 <p className="text-red-100 text-xs">Vi svarar direkt</p>
               </div>
             </div>
           </div>
 
           {/* Content */}
-          <div className="max-h-[420px] overflow-y-auto">
+          <div className="max-h-[380px] overflow-y-auto">
             {view === "welcome" && renderWelcome()}
             {view === "hours" && renderHours()}
             {view === "location" && renderLocation()}
