@@ -1,59 +1,265 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot, MapPin, Clock, Phone, User, Mail, ChevronRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+const STORES = [
+  {
+    name: "Mathallen Malmö",
+    address: "Lantmannagatan 59, 214 48 Malmö",
+    phone: "040-92 44 20"
+  },
+  {
+    name: "Mathallen Lugnet",
+    address: "Lugna gatan 2, 211 60 Malmö",
+    phone: "040-92 44 20"
+  }
+];
+
+const QUICK_ACTIONS = [
+  { id: "hours", label: "Öppettider", icon: Clock },
+  { id: "location", label: "Hitta oss", icon: MapPin },
+  { id: "contact", label: "Kontakt", icon: Phone },
+];
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      type: "bot",
-      text: "Hej och välkommen till Mathallen! 👋\n\nJag kan hjälpa dig med:\n• Öppettider\n• Adresser till våra butiker\n• Kontaktuppgifter\n\nSkriv din fråga så hjälper jag dig!",
-    },
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [view, setView] = useState("welcome"); // welcome, chat, form, success
+  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [submitting, setSubmitting] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const handleQuickAction = (actionId) => {
+    setView(actionId);
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const handleSubmit = async (e) => {
+  const handleSubmitLead = async (e) => {
     e.preventDefault();
-    if (!input.trim() || loading) return;
+    if (!formData.name || !formData.email) return;
 
-    const userMessage = input.trim();
-    setInput("");
-    setMessages((prev) => [...prev, { type: "user", text: userMessage }]);
-    setLoading(true);
-
+    setSubmitting(true);
     try {
-      const response = await axios.post(`${API}/chat`, { query: userMessage });
-      setMessages((prev) => [
-        ...prev,
-        { type: "bot", text: response.data.message, found: response.data.found },
-      ]);
+      await axios.post(`${API}/chat/lead`, formData);
+      setView("success");
+      setFormData({ name: "", email: "" });
     } catch (error) {
-      console.error("Chat error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          type: "bot",
-          text: "Ursäkta, något gick fel. Försök igen senare eller kontakta oss direkt!",
-        },
-      ]);
+      console.error("Error submitting lead:", error);
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
+
+  const renderWelcome = () => (
+    <div className="p-5 space-y-4">
+      <div className="text-center mb-6">
+        <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <Bot className="w-8 h-8 text-red-600" />
+        </div>
+        <h3 className="font-bold text-stone-900 text-lg">Välkommen! 👋</h3>
+        <p className="text-stone-500 text-sm mt-1">Hur kan vi hjälpa dig idag?</p>
+      </div>
+
+      <div className="space-y-2">
+        {QUICK_ACTIONS.map((action) => (
+          <button
+            key={action.id}
+            onClick={() => handleQuickAction(action.id)}
+            className="w-full flex items-center gap-3 p-3 bg-stone-50 hover:bg-stone-100 rounded-xl transition-colors text-left group"
+          >
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm group-hover:shadow">
+              <action.icon className="w-5 h-5 text-red-600" />
+            </div>
+            <span className="font-medium text-stone-700 flex-1">{action.label}</span>
+            <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-red-600" />
+          </button>
+        ))}
+      </div>
+
+      <div className="pt-4 border-t border-stone-100">
+        <button
+          onClick={() => setView("form")}
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+        >
+          Lämna dina uppgifter
+        </button>
+        <p className="text-center text-xs text-stone-400 mt-2">
+          Så kontaktar vi dig
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderHours = () => (
+    <div className="p-5 space-y-4">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+        ← Tillbaka
+      </button>
+      
+      <div className="bg-red-50 rounded-2xl p-5">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">
+            <Clock className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-stone-900">Öppettider</h3>
+            <p className="text-stone-500 text-sm">Alla våra butiker</p>
+          </div>
+        </div>
+        
+        <div className="bg-white rounded-xl p-4">
+          <div className="flex justify-between items-center">
+            <span className="text-stone-600">Alla dagar</span>
+            <span className="font-bold text-stone-900 text-lg">07:00 - 22:00</span>
+          </div>
+        </div>
+      </div>
+
+      <p className="text-center text-stone-500 text-sm">
+        Välkommen in! Vi ser fram emot ditt besök.
+      </p>
+    </div>
+  );
+
+  const renderLocation = () => (
+    <div className="p-5 space-y-4">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+        ← Tillbaka
+      </button>
+      
+      <h3 className="font-bold text-stone-900 text-lg">Våra butiker</h3>
+      
+      <div className="space-y-3">
+        {STORES.map((store, index) => (
+          <div key={index} className="bg-stone-50 rounded-xl p-4">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-stone-900">{store.name}</h4>
+                <p className="text-stone-500 text-sm mt-1">{store.address}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderContact = () => (
+    <div className="p-5 space-y-4">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+        ← Tillbaka
+      </button>
+      
+      <h3 className="font-bold text-stone-900 text-lg">Kontakta oss</h3>
+      
+      <div className="space-y-3">
+        {STORES.map((store, index) => (
+          <div key={index} className="bg-stone-50 rounded-xl p-4">
+            <h4 className="font-semibold text-stone-900 mb-2">{store.name}</h4>
+            <a 
+              href={`tel:${store.phone.replace(/-/g, '')}`}
+              className="flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+            >
+              <Phone className="w-4 h-4" />
+              {store.phone}
+            </a>
+            <p className="text-stone-500 text-sm mt-1">{store.address}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="pt-2">
+        <button
+          onClick={() => setView("form")}
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors"
+        >
+          Eller lämna dina uppgifter
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderForm = () => (
+    <div className="p-5 space-y-4">
+      <button onClick={() => setView("welcome")} className="text-red-600 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+        ← Tillbaka
+      </button>
+      
+      <div className="text-center mb-2">
+        <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <Mail className="w-7 h-7 text-red-600" />
+        </div>
+        <h3 className="font-bold text-stone-900 text-lg">Lämna dina uppgifter</h3>
+        <p className="text-stone-500 text-sm mt-1">Så hör vi av oss till dig</p>
+      </div>
+
+      <form onSubmit={handleSubmitLead} className="space-y-3">
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">Namn</label>
+          <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+            <Input
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="Ditt namn"
+              className="pl-10 rounded-xl"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-stone-700 mb-1">E-post</label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+            <Input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder="din@email.se"
+              className="pl-10 rounded-xl"
+              required
+            />
+          </div>
+        </div>
+        <Button
+          type="submit"
+          disabled={submitting}
+          className="w-full bg-red-600 hover:bg-red-700 text-white rounded-xl py-6 mt-2"
+        >
+          {submitting ? "Skickar..." : "Skicka"}
+        </Button>
+      </form>
+
+      <p className="text-center text-xs text-stone-400">
+        Vi respekterar din integritet och spammar aldrig.
+      </p>
+    </div>
+  );
+
+  const renderSuccess = () => (
+    <div className="p-5 text-center space-y-4">
+      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+        <CheckCircle className="w-8 h-8 text-green-600" />
+      </div>
+      <h3 className="font-bold text-stone-900 text-lg">Tack!</h3>
+      <p className="text-stone-500">
+        Vi har tagit emot dina uppgifter och hör av oss snart.
+      </p>
+      <Button
+        onClick={() => setView("welcome")}
+        variant="outline"
+        className="rounded-xl"
+      >
+        Tillbaka till start
+      </Button>
+    </div>
+  );
 
   return (
     <>
@@ -62,7 +268,7 @@ export default function ChatBot() {
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           isOpen
-            ? "bg-stone-800 hover:bg-stone-700"
+            ? "bg-stone-800 hover:bg-stone-700 rotate-0"
             : "bg-red-600 hover:bg-red-700 hover:scale-110"
         }`}
         data-testid="chatbot-toggle"
@@ -74,10 +280,19 @@ export default function ChatBot() {
         )}
       </button>
 
+      {/* Notification badge */}
+      {!isOpen && (
+        <div className="fixed bottom-[72px] left-6 z-50 animate-bounce">
+          <div className="bg-white rounded-lg shadow-lg px-3 py-2 text-sm font-medium text-stone-700">
+            Hej! Behöver du hjälp? 👋
+          </div>
+        </div>
+      )}
+
       {/* Chat Window */}
       {isOpen && (
         <div
-          className="fixed bottom-24 left-6 z-50 w-[340px] sm:w-[380px] bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
+          className="fixed bottom-24 left-6 z-50 w-[340px] bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
           data-testid="chatbot-window"
         >
           {/* Header */}
@@ -88,82 +303,20 @@ export default function ChatBot() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Mathallens Assistent</h3>
-                <p className="text-red-100 text-xs">Hur kan vi hjälpa dig?</p>
+                <p className="text-red-100 text-xs">Vi svarar direkt</p>
               </div>
             </div>
           </div>
 
-          {/* Messages */}
-          <div className="h-[320px] overflow-y-auto p-4 space-y-4 bg-stone-50">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex gap-2 ${
-                  msg.type === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                {msg.type === "bot" && (
-                  <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-red-600" />
-                  </div>
-                )}
-                <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
-                    msg.type === "user"
-                      ? "bg-red-600 text-white rounded-br-md"
-                      : msg.found
-                      ? "bg-green-100 text-green-900 rounded-bl-md"
-                      : "bg-white text-stone-800 shadow-sm rounded-bl-md"
-                  }`}
-                >
-                  <p className="text-sm leading-relaxed">{msg.text}</p>
-                </div>
-                {msg.type === "user" && (
-                  <div className="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center flex-shrink-0">
-                    <User className="w-4 h-4 text-stone-600" />
-                  </div>
-                )}
-              </div>
-            ))}
-            {loading && (
-              <div className="flex gap-2 justify-start">
-                <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-                  <Bot className="w-4 h-4 text-red-600" />
-                </div>
-                <div className="bg-white rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+          {/* Content */}
+          <div className="max-h-[420px] overflow-y-auto">
+            {view === "welcome" && renderWelcome()}
+            {view === "hours" && renderHours()}
+            {view === "location" && renderLocation()}
+            {view === "contact" && renderContact()}
+            {view === "form" && renderForm()}
+            {view === "success" && renderSuccess()}
           </div>
-
-          {/* Input */}
-          <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-stone-100">
-            <div className="flex gap-2">
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Skriv din fråga..."
-                className="flex-1 rounded-full border-stone-200 focus:border-red-500"
-                disabled={loading}
-                data-testid="chatbot-input"
-              />
-              <Button
-                type="submit"
-                size="icon"
-                disabled={loading || !input.trim()}
-                className="rounded-full bg-red-600 hover:bg-red-700 w-10 h-10"
-                data-testid="chatbot-send"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
-          </form>
         </div>
       )}
     </>
