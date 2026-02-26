@@ -216,7 +216,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Prisvärdhet</h3>
                 <p className="text-white/90 text-sm leading-relaxed hidden md:block">
-                  Bra mat till rätt pris, varje dag.
+                  Bra mat till rätt pris – med starka kampanjer varje vecka.
                 </p>
               </div>
             </div>
