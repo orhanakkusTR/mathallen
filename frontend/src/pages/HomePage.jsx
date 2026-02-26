@@ -96,14 +96,14 @@ export default function HomePage() {
           <div className="max-w-2xl animate-fade-in-up">
             <span className="inline-flex items-center gap-2 text-white/90 font-medium text-sm mb-4 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
               <Leaf className="w-4 h-4" />
-              Din lokala stormarknad i Malmö
+              Där smak möter mångfald.
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6">
               Välkommen till{" "}
               <span className="text-red-500">Mathallen</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
-              Kvalitet, prisvärdhet och attraktiva veckokampanjer – allt under samma tak.
+              Kvalitet med hjärta, priser med omtanke och kampanjer som märks i plånboken – mitt i Malmö.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
