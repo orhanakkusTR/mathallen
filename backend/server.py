@@ -437,73 +437,71 @@ async def get_product_categories():
 
 # ---- CHATBOT ----
 
-# Alcohol keywords to filter out (exact match or as separate word)
-ALCOHOL_KEYWORDS = [
-    "alkohol", "beer", "whisky", "whiskey", "vodka", 
-    "gin", "rom", "rum", "cognac", "brandy", "likör", "liquor", "sprit",
-    "champagne", "prosecco", "sake", "tequila", "absint", "calvados",
-    "grappa", "schnaps", "aquavit", "akvavit", "punsch",
-    "starköl", "folköl", "rödvin", "vitvin", "rosévin", "mousserande",
-    "systembolaget", "systemet", "spritdryck", "alkoholdryck"
-]
-
-# Words that must match exactly (not as substring)
-ALCOHOL_EXACT_WORDS = ["öl", "vin", "cider"]
-
 STORE_INFO = """
+📍 **Mathallen Malmö**
+Lantmannagatan 59, 214 48 Malmö
+Tel: 040-92 44 20
 
-📍 Mathallen Malmö
-   Lantmannagatan 59, Lugna gatan 2, 214 48 Malmö
-   📞 040-92 44 20
+📍 **Mathallen Lugnet**
+Lugna gatan 2, 211 60 Malmö
+Tel: 040-92 44 20
 
-📍 Mathallen Lugnet
-   Lugna gatan 2, 211 60 Malmö
-   📞 040-92 44 20
+🕐 **Öppettider:** Alla dagar 07:00 - 22:00
+"""
 
-🕐 Öppet alla dagar: 07:00 - 22:00"""
+WELCOME_RESPONSES = {
+    "greeting": "Hej och välkommen till Mathallen! 👋 Jag är din virtuella assistent. Hur kan jag hjälpa dig idag?",
+    "hours": f"Vi har öppet alla dagar mellan 07:00 och 22:00. Välkommen in!\n{STORE_INFO}",
+    "location": f"Du hittar oss på två platser i Malmö:\n{STORE_INFO}",
+    "contact": f"Du kan nå oss på telefon 040-92 44 20. Här är våra butiker:\n{STORE_INFO}",
+    "default": f"Tack för din fråga! Välkommen till Mathallen - din lokala stormarknad i Malmö med färska produkter, bra priser och veckans bästa erbjudanden.\n{STORE_INFO}"
+}
 
-def is_alcohol_query(search_term: str) -> bool:
-    """Check if the query is about alcohol products"""
-    # Check substring matches
-    for keyword in ALCOHOL_KEYWORDS:
-        if keyword in search_term:
-            return True
+# Keywords for different response types
+GREETING_KEYWORDS = ["hej", "hallå", "tjena", "hejsan", "god dag", "hello", "hi", "morsning"]
+HOURS_KEYWORDS = ["öppet", "öppna", "stänger", "öppettider", "tider", "timmar", "när"]
+LOCATION_KEYWORDS = ["var", "hitta", "adress", "ligger", "vägen", "karta", "plats"]
+CONTACT_KEYWORDS = ["kontakt", "telefon", "ring", "nummer", "nå", "mail", "mejl"]
+
+def get_chat_response(query: str) -> str:
+    """Get appropriate response based on query"""
+    query_lower = query.lower().strip()
     
-    # Check exact word matches (to avoid "mjölk" matching "öl")
-    words = search_term.split()
-    for word in words:
-        if word in ALCOHOL_EXACT_WORDS:
-            return True
+    # Check for greetings
+    if any(word in query_lower for word in GREETING_KEYWORDS):
+        return WELCOME_RESPONSES["greeting"]
     
-    return False
+    # Check for opening hours
+    if any(word in query_lower for word in HOURS_KEYWORDS):
+        return WELCOME_RESPONSES["hours"]
+    
+    # Check for location
+    if any(word in query_lower for word in LOCATION_KEYWORDS):
+        return WELCOME_RESPONSES["location"]
+    
+    # Check for contact
+    if any(word in query_lower for word in CONTACT_KEYWORDS):
+        return WELCOME_RESPONSES["contact"]
+    
+    # Default response
+    return WELCOME_RESPONSES["default"]
 
 @api_router.post("/chat")
 async def chat_search(query: ChatQuery):
-    """Smart chatbot - invites customers for all products except alcohol"""
-    search_term = query.query.strip().lower()
+    """Virtual assistant chatbot"""
+    search_term = query.query.strip()
     
     if len(search_term) < 2:
         return {
-            "found": False,
-            "message": "Vänligen skriv minst 2 tecken för att söka.",
-            "products": []
+            "found": True,
+            "message": WELCOME_RESPONSES["greeting"],
         }
     
-    # Check for alcohol-related queries
-    if is_alcohol_query(search_term):
-        return {
-            "found": False,
-            "message": f"Tyvärr säljer vi inte alkoholhaltiga produkter på Mathallen. För alkohol hänvisar vi till Systembolaget. Men vi har ett stort utbud av alkoholfria alternativ! Välkommen in!{STORE_INFO}",
-            "products": []
-        }
-    
-    # For all other products - welcome them!
-    product_name = query.query.strip()
+    response = get_chat_response(search_term)
     
     return {
         "found": True,
-        "message": f"Ja, vi har {product_name} i vårt sortiment! 🛒 Välkommen in till Mathallen så hjälper vi dig att hitta det du söker.{STORE_INFO}",
-        "products": []
+        "message": response,
     }
 
 # ---- ADMIN SETUP ----
