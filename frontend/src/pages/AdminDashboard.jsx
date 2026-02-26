@@ -88,7 +88,15 @@ const categories = [
   "Specerier",
 ];
 
-const units = ["", "cl", "st", "g", "kg", "l", "ml"];
+const units = [
+  { value: "none", label: "Ingen enhet" },
+  { value: "cl", label: "cl" },
+  { value: "st", label: "st" },
+  { value: "g", label: "g" },
+  { value: "kg", label: "kg" },
+  { value: "l", label: "l" },
+  { value: "ml", label: "ml" },
+];
 
 function getWeekNumber(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
