@@ -51,10 +51,24 @@ function getImageUrl(url) {
 export default function OffersPage() {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   const currentWeek = new Date().toLocaleDateString("sv-SE", {
     year: "numeric",
   }).split("-")[0] + " v." + getWeekNumber(new Date());
+
+  // Get unique categories that exist in offers
+  const availableCategories = useMemo(() => {
+    const cats = [...new Set(offers.map(offer => offer.category).filter(Boolean))];
+    return allCategories.filter(cat => cats.includes(cat));
+  }, [offers]);
+
+  // Filter offers by selected category
+  const filteredOffers = useMemo(() => {
+    if (selectedCategory === "all") return offers;
+    return offers.filter(offer => offer.category === selectedCategory);
+  }, [offers, selectedCategory]);
 
   function getWeekNumber(date) {
     const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
