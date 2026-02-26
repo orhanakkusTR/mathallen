@@ -107,8 +107,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-stone-900 mb-1">E-post</h3>
-                    <a href="mailto:info@mathallen.se" className="text-red-600 hover:text-red-700 font-medium">
-                      info@mathallen.se
+                    <a href="mailto:info@mathallen.nu" className="text-red-600 hover:text-red-700 font-medium">
+                      info@mathallen.nu
                     </a>
                   </div>
                 </div>

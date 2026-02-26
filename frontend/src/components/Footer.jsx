@@ -93,8 +93,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-red-500 flex-shrink-0" />
-                <a href="mailto:info@mathallen.se" className="text-sm hover:text-red-400 transition-colors">
-                  info@mathallen.se
+                <a href="mailto:info@mathallen.nu" className="text-sm hover:text-red-400 transition-colors">
+                  info@mathallen.nu
                 </a>
               </li>
             </ul>
