@@ -19,6 +19,8 @@ function getWeekNumber() {
 export default function HomePage() {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -34,6 +36,23 @@ export default function HomePage() {
     };
     fetchOffers();
   }, []);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    
+    setSubscribing(true);
+    try {
+      await axios.post(`${API}/newsletter/subscribe`, { email });
+      toast.success("Tack! Du kommer nu få våra veckokampanjer via e-post.");
+      setEmail("");
+    } catch (error) {
+      console.error("Error subscribing:", error);
+      toast.error("Något gick fel. Försök igen senare.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   return (
     <div className="page-transition">
