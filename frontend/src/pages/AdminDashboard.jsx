@@ -206,7 +206,7 @@ export default function AdminDashboard() {
       product_name: offer.product_name,
       original_price: offer.original_price?.toString() || "",
       offer_price: offer.offer_price.toString(),
-      unit: offer.unit,
+      unit: offer.unit || "none",
       image_url: offer.image_url || "",
       category: offer.category,
       week_number: offer.week_number,
