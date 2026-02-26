@@ -288,10 +288,21 @@ export default function OffersPage() {
                     
                     {/* Multi-buy Badge */}
                     {offer.multi_buy && (
-                      <div className="absolute top-2 right-2 md:top-3 md:right-3">
-                        <div className="bg-red-600 rounded-full w-14 h-14 md:w-16 md:h-16 flex flex-col items-center justify-center shadow-lg border-2 border-white">
-                          <span className="text-white font-black text-xl md:text-2xl leading-none">{offer.multi_buy}</span>
-                          <span className="text-yellow-300 font-bold text-xs md:text-sm leading-none">För</span>
+                      <div className="absolute top-3 right-0 md:top-4 animate-slide-in-right">
+                        <div className="relative">
+                          {/* Brush stroke background */}
+                          <svg viewBox="0 0 120 45" className="w-20 h-8 md:w-24 md:h-10">
+                            <path 
+                              d="M5,8 Q0,22 8,35 Q15,45 35,42 L95,40 Q115,38 118,25 Q120,10 110,5 Q100,0 80,3 L20,6 Q8,7 5,8 Z" 
+                              fill="#dc2626"
+                            />
+                          </svg>
+                          {/* Text overlay */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white font-black text-lg md:text-xl tracking-tight drop-shadow-sm">
+                              {offer.multi_buy} För
+                            </span>
+                          </div>
                         </div>
                       </div>
                     )}
