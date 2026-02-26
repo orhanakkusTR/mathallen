@@ -437,15 +437,18 @@ async def get_product_categories():
 
 # ---- CHATBOT ----
 
-# Alcohol keywords to filter out
+# Alcohol keywords to filter out (exact match or as separate word)
 ALCOHOL_KEYWORDS = [
-    "alkohol", "öl", "beer", "vin", "wine", "whisky", "whiskey", "vodka", 
+    "alkohol", "beer", "whisky", "whiskey", "vodka", 
     "gin", "rom", "rum", "cognac", "brandy", "likör", "liquor", "sprit",
-    "champagne", "prosecco", "cider", "sake", "tequila", "absint", "calvados",
-    "grappa", "schnaps", "aquavit", "akvavit", "punsch", "glögg med alkohol",
-    "starköl", "folköl", "lättöl", "rödvin", "vitvin", "rosévin", "mousserande",
+    "champagne", "prosecco", "sake", "tequila", "absint", "calvados",
+    "grappa", "schnaps", "aquavit", "akvavit", "punsch",
+    "starköl", "folköl", "rödvin", "vitvin", "rosévin", "mousserande",
     "systembolaget", "systemet", "spritdryck", "alkoholdryck"
 ]
+
+# Words that must match exactly (not as substring)
+ALCOHOL_EXACT_WORDS = ["öl", "vin", "cider"]
 
 STORE_INFO = """
 
@@ -458,6 +461,21 @@ STORE_INFO = """
    📞 040-92 44 20
 
 🕐 Öppet alla dagar: 07:00 - 22:00"""
+
+def is_alcohol_query(search_term: str) -> bool:
+    """Check if the query is about alcohol products"""
+    # Check substring matches
+    for keyword in ALCOHOL_KEYWORDS:
+        if keyword in search_term:
+            return True
+    
+    # Check exact word matches (to avoid "mjölk" matching "öl")
+    words = search_term.split()
+    for word in words:
+        if word in ALCOHOL_EXACT_WORDS:
+            return True
+    
+    return False
 
 @api_router.post("/chat")
 async def chat_search(query: ChatQuery):
@@ -472,9 +490,7 @@ async def chat_search(query: ChatQuery):
         }
     
     # Check for alcohol-related queries
-    is_alcohol = any(keyword in search_term for keyword in ALCOHOL_KEYWORDS)
-    
-    if is_alcohol:
+    if is_alcohol_query(search_term):
         return {
             "found": False,
             "message": f"Tyvärr säljer vi inte alkoholhaltiga produkter på Mathallen. För alkohol hänvisar vi till Systembolaget. Men vi har ett stort utbud av alkoholfria alternativ! Välkommen in!{STORE_INFO}",
