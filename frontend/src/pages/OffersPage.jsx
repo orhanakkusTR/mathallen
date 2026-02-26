@@ -338,69 +338,6 @@ export default function OffersPage() {
               </Button>
             </div>
           )}
-
-            {/* Desktop Sidebar Filter */}
-            {!loading && availableCategories.length > 0 && (
-              <aside className="hidden lg:block w-64 flex-shrink-0">
-                <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-5 sticky top-24">
-                  <div className="flex items-center gap-2 mb-4 pb-4 border-b border-stone-100">
-                    <Filter className="w-5 h-5 text-red-600" />
-                    <h3 className="font-bold text-stone-900">Kategorier</h3>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <button
-                      onClick={() => setSelectedCategory("all")}
-                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                        selectedCategory === "all" 
-                          ? "bg-red-600 text-white shadow-sm" 
-                          : "text-stone-700 hover:bg-stone-100"
-                      }`}
-                      data-testid="desktop-filter-all"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span>Visa alla</span>
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${
-                          selectedCategory === "all" 
-                            ? "bg-white/20 text-white" 
-                            : "bg-stone-200 text-stone-600"
-                        }`}>
-                          {offers.length}
-                        </span>
-                      </div>
-                    </button>
-                    
-                    {availableCategories.map(category => {
-                      const count = offers.filter(o => o.category === category).length;
-                      return (
-                        <button
-                          key={category}
-                          onClick={() => setSelectedCategory(category)}
-                          className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                            selectedCategory === category 
-                              ? "bg-red-600 text-white shadow-sm" 
-                              : "text-stone-700 hover:bg-stone-100"
-                          }`}
-                          data-testid={`desktop-filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="truncate pr-2">{category}</span>
-                            <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${
-                              selectedCategory === category 
-                                ? "bg-white/20 text-white" 
-                                : "bg-stone-200 text-stone-600"
-                            }`}>
-                              {count}
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </aside>
-            )}
-          </div>
         </div>
       </section>
 
