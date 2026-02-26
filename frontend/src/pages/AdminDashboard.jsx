@@ -197,6 +197,7 @@ export default function AdminDashboard() {
       is_active: true,
       sort_order: offers.length,
       multi_buy: "",
+      is_best_price: false,
     });
     setIsDialogOpen(true);
   };
@@ -216,6 +217,7 @@ export default function AdminDashboard() {
       is_active: offer.is_active,
       sort_order: offer.sort_order || 0,
       multi_buy: offer.multi_buy?.toString() || "",
+      is_best_price: offer.is_best_price || false,
     });
     setIsDialogOpen(true);
   };
