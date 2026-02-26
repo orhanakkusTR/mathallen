@@ -759,10 +759,11 @@ export default function AdminDashboard() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="st">st</SelectItem>
-                    <SelectItem value="kg">kg</SelectItem>
-                    <SelectItem value="l">l</SelectItem>
-                    <SelectItem value="förp">förp</SelectItem>
+                    {units.map((unit) => (
+                      <SelectItem key={unit} value={unit}>
+                        {unit}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
