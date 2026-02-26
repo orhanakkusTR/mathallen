@@ -834,7 +834,7 @@ export default function AdminDashboard() {
               {imagePreview ? (
                 <div className="relative bg-stone-50 rounded-xl overflow-hidden border-2 border-stone-200 p-4">
                   <img
-                    src={imagePreview.startsWith('/') ? `${BASE_URL}${imagePreview}` : imagePreview}
+                    src={imagePreview.startsWith('/') ? `${BASE_URL}${imagePreview.startsWith('/api') ? '' : '/api'}${imagePreview.startsWith('/api') ? imagePreview : imagePreview}` : imagePreview}
                     alt="Preview"
                     className="w-full h-48 object-contain mx-auto"
                     onError={(e) => {
