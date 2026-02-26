@@ -150,6 +150,17 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Developer credit bar */}
+      <div className="bg-stone-950">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 text-xs text-stone-500">
+          <span>Webbplats utvecklad av <a href="https://orvedo.com" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 font-medium transition-colors">Orvedo Co.</a></span>
+          <span className="hidden md:inline text-stone-700">|</span>
+          <a href="mailto:info@orvedo.com" className="hover:text-stone-300 transition-colors">info@orvedo.com</a>
+          <span className="hidden md:inline text-stone-700">|</span>
+          <a href="tel:+46723735555" className="hover:text-stone-300 transition-colors">072 373 55 55</a>
+        </div>
+      </div>
     </footer>
   );
 }
