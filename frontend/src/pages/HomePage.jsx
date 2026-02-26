@@ -295,35 +295,38 @@ export default function HomePage() {
                   >
                     <div className="flex">
                       {/* Image */}
-                      <div className="relative w-32 h-32 flex-shrink-0">
+                      <div className="relative w-36 flex-shrink-0">
                         {offer.image_url ? (
                           <img
                             src={offer.image_url}
                             alt={offer.product_name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover min-h-[140px]"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
-                            <ShoppingBasket className="w-10 h-10 text-red-300" />
+                          <div className="w-full h-full min-h-[140px] bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
+                            <ShoppingBasket className="w-12 h-12 text-red-300" />
                           </div>
                         )}
                       </div>
                       
                       {/* Content */}
                       <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
-                        <h3 className="font-bold text-stone-900 text-base leading-tight mb-2">
+                        <h3 className="font-bold text-stone-900 text-lg leading-tight mb-3">
                           {offer.product_name}
                         </h3>
                         
                         {/* Price section */}
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl font-bold text-red-600">
-                            {offer.offer_price}:-
-                          </span>
-                          {offer.original_price && (
-                            <span className="text-base text-stone-500 line-through">
-                              {offer.original_price}:-
+                        <div className="space-y-1">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-3xl font-bold text-red-600">
+                              {offer.offer_price}:-
                             </span>
+                            <span className="text-sm text-stone-400">/{offer.unit}</span>
+                          </div>
+                          {offer.original_price && (
+                            <div className="text-stone-500 text-sm">
+                              Ord. pris <span className="line-through">{offer.original_price}:-</span>
+                            </div>
                           )}
                         </div>
                       </div>
@@ -331,9 +334,9 @@ export default function HomePage() {
                     
                     {/* Bottom discount bar */}
                     {offer.original_price && (
-                      <div className="bg-red-600 text-white px-4 py-2 flex items-center justify-between">
-                        <span className="text-sm font-medium">Spara {offer.original_price - offer.offer_price}:-</span>
-                        <span className="text-sm font-bold bg-white/20 px-2 py-0.5 rounded">
+                      <div className="bg-red-600 text-white px-4 py-2.5 flex items-center justify-between">
+                        <span className="text-sm font-semibold">Spara {offer.original_price - offer.offer_price}:-</span>
+                        <span className="text-sm font-bold bg-white/20 px-3 py-1 rounded-full">
                           -{Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
                         </span>
                       </div>
