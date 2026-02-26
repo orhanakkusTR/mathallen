@@ -117,7 +117,7 @@ export default function OffersPage() {
                     <div className="aspect-square overflow-hidden">
                       {offer.image_url ? (
                         <img
-                          src={offer.image_url}
+                          src={convertToDirectImageUrl(offer.image_url)}
                           alt={offer.product_name}
                           className="w-full h-full object-cover"
                         />
