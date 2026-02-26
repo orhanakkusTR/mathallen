@@ -53,11 +53,10 @@ export default function ContactPage() {
               Kontakta oss
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4 md:mb-6">
-              Hitta till <span className="text-red-500">Mathallen</span>
+              Har du <span className="text-red-500">frågor?</span>
             </h1>
             <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg">
-              Vi finns i centrala Malmö och välkomnar dig varje dag. 
-              Har du frågor? Tveka inte att höra av dig!
+              Du hittar oss på Lantmannagatan 59 i Malmö – välkommen in och upptäck vårt breda sortiment.
             </p>
           </div>
           
