@@ -88,7 +88,7 @@ export default function ChatBot() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">Mathallens Assistent</h3>
-                <p className="text-red-100 text-xs">Fråga om våra produkter</p>
+                <p className="text-red-100 text-xs">Hur kan vi hjälpa dig?</p>
               </div>
             </div>
           </div>
