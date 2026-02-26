@@ -90,13 +90,6 @@ const categories = [
 
 const units = ["cl", "st", "g", "kg", "l", "ml"];
 
-const multiBuyOptions = [
-  { value: "none", label: "Ingen" },
-  { value: "2", label: "2 För" },
-  { value: "3", label: "3 För" },
-  { value: "4", label: "4 För" },
-];
-
 function getWeekNumber(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   const dayNum = d.getUTCDay() || 7;
