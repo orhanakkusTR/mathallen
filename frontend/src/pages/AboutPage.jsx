@@ -331,7 +331,7 @@ export default function AboutPage() {
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-12 md:py-16 bg-stone-50">
+      <section className="py-12 md:py-16 bg-stone-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
             <div>
@@ -359,83 +359,96 @@ export default function AboutPage() {
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Review 1 */}
-            <div className="bg-white rounded-2xl p-6 border border-stone-100" data-testid="review-1">
-              <div className="flex items-center gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-stone-700 mb-4 leading-relaxed">
-                "Fantastisk butik med ett brett sortiment! Personalen är alltid hjälpsam och 
-                veckans erbjudanden är verkligen prisvärda. Vår familjs favoritbutik!"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                  <span className="text-red-600 font-semibold">AK</span>
+          {/* Reviews Carousel */}
+          <div className="reviews-carousel">
+            <div className="flex gap-4 md:gap-6 animate-scroll-reviews">
+              {/* First set of reviews */}
+              {customerReviews.map((review) => (
+                <div 
+                  key={`review-${review.id}`}
+                  className="flex-shrink-0 w-[280px] md:w-[380px] bg-white rounded-2xl p-5 md:p-6 border border-stone-100" 
+                  data-testid={`review-${review.id}`}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-stone-200 text-stone-200'}`} />
+                      ))}
+                    </div>
+                    {review.platform === "google" ? (
+                      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-4 w-auto" />
+                    ) : (
+                      <svg className="h-5 w-auto" viewBox="0 0 24 24" fill="#1877F2">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <p className="text-stone-700 mb-4 leading-relaxed text-sm md:text-base">
+                    "{review.text}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 md:w-10 md:h-10 rounded-full ${colorClasses[review.color].bg} flex items-center justify-center`}>
+                      <span className={`${colorClasses[review.color].text} font-semibold text-sm`}>{review.initials}</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-stone-900 text-sm">{review.name}</p>
+                      <p className="text-stone-500 text-xs">{review.time}</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-stone-900 text-sm">Anna Karlsson</p>
-                  <p className="text-stone-500 text-xs">2 veckor sedan</p>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {customerReviews.map((review) => (
+                <div 
+                  key={`review-dup-${review.id}`}
+                  className="flex-shrink-0 w-[280px] md:w-[380px] bg-white rounded-2xl p-5 md:p-6 border border-stone-100"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'fill-stone-200 text-stone-200'}`} />
+                      ))}
+                    </div>
+                    {review.platform === "google" ? (
+                      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-4 w-auto" />
+                    ) : (
+                      <svg className="h-5 w-auto" viewBox="0 0 24 24" fill="#1877F2">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <p className="text-stone-700 mb-4 leading-relaxed text-sm md:text-base">
+                    "{review.text}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 md:w-10 md:h-10 rounded-full ${colorClasses[review.color].bg} flex items-center justify-center`}>
+                      <span className={`${colorClasses[review.color].text} font-semibold text-sm`}>{review.initials}</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-stone-900 text-sm">{review.name}</p>
+                      <p className="text-stone-500 text-xs">{review.time}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Review 2 */}
-            <div className="bg-white rounded-2xl p-6 border border-stone-100" data-testid="review-2">
-              <div className="flex items-center gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-stone-700 mb-4 leading-relaxed">
-                "Bästa stormarknaden i Malmö! Fräscha grönsaker, bra kött och alltid 
-                trevlig service. Har handlat här i över 10 år och kommer fortsätta."
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">ML</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-stone-900 text-sm">Magnus Lindqvist</p>
-                  <p className="text-stone-500 text-xs">1 månad sedan</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Review 3 */}
-            <div className="bg-white rounded-2xl p-6 border border-stone-100" data-testid="review-3">
-              <div className="flex items-center gap-1 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-4 h-4 ${i < 4 ? 'fill-yellow-400 text-yellow-400' : 'fill-stone-200 text-stone-200'}`} />
-                ))}
-              </div>
-              <p className="text-stone-700 mb-4 leading-relaxed">
-                "Gillar verkligen deras färskvaror och charkuteriavdelning. Priserna är 
-                rimliga och kampanjerna är alltid värda att kolla in. Rekommenderas!"
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <span className="text-green-600 font-semibold">SN</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-stone-900 text-sm">Sofia Nilsson</p>
-                  <p className="text-stone-500 text-xs">3 veckor sedan</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Google Reviews Badge */}
-          <div className="mt-8 flex justify-center">
-            <div className="inline-flex items-center gap-3 bg-white rounded-full px-5 py-3 border border-stone-200">
+          {/* Platform Badges */}
+          <div className="mt-8 flex justify-center gap-4">
+            <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-stone-200">
               <img 
                 src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" 
                 alt="Google" 
-                className="h-5 w-auto"
+                className="h-4 w-auto"
               />
-              <span className="text-stone-600 text-sm font-medium">Omdömen från Google</span>
+              <span className="text-stone-600 text-xs md:text-sm font-medium">240+ omdömen</span>
+            </div>
+            <div className="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-stone-200">
+              <svg className="h-4 w-auto" viewBox="0 0 24 24" fill="#1877F2">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span className="text-stone-600 text-xs md:text-sm font-medium">134+ omdömen</span>
             </div>
           </div>
         </div>
