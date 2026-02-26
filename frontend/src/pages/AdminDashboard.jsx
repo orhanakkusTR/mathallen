@@ -797,28 +797,68 @@ export default function AdminDashboard() {
               </div>
             </div>
 
+            {/* File Upload */}
             <div className="space-y-2">
-              <Label htmlFor="image_url">Bild-URL (Google Drive eller annan länk)</Label>
+              <Label>Produktbild</Label>
+              <div className="flex gap-3">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  className="hidden"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="flex-1"
+                >
+                  {uploading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Laddar upp...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-4 h-4 mr-2" />
+                      Ladda upp bild
+                    </>
+                  )}
+                </Button>
+              </div>
+              <p className="text-xs text-stone-500">Max 5MB. Format: JPG, PNG, WebP, GIF</p>
+            </div>
+
+            {/* Or use URL */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-stone-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-stone-400">eller ange länk</span>
+              </div>
+            </div>
+
+            <div className="space-y-2">
               <Input
                 id="image_url"
                 type="url"
                 value={formData.image_url}
                 onChange={(e) => handleImageUrlChange(e.target.value)}
-                placeholder="https://drive.google.com/file/d/.../view?usp=sharing"
+                placeholder="https://example.com/bild.jpg"
                 data-testid="offer-image-url"
               />
-              <p className="text-xs text-stone-500">
-                Tips: Ladda upp bilden till Google Drive → Högerklicka → "Dela" → "Alla med länken" → Kopiera länk
-              </p>
             </div>
 
             {/* Image Preview */}
             <div className="space-y-2">
               <Label>Förhandsgranskning</Label>
               {imagePreview ? (
-                <div className="relative bg-stone-50 rounded-xl overflow-hidden border-2 border-dashed border-stone-200 p-4">
+                <div className="relative bg-stone-50 rounded-xl overflow-hidden border-2 border-stone-200 p-4">
                   <img
-                    src={imagePreview}
+                    src={imagePreview.startsWith('/') ? `${API.replace('/api', '')}${imagePreview}` : imagePreview}
                     alt="Preview"
                     className="w-full h-48 object-contain mx-auto"
                     onError={(e) => {
@@ -829,15 +869,33 @@ export default function AdminDashboard() {
                   <div className="hidden w-full h-48 items-center justify-center flex-col text-stone-400">
                     <Image className="w-12 h-12 mb-2" />
                     <p className="text-sm">Kunde inte ladda bilden</p>
-                    <p className="text-xs">Kontrollera att länken är korrekt och delad</p>
                   </div>
+                  {imagePreview && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 right-2 bg-white/80 hover:bg-white"
+                      onClick={() => {
+                        setFormData({ ...formData, image_url: "" });
+                        setImagePreview("");
+                      }}
+                    >
+                      <Trash2 className="w-4 h-4 text-red-500" />
+                    </Button>
+                  )}
                 </div>
               ) : (
-                <div className="bg-stone-50 rounded-xl border-2 border-dashed border-stone-200 p-8 text-center">
-                  <Image className="w-12 h-12 text-stone-300 mx-auto mb-2" />
-                  <p className="text-stone-400 text-sm">Klistra in en bild-URL ovan för att se förhandsgranskning</p>
+                <div 
+                  className="bg-stone-50 rounded-xl border-2 border-dashed border-stone-200 p-8 text-center cursor-pointer hover:bg-stone-100 transition-colors"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <Upload className="w-12 h-12 text-stone-300 mx-auto mb-2" />
+                  <p className="text-stone-500 text-sm font-medium">Klicka för att ladda upp en bild</p>
+                  <p className="text-stone-400 text-xs mt-1">eller dra och släpp här</p>
                 </div>
               )}
+            </div>
             </div>
 
             <div className="flex items-center justify-between py-2 px-3 bg-stone-50 rounded-lg">
