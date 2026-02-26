@@ -381,7 +381,7 @@ export default function HomePage() {
                     <div className="relative mb-4">
                       {offer.image_url ? (
                         <img
-                          src={offer.image_url}
+                          src={convertToDirectImageUrl(offer.image_url)}
                           alt={offer.product_name}
                           className="w-full aspect-square object-cover rounded-xl"
                         />
