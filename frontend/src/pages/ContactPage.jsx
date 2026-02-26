@@ -265,14 +265,14 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Store Section - Only Mathallen Malmö */}
-      <section className="bg-stone-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2">
-            {/* Store Info */}
-            <div className="text-white p-8 md:p-12 flex flex-col justify-center" data-testid="store-malmo">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6">Mathallen Malmö</h3>
-              <div className="space-y-4 mb-6">
+      {/* Two Stores Section */}
+      <section className="bg-stone-100">
+        <div className="grid md:grid-cols-2">
+          {/* Store 1 - Mathallen Malmö */}
+          <div className="bg-stone-900 text-white" data-testid="store-malmo">
+            <div className="p-8 md:p-12">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Malmö</h3>
+              <div className="space-y-3 mb-6">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
                   <p className="text-stone-300">
@@ -291,25 +291,52 @@ export default function ContactPage() {
                   <p className="text-stone-300">Alla dagar: 07:00 - 22:00</p>
                 </div>
               </div>
-              <a 
-                href="https://www.google.com/maps/dir//Lantmannagatan+59,+214+48+Malmö" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-full transition-colors w-fit"
-              >
-                <MapPin className="w-4 h-4" />
-                Vägbeskrivning
-              </a>
             </div>
-            
-            {/* Map */}
-            <div className="h-[350px] md:h-[450px]">
+            <div className="h-[300px] md:h-[350px]">
               <iframe
                 title="Mathallen Malmö Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, filter: "grayscale(0.3) contrast(1.05)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+
+          {/* Store 2 - Mathallen Lugnet */}
+          <div className="bg-red-600 text-white" data-testid="store-lugnet">
+            <div className="p-8 md:p-12">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Lugnet</h3>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-red-200 flex-shrink-0 mt-0.5" />
+                  <p className="text-red-100">
+                    Lugna gatan 2,<br />
+                    211 60 Malmö
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-red-200 flex-shrink-0" />
+                  <a href="tel:+46409244220" className="text-red-100 hover:text-white transition-colors">
+                    040-92 44 20
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-red-200 flex-shrink-0" />
+                  <p className="text-red-100">Alla dagar: 07:00 - 22:00</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-[300px] md:h-[350px]">
+              <iframe
+                title="Mathallen Lugnet Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.8!2d13.0050!3d55.6000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLugna%20gatan%202%2C%20211%2060%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "grayscale(0.3) contrast(1.05)" }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
