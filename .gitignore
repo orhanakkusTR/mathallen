@@ -79,3 +79,7 @@ agenthub/agents/youtube/db
 # Mobile development
 android-sdk/ frontend/public/mat-video.mov
 frontend/public/mat-video.mov
+-e 
+# Environment files
+*.env
+*.env.*
