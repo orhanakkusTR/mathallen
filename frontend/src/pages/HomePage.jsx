@@ -286,7 +286,7 @@ export default function HomePage() {
           ) : offers.length > 0 ? (
             <>
               {/* Mobile: Horizontal cards */}
-              <div className="space-y-6 md:hidden">
+              <div className="space-y-10 md:hidden">
                 {offers.map((offer, index) => (
                   <div
                     key={offer.id}
