@@ -132,29 +132,32 @@ export default function HomePage() {
           {/* Weekly Offer Card - Floating Calendar Style */}
           <Link 
             to="/erbjudanden"
-            className="hidden lg:block absolute right-8 xl:right-16 bottom-16 group"
+            className="hidden lg:block absolute right-8 xl:right-16 bottom-12 group"
             data-testid="hero-weekly-offer-box"
           >
             <div className="relative">
-              {/* Wire rings - metallic spiral */}
-              <div className="absolute -top-4 left-4 right-4 flex justify-between z-20">
+              {/* Wire spiral rings */}
+              <div className="absolute -top-5 left-3 right-3 flex justify-between z-20">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="relative">
-                    <div className="w-6 h-10 border-[3px] border-stone-300 rounded-full bg-gradient-to-b from-stone-200 to-stone-400 shadow-md"></div>
+                  <div key={i} className="relative w-7 h-9">
+                    {/* Ring shadow */}
+                    <div className="absolute inset-0 rounded-full border-[3px] border-stone-600/50 translate-y-0.5"></div>
+                    {/* Main ring */}
+                    <div className="absolute inset-0 rounded-full border-[3px] border-stone-300 bg-gradient-to-br from-stone-100 via-stone-300 to-stone-400"></div>
                   </div>
                 ))}
               </div>
               
-              {/* Top binding strip */}
-              <div className="absolute -top-1 left-0 right-0 h-4 bg-stone-700 rounded-t-lg z-10 shadow-md"></div>
+              {/* Binding bar */}
+              <div className="absolute top-1 left-0 right-0 h-3 bg-gradient-to-b from-stone-600 to-stone-800 rounded-t-md z-10"></div>
               
               {/* Calendar page */}
-              <div className="w-44 h-48 bg-red-600 hover:bg-red-700 transition-colors rounded-b-xl rounded-t-sm shadow-2xl text-white flex flex-col items-center justify-center pt-4">
+              <div className="w-48 h-48 bg-red-600 hover:bg-red-700 transition-colors rounded-xl shadow-2xl text-white flex flex-col items-center justify-center pt-3 mt-2">
                 <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
-                <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
-                <div className="mt-3 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
+                <p className="text-white font-black text-4xl">VECKA {getWeekNumber()}</p>
+                <div className="mt-3 flex items-center gap-1 text-white/90 text-sm font-medium group-hover:text-white transition-colors">
                   <span>Se alla</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
