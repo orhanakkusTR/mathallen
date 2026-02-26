@@ -284,44 +284,96 @@ export default function HomePage() {
               ))}
             </div>
           ) : offers.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {offers.map((offer, index) => (
-                <div
-                  key={offer.id}
-                  className={`bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover-lift animate-fade-in-up stagger-${index + 1}`}
-                  data-testid={`offer-card-${index}`}
-                >
-                  <div className="relative mb-4">
-                    {offer.image_url ? (
-                      <img
-                        src={offer.image_url}
-                        alt={offer.product_name}
-                        className="w-full aspect-square object-cover rounded-xl"
-                      />
-                    ) : (
-                      <div className="w-full aspect-square bg-red-100 rounded-xl flex items-center justify-center">
-                        <ShoppingBasket className="w-12 h-12 text-red-300" />
+            <>
+              {/* Mobile: Horizontal cards */}
+              <div className="space-y-3 md:hidden">
+                {offers.map((offer, index) => (
+                  <div
+                    key={offer.id}
+                    className="bg-white rounded-xl overflow-hidden shadow-sm border border-stone-100 flex"
+                    data-testid={`offer-card-mobile-${index}`}
+                  >
+                    {/* Image */}
+                    <div className="relative w-28 h-28 flex-shrink-0">
+                      {offer.image_url ? (
+                        <img
+                          src={offer.image_url}
+                          alt={offer.product_name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
+                          <ShoppingBasket className="w-8 h-8 text-red-300" />
+                        </div>
+                      )}
+                      {offer.original_price && (
+                        <span className="absolute top-1 left-1 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                          -{Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
+                        </span>
+                      )}
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
+                      <h3 className="font-semibold text-stone-900 text-sm leading-tight truncate">
+                        {offer.product_name}
+                      </h3>
+                      <div className="flex items-baseline gap-1.5 mt-1">
+                        <span className="text-xl font-bold text-red-600">
+                          {offer.offer_price}:-
+                        </span>
+                        <span className="text-xs text-stone-400">/{offer.unit}</span>
+                        {offer.original_price && (
+                          <span className="text-xs text-stone-400 line-through ml-1">
+                            {offer.original_price}:-
+                          </span>
+                        )}
                       </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop: Grid cards */}
+              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {offers.map((offer, index) => (
+                  <div
+                    key={offer.id}
+                    className={`bg-white rounded-2xl p-6 border-2 border-dashed border-red-200 hover-lift animate-fade-in-up stagger-${index + 1}`}
+                    data-testid={`offer-card-${index}`}
+                  >
+                    <div className="relative mb-4">
+                      {offer.image_url ? (
+                        <img
+                          src={offer.image_url}
+                          alt={offer.product_name}
+                          className="w-full aspect-square object-cover rounded-xl"
+                        />
+                      ) : (
+                        <div className="w-full aspect-square bg-red-100 rounded-xl flex items-center justify-center">
+                          <ShoppingBasket className="w-12 h-12 text-red-300" />
+                        </div>
+                      )}
+                      <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        ERBJUDANDE
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-stone-900 mb-1">{offer.product_name}</h3>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-bold text-red-600">
+                        {offer.offer_price} kr
+                      </span>
+                      <span className="text-sm text-stone-500">/{offer.unit}</span>
+                    </div>
+                    {offer.original_price && (
+                      <p className="text-sm text-stone-400 line-through">
+                        Ord. pris {offer.original_price} kr
+                      </p>
                     )}
-                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      ERBJUDANDE
-                    </span>
                   </div>
-                  <h3 className="font-semibold text-stone-900 mb-1">{offer.product_name}</h3>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-red-600">
-                      {offer.offer_price} kr
-                    </span>
-                    <span className="text-sm text-stone-500">/{offer.unit}</span>
-                  </div>
-                  {offer.original_price && (
-                    <p className="text-sm text-stone-400 line-through">
-                      Ord. pris {offer.original_price} kr
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </>
           ) : (
             <div className="text-center py-12 bg-white rounded-2xl">
               <ShoppingBasket className="w-16 h-16 text-stone-300 mx-auto mb-4" />
