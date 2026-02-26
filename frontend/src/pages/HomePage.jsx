@@ -74,7 +74,7 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       {/* Hero Section - Full Width */}
-      <section className="relative h-[calc(100vh-112px)] min-h-[500px] overflow-hidden">
+      <section className="relative h-screen min-h-[500px] overflow-hidden -mt-[93px] md:-mt-[117px] pt-[93px] md:pt-[117px]">
         {/* Background Video */}
         <div className="absolute inset-0">
           <video
