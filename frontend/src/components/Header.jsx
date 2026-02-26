@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/shop", label: "Shop" },
 ];
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/qyf9zb3l_beyaz.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
