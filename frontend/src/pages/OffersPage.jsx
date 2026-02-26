@@ -356,7 +356,7 @@ export default function OffersPage() {
                       <div className="bg-stone-100 rounded-lg py-2 px-3">
                         <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
                         <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">
-                          {offer.original_price} kr{offer.unit ? `/${offer.unit}` : ''}
+                          {Math.floor(offer.original_price)}:-{offer.unit ? `/${offer.unit}` : ''}
                         </span>
                       </div>
                     )}
