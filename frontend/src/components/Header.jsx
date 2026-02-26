@@ -7,8 +7,8 @@ const navLinks = [
   { href: "/", label: "Hem" },
   { href: "/om-oss", label: "Om oss" },
   { href: "/erbjudanden", label: "Veckans erbjudanden" },
-  { href: "/shop", label: "Shop" },
   { href: "/kontakt", label: "Kontakt" },
+  { href: "/shop", label: "Shop" },
 ];
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
