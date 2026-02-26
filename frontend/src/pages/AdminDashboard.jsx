@@ -40,7 +40,6 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import axios from "axios";
-import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
@@ -252,8 +251,6 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-stone-100">
-      <SEO title="Admin Dashboard" noindex={true} />
-      
       {/* Header */}
       <header className="bg-stone-900 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">

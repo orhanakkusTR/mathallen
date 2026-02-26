@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import axios from "axios";
-import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -49,7 +48,6 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-stone-900 flex items-center justify-center px-4">
-      <SEO title="Admin Login" noindex={true} />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img 
