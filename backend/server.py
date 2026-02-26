@@ -368,6 +368,112 @@ async def get_newsletter_subscribers(admin = Depends(get_current_admin)):
             sub['subscribed_at'] = datetime.fromisoformat(sub['subscribed_at'])
     return subscribers
 
+# ---- PRODUCTS (Inventory) ----
+
+@api_router.get("/products")
+async def get_products(
+    search: Optional[str] = None,
+    category: Optional[str] = None,
+    limit: int = 100,
+    skip: int = 0
+):
+    """Get all products with optional search/filter"""
+    query = {}
+    if search:
+        query["name"] = {"$regex": search, "$options": "i"}
+    if category:
+        query["category"] = category
+    
+    products = await db.products.find(query, {"_id": 0}).skip(skip).limit(limit).to_list(limit)
+    total = await db.products.count_documents(query)
+    
+    return {"products": products, "total": total}
+
+@api_router.post("/products")
+async def create_product(product: ProductCreate, admin = Depends(get_current_admin)):
+    """Create a single product (admin only)"""
+    new_product = Product(name=product.name, category=product.category)
+    doc = new_product.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.products.insert_one(doc)
+    return {"message": "Produkt skapad", "product": doc}
+
+@api_router.post("/products/bulk")
+async def create_products_bulk(data: ProductBulkCreate, admin = Depends(get_current_admin)):
+    """Bulk create products from a list of names (admin only)"""
+    products = []
+    for name in data.products:
+        name = name.strip()
+        if name:
+            product = Product(name=name, category=data.category)
+            doc = product.model_dump()
+            doc['created_at'] = doc['created_at'].isoformat()
+            products.append(doc)
+    
+    if products:
+        await db.products.insert_many(products)
+    
+    return {"message": f"{len(products)} produkter skapade", "count": len(products)}
+
+@api_router.delete("/products/{product_id}")
+async def delete_product(product_id: str, admin = Depends(get_current_admin)):
+    """Delete a product (admin only)"""
+    result = await db.products.delete_one({"id": product_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Produkt hittades inte")
+    return {"message": "Produkt borttagen"}
+
+@api_router.delete("/products")
+async def delete_all_products(admin = Depends(get_current_admin)):
+    """Delete all products (admin only)"""
+    result = await db.products.delete_many({})
+    return {"message": f"{result.deleted_count} produkter borttagna"}
+
+@api_router.get("/products/categories")
+async def get_product_categories():
+    """Get unique product categories"""
+    categories = await db.products.distinct("category")
+    return [c for c in categories if c]
+
+# ---- CHATBOT ----
+
+@api_router.post("/chat")
+async def chat_search(query: ChatQuery):
+    """Search for products and return chatbot response"""
+    search_term = query.query.strip().lower()
+    
+    if len(search_term) < 2:
+        return {
+            "found": False,
+            "message": "Vänligen skriv minst 2 tecken för att söka.",
+            "products": []
+        }
+    
+    # Search for products matching the query
+    products = await db.products.find(
+        {"name": {"$regex": search_term, "$options": "i"}},
+        {"_id": 0, "name": 1, "category": 1}
+    ).limit(5).to_list(5)
+    
+    if products:
+        product_names = [p['name'] for p in products]
+        if len(products) == 1:
+            message = f"Ja, vi har {product_names[0]} i vårt sortiment! Välkommen in till butiken för att handla."
+        else:
+            message = f"Vi har flera matchande produkter: {', '.join(product_names[:3])}{'...' if len(products) > 3 else ''}. Välkommen in till Mathallen!"
+        
+        return {
+            "found": True,
+            "message": message,
+            "products": products
+        }
+    else:
+        return {
+            "found": False,
+            "message": f"Tyvärr kunde vi inte hitta '{query.query}' i vårt sortiment. Kontakta oss gärna om du har frågor!",
+            "products": []
+        }
+
 # ---- ADMIN SETUP ----
 
 @api_router.post("/setup/admin")
