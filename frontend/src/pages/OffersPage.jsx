@@ -84,56 +84,111 @@ export default function OffersPage() {
               ))}
             </div>
           ) : offers.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {offers.map((offer, index) => (
-                <div
-                  key={offer.id}
-                  className="offer-card bg-white rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover-lift group"
-                  data-testid={`offer-item-${index}`}
-                >
-                  <div className="relative mb-4">
-                    {offer.image_url ? (
-                      <img
-                        src={offer.image_url}
-                        alt={offer.product_name}
-                        className="w-full aspect-square object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full aspect-square bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center">
-                        <ShoppingBasket className="w-12 h-12 text-red-300" />
-                      </div>
-                    )}
-                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm offer-tag">
-                      ERBJUDANDE
-                    </span>
-                  </div>
-                  <div className="space-y-2">
-                    <span className="text-xs font-medium text-stone-500 uppercase tracking-wide">
-                      {offer.category}
-                    </span>
-                    <h3 className="font-semibold text-stone-900 text-lg leading-tight">
-                      {offer.product_name}
-                    </h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-red-600">
-                        {offer.offer_price}:-
-                      </span>
-                      <span className="text-sm text-stone-500">/{offer.unit}</span>
+            <>
+              {/* Mobile: Horizontal cards */}
+              <div className="space-y-3 md:hidden">
+                {offers.map((offer, index) => (
+                  <div
+                    key={offer.id}
+                    className="bg-white rounded-xl overflow-hidden shadow-sm border border-stone-100 flex"
+                    data-testid={`offer-item-mobile-${index}`}
+                  >
+                    {/* Image */}
+                    <div className="relative w-28 h-28 flex-shrink-0">
+                      {offer.image_url ? (
+                        <img
+                          src={offer.image_url}
+                          alt={offer.product_name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
+                          <ShoppingBasket className="w-8 h-8 text-red-300" />
+                        </div>
+                      )}
+                      {offer.original_price && (
+                        <span className="absolute top-1 left-1 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                          -{Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
+                        </span>
+                      )}
                     </div>
-                    {offer.original_price && (
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm text-stone-400 line-through">
-                          Ord. {offer.original_price}:-
+                    
+                    {/* Content */}
+                    <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
+                      <span className="text-[10px] font-medium text-stone-400 uppercase tracking-wide truncate">
+                        {offer.category}
+                      </span>
+                      <h3 className="font-semibold text-stone-900 text-sm leading-tight truncate">
+                        {offer.product_name}
+                      </h3>
+                      <div className="flex items-baseline gap-1.5 mt-1">
+                        <span className="text-xl font-bold text-red-600">
+                          {offer.offer_price}:-
                         </span>
-                        <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
-                          Spara {Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
-                        </span>
+                        <span className="text-xs text-stone-400">/{offer.unit}</span>
+                        {offer.original_price && (
+                          <span className="text-xs text-stone-400 line-through ml-1">
+                            {offer.original_price}:-
+                          </span>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
+              {/* Desktop: Grid cards */}
+              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {offers.map((offer, index) => (
+                  <div
+                    key={offer.id}
+                    className="offer-card bg-white rounded-2xl p-6 border-2 border-dashed border-red-200 hover-lift group"
+                    data-testid={`offer-item-${index}`}
+                  >
+                    <div className="relative mb-4">
+                      {offer.image_url ? (
+                        <img
+                          src={offer.image_url}
+                          alt={offer.product_name}
+                          className="w-full aspect-square object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full aspect-square bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center">
+                          <ShoppingBasket className="w-12 h-12 text-red-300" />
+                        </div>
+                      )}
+                      <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                        ERBJUDANDE
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      <span className="text-xs font-medium text-stone-500 uppercase tracking-wide">
+                        {offer.category}
+                      </span>
+                      <h3 className="font-semibold text-stone-900 text-lg leading-tight">
+                        {offer.product_name}
+                      </h3>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-red-600">
+                          {offer.offer_price}:-
+                        </span>
+                        <span className="text-sm text-stone-500">/{offer.unit}</span>
+                      </div>
+                      {offer.original_price && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-stone-400 line-through">
+                            Ord. {offer.original_price}:-
+                          </span>
+                          <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                            Spara {Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           ) : (
             <div className="text-center py-20 bg-white rounded-2xl">
               <ShoppingBasket className="w-20 h-20 text-stone-200 mx-auto mb-6" />
