@@ -86,53 +86,61 @@ export default function OffersPage() {
           ) : offers.length > 0 ? (
             <>
               {/* Mobile: Horizontal cards */}
-              <div className="space-y-3 md:hidden">
+              <div className="space-y-4 md:hidden">
                 {offers.map((offer, index) => (
                   <div
                     key={offer.id}
-                    className="bg-white rounded-xl overflow-hidden shadow-sm border border-stone-100 flex"
+                    className="bg-white rounded-2xl overflow-hidden shadow-md border border-stone-100"
                     data-testid={`offer-item-mobile-${index}`}
                   >
-                    {/* Image */}
-                    <div className="relative w-28 h-28 flex-shrink-0">
-                      {offer.image_url ? (
-                        <img
-                          src={offer.image_url}
-                          alt={offer.product_name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
-                          <ShoppingBasket className="w-8 h-8 text-red-300" />
-                        </div>
-                      )}
-                      {offer.original_price && (
-                        <span className="absolute top-1 left-1 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                          -{Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
-                        </span>
-                      )}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
-                      <span className="text-[10px] font-medium text-stone-400 uppercase tracking-wide truncate">
-                        {offer.category}
-                      </span>
-                      <h3 className="font-semibold text-stone-900 text-sm leading-tight truncate">
-                        {offer.product_name}
-                      </h3>
-                      <div className="flex items-baseline gap-1.5 mt-1">
-                        <span className="text-xl font-bold text-red-600">
-                          {offer.offer_price}:-
-                        </span>
-                        <span className="text-xs text-stone-400">/{offer.unit}</span>
-                        {offer.original_price && (
-                          <span className="text-xs text-stone-400 line-through ml-1">
-                            {offer.original_price}:-
-                          </span>
+                    <div className="flex">
+                      {/* Image */}
+                      <div className="relative w-32 h-32 flex-shrink-0">
+                        {offer.image_url ? (
+                          <img
+                            src={offer.image_url}
+                            alt={offer.product_name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
+                            <ShoppingBasket className="w-10 h-10 text-red-300" />
+                          </div>
                         )}
                       </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
+                        <span className="text-[11px] font-medium text-stone-400 uppercase tracking-wide mb-0.5">
+                          {offer.category}
+                        </span>
+                        <h3 className="font-bold text-stone-900 text-base leading-tight mb-2">
+                          {offer.product_name}
+                        </h3>
+                        
+                        {/* Price section */}
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl font-bold text-red-600">
+                            {offer.offer_price}:-
+                          </span>
+                          {offer.original_price && (
+                            <span className="text-base text-stone-500 line-through">
+                              {offer.original_price}:-
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                    
+                    {/* Bottom discount bar */}
+                    {offer.original_price && (
+                      <div className="bg-red-600 text-white px-4 py-2 flex items-center justify-between">
+                        <span className="text-sm font-medium">Spara {offer.original_price - offer.offer_price}:-</span>
+                        <span className="text-sm font-bold bg-white/20 px-2 py-0.5 rounded">
+                          -{Math.round(((offer.original_price - offer.offer_price) / offer.original_price) * 100)}%
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
