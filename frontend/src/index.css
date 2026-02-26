@@ -224,7 +224,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-/* Ticket tear edge - soft rounded scallop/wave pattern */
+/* Ticket tear edge - scallop pattern on top of yellow price box */
 .ticket-edge {
     position: relative;
 }
@@ -232,11 +232,11 @@ input:focus, textarea:focus, select:focus {
 .ticket-edge::before {
     content: '';
     position: absolute;
-    top: -12px;
+    top: -10px;
     left: 0;
     right: 0;
-    height: 12px;
-    background: radial-gradient(circle at 50% 100%, transparent 8px, #facc15 8px);
-    background-size: 16px 12px;
-    background-position: -8px 0;
+    height: 10px;
+    background: radial-gradient(circle at 50% 0%, #facc15 10px, transparent 10px);
+    background-size: 20px 20px;
+    background-position: 0 0;
 }
