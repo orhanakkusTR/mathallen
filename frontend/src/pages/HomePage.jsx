@@ -246,14 +246,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Brett sortiment */}
+            {/* Mångkulturellt sortiment */}
             <div 
               className="group relative overflow-hidden rounded-xl md:rounded-2xl aspect-[3/4] cursor-pointer"
               data-testid="value-card-3"
             >
               <img
                 src="https://images.unsplash.com/photo-1760463921690-9bec0cc7d434?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxzdXBlcm1hcmtldCUyMGFpc2xlJTIwcHJvZHVjdHMlMjB2YXJpZXR5fGVufDB8fHx8MTc3MjA1NDg1NXww&ixlib=rb-4.1.0&q=85"
-                alt="Brett sortiment"
+                alt="Mångkulturellt sortiment"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -261,9 +261,9 @@ export default function HomePage() {
                 <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-2 md:mb-3">
                   <ShoppingBasket className="w-4 h-4 md:w-5 md:h-5" />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold mb-1">Brett sortiment</h3>
+                <h3 className="text-lg md:text-xl font-bold mb-1">Mångkulturellt sortiment</h3>
                 <p className="text-white/90 text-xs md:text-sm leading-relaxed line-clamp-3">
-                  Allt du behöver finns under vårt tak.
+                  Lokala favoriter och internationella smaker – allt samlat under ett tak.
                 </p>
               </div>
             </div>
