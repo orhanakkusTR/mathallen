@@ -525,20 +525,18 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Malmös favoritbutik sedan{" "}
-                <span className="text-red-500">1985</span>
+                Mathallen – en självklar matbutik i{" "}
+                <span className="text-red-500">Malmö</span>
               </h2>
               <p className="text-stone-300 text-lg mb-8 leading-relaxed">
-                Med över 10 års erfarenhet har vi byggt upp ett förtroende hos 
-                Malmöborna. Vår passion för kvalitet och service gör oss till 
-                mer än bara en butik – vi är en del av samhället.
+                Sedan 2020 har vi byggt Mathallen med målet att skapa en butik där alla ska kunna handla bra mat till bra priser. Vi är en privatägd matbutik som speglar Malmös mångfald och erbjuder ett brett sortiment av produkter från världens alla hörn. Hos oss ska alla känna sig välkomna och hitta det de söker – oavsett vardag eller fest.
               </p>
               <ul className="space-y-4 mb-8">
                 {[
-                  "Dagliga leveranser av färska produkter",
-                  "Lokala och internationella specialiteter",
+                  "Dagliga leveranser av färska varor",
+                  "Brett sortiment med lokala och internationella produkter",
                   "Personlig service av kunnig personal",
-                  "Attraktiva veckokampanjer",
+                  "Prisvärda och uppdaterade veckokampanjer",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
@@ -565,7 +563,7 @@ export default function HomePage() {
               </div>
               {/* Desktop: Floating badges */}
               <div className="absolute -bottom-6 -left-6 bg-red-600 text-white rounded-2xl p-6 shadow-xl hidden md:block">
-                <p className="text-4xl font-bold">10+</p>
+                <p className="text-4xl font-bold">5+</p>
                 <p className="text-red-100">års erfarenhet</p>
               </div>
               <div className="absolute -top-6 -right-6 bg-white text-stone-900 rounded-2xl p-6 shadow-xl hidden md:block">
@@ -575,7 +573,7 @@ export default function HomePage() {
               {/* Mobile: Stats cards below image */}
               <div className="grid grid-cols-2 gap-3 mt-4 md:hidden">
                 <div className="bg-red-600 text-white rounded-xl p-4 text-center shadow-lg">
-                  <p className="text-3xl font-bold">10+</p>
+                  <p className="text-3xl font-bold">5+</p>
                   <p className="text-red-100 text-sm">års erfarenhet</p>
                 </div>
                 <div className="bg-white text-stone-900 rounded-xl p-4 text-center shadow-lg border border-stone-100">
