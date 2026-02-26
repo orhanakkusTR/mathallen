@@ -91,12 +91,12 @@ export default function NewsletterPopup() {
       >
         <button
           onClick={handleExpand}
-          className="bg-red-600 hover:bg-red-700 text-white px-3 py-4 rounded-l-xl shadow-2xl flex flex-col items-center gap-2 transition-all hover:px-4 group"
+          className="bg-red-600 hover:bg-red-700 text-white px-2 py-2 md:px-3 md:py-4 rounded-l-xl shadow-2xl flex flex-col items-center gap-1 md:gap-2 transition-all hover:px-3 md:hover:px-4 group"
           data-testid="newsletter-expand-button"
         >
-          <ChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          <Mail className="w-5 h-5" />
-          <span className="writing-vertical text-xs font-medium tracking-wider">ERBJUDANDEN</span>
+          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+          <Mail className="w-4 h-4 md:w-5 md:h-5" />
+          <span className="writing-vertical text-[10px] md:text-xs font-medium tracking-wider">ERBJUDANDEN</span>
         </button>
       </div>
     );
