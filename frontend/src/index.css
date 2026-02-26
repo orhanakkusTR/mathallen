@@ -224,7 +224,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-/* Ticket tear edge - zigzag pattern */
+/* Ticket tear edge - clean perforation */
 .ticket-edge {
     position: relative;
 }
@@ -236,10 +236,8 @@ input:focus, textarea:focus, select:focus {
     left: 0;
     right: 0;
     height: 8px;
-    background: linear-gradient(135deg, #facc15 25%, transparent 25%) -8px 0,
-                linear-gradient(225deg, #facc15 25%, transparent 25%) -8px 0,
-                linear-gradient(315deg, #facc15 25%, transparent 25%),
-                linear-gradient(45deg, #facc15 25%, transparent 25%);
+    background: 
+        radial-gradient(circle at 8px 0, transparent 8px, #facc15 8px);
     background-size: 16px 8px;
-    background-color: transparent;
+    background-position: 0 0;
 }
