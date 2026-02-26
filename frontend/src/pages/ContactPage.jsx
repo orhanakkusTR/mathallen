@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import axios from "axios";
-import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -44,13 +43,6 @@ export default function ContactPage() {
 
   return (
     <div className="page-transition">
-      <SEO 
-        title="Kontakt"
-        description="Kontakta Mathallen Malmö. Besök oss på Lantmannagatan 59 eller Lugna gatan 2. Öppet alla dagar 07-22. Ring oss på 040-92 44 20 eller skicka ett meddelande."
-        url="/kontakt"
-        image="https://images.unsplash.com/photo-1753354868473-94c8ac971269?auto=compress&w=1200"
-      />
-      
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
         <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">

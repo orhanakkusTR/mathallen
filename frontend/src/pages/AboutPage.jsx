@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -27,13 +26,6 @@ export default function AboutPage() {
 
   return (
     <div className="page-transition">
-      <SEO 
-        title="Om oss"
-        description="Mathallen Malmö - Din lokala stormarknad sedan 1985. Vi kombinerar hög kvalitet, rimliga priser och attraktiva veckokampanjer. Lär känna vår historia och våra värderingar."
-        url="/om-oss"
-        image="https://images.pexels.com/photos/3985062/pexels-photo-3985062.jpeg?auto=compress&cs=tinysrgb&w=1200"
-      />
-      
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
         <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
