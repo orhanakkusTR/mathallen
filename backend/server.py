@@ -492,10 +492,8 @@ app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 # ---- FILE UPLOAD ----
 @app.post("/api/upload")
-async def upload_file(file: UploadFile = File(...), credentials: HTTPAuthorizationCredentials = Depends(security)):
+async def upload_file(file: UploadFile = File(...), admin = Depends(get_current_admin)):
     """Upload a product image"""
-    verify_token(credentials)
-    
     # Validate file type
     allowed_types = ["image/jpeg", "image/png", "image/webp", "image/gif"]
     if file.content_type not in allowed_types:
