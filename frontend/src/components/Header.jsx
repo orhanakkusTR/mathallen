@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, MapPin, Clock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,22 +15,12 @@ const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malm
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <header className="sticky top-0 z-50">
-      {/* Top bar - White with red text - Hidden when scrolled */}
-      <div className={`bg-white text-red-600 text-sm border-b border-stone-100 transition-all duration-300 overflow-hidden ${isScrolled ? 'h-0 py-0 opacity-0' : 'h-auto py-2.5 opacity-100'}`}>
+      {/* Top bar - White with red text */}
+      <div className="bg-white text-red-600 py-2.5 text-sm border-b border-stone-100">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Desktop */}
           <div className="hidden sm:flex items-center justify-between">
