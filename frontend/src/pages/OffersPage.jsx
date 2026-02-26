@@ -93,51 +93,48 @@ export default function OffersPage() {
                     className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-stone-100"
                     data-testid={`offer-item-${index}`}
                   >
-                    {/* Product Image with overlapping price */}
-                    <div className="relative">
-                      <div className="bg-gradient-to-b from-stone-50 to-white p-4 md:p-6 pb-12">
-                        {offer.image_url ? (
-                          <img
-                            src={offer.image_url}
-                            alt={offer.product_name}
-                            className="w-full aspect-square object-contain"
-                          />
-                        ) : (
-                          <div className="w-full aspect-square flex items-center justify-center">
-                            <ShoppingBasket className="w-16 h-16 text-stone-300" />
-                          </div>
-                        )}
-                      </div>
-                      
-                      {/* Price Tag - Overlapping the image */}
-                      <div className="absolute bottom-0 left-0 right-0 flex justify-center">
-                        <div className="bg-yellow-400 px-5 py-2 md:px-6 md:py-3 text-center shadow-lg">
-                          <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
-                          <div className="flex items-start justify-center">
-                            <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                              {Math.floor(offer.offer_price)}
-                            </span>
-                            <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                              {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
-                            </span>
-                            <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
-                          </div>
+                    {/* Product Image */}
+                    <div className="bg-gradient-to-b from-stone-50 to-white p-4 md:p-6">
+                      {offer.image_url ? (
+                        <img
+                          src={offer.image_url}
+                          alt={offer.product_name}
+                          className="w-full aspect-square object-contain"
+                        />
+                      ) : (
+                        <div className="w-full aspect-square flex items-center justify-center">
+                          <ShoppingBasket className="w-16 h-16 text-stone-300" />
                         </div>
+                      )}
+                    </div>
+                    
+                    {/* Price Tag - Below image, full width */}
+                    <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
+                      <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
+                      <div className="flex items-start justify-center">
+                        <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
+                          {Math.floor(offer.offer_price)}
+                        </span>
+                        <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
+                          {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
+                        </span>
+                        <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
                       </div>
                     </div>
                     
                     {/* Product Info */}
-                    <div className="p-4 pt-3 text-center">
+                    <div className="p-4 text-center">
                       <h3 className="font-bold text-stone-900 text-sm md:text-base leading-tight mb-1">
                         {offer.product_name}
                       </h3>
-                      <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-2">
+                      <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-3">
                         {offer.category}
                       </p>
                       {offer.original_price && (
-                        <p className="text-stone-400 text-xs md:text-sm">
-                          Ord pris <span className="line-through">{offer.original_price} kr/{offer.unit}</span>
-                        </p>
+                        <div className="bg-stone-100 rounded-lg py-2 px-3">
+                          <span className="text-stone-600 text-sm font-medium">Ord pris </span>
+                          <span className="text-red-600 text-base font-bold line-through">{offer.original_price} kr/{offer.unit}</span>
+                        </div>
                       )}
                     </div>
                   </div>
