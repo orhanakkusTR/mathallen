@@ -40,6 +40,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import axios from "axios";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
