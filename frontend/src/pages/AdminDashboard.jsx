@@ -133,6 +133,7 @@ export default function AdminDashboard() {
     is_active: true,
     sort_order: 0,
     multi_buy: "",
+    is_best_price: false,
   });
 
   const [uploading, setUploading] = useState(false);
