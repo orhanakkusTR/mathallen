@@ -143,9 +143,18 @@ export default function Footer() {
           <p className="text-stone-500 text-sm">
             © {currentYear} Mathallen Malmö. Alla rättigheter förbehållna.
           </p>
-          <div className="flex gap-6 text-sm">
-            <Link to="/admin" className="text-stone-500 hover:text-stone-300 transition-colors" data-testid="footer-admin-link">
-              Admin
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
+            <Link to="/allmanna-villkor" className="text-stone-500 hover:text-stone-300 transition-colors">
+              Allmänna villkor
+            </Link>
+            <Link to="/dataskydd" className="text-stone-500 hover:text-stone-300 transition-colors">
+              Dataskydd
+            </Link>
+            <Link to="/tillganglighet" className="text-stone-500 hover:text-stone-300 transition-colors">
+              Tillgänglighet
+            </Link>
+            <Link to="/integritetspolicy" className="text-stone-500 hover:text-stone-300 transition-colors">
+              Integritetspolicy
             </Link>
           </div>
         </div>
