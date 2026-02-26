@@ -193,7 +193,7 @@ export default function AdminDashboard() {
       year: currentYear,
       is_active: true,
       sort_order: offers.length,
-      multi_buy: "",
+      multi_buy: "none",
     });
     setIsDialogOpen(true);
   };
