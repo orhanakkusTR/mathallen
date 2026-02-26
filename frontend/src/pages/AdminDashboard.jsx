@@ -91,7 +91,7 @@ const categories = [
 const units = ["cl", "st", "g", "kg", "l", "ml"];
 
 const multiBuyOptions = [
-  { value: "", label: "Ingen" },
+  { value: "none", label: "Ingen" },
   { value: "2", label: "2 För" },
   { value: "3", label: "3 För" },
   { value: "4", label: "4 För" },
