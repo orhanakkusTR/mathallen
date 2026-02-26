@@ -526,7 +526,7 @@ export default function HomePage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 En självklar matbutik i{" "}
-                <span className="text-red-500">Malmö</span>
+                <span className="text-red-500">Skåne</span>
               </h2>
               <p className="text-stone-300 text-lg mb-8 leading-relaxed">
                 Sedan 2020 har vi byggt Mathallen med målet att skapa en butik där alla ska kunna handla bra mat till bra priser. Vi är en privatägd matbutik som speglar Malmös mångfald och erbjuder ett brett sortiment av produkter från världens alla hörn. Hos oss ska alla känna sig välkomna och hitta det de söker – oavsett vardag eller fest.
