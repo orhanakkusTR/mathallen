@@ -1,5 +1,8 @@
 # Mathallen Malmö - Product Requirements Document
 
+## Latest Update: 2026-02-26
+- **Kategori Filtreleme Sistemi Eklendi:** Erbjudanden sayfasına masaüstü (sidebar) ve mobil (dropdown) kategori filtreleme özelliği eklendi
+
 ## Original Problem Statement
 Build a corporate website for Mathallen Malmö - a local supermarket (stormarknad) in Malmö, Sweden. The site should be warm, accessible, campaign-focused, and NOT e-commerce. Focus on promotion, campaigns, brand trust, and store information.
 
