@@ -38,6 +38,13 @@ export default function OffersPage() {
 
   return (
     <div className="page-transition">
+      <SEO 
+        title="Veckans erbjudanden"
+        description="Upptäck veckans bästa erbjudanden på Mathallen Malmö. Spara pengar på färska produkter, kött, mejeri och mycket mer. Nya kampanjer varje vecka!"
+        url="/erbjudanden"
+        image="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=1200"
+      />
+      
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
         <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
