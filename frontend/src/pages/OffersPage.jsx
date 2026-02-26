@@ -86,7 +86,7 @@ export default function OffersPage() {
           ) : offers.length > 0 ? (
             <>
               {/* Mobile: Horizontal cards */}
-              <div className="space-y-4 md:hidden">
+              <div className="space-y-6 md:hidden">
                 {offers.map((offer, index) => (
                   <div
                     key={offer.id}
