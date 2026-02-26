@@ -554,6 +554,7 @@ export default function HomePage() {
                   className="w-full aspect-[4/3] object-cover"
                 />
               </div>
+              {/* Desktop: Floating badges */}
               <div className="absolute -bottom-6 -left-6 bg-red-600 text-white rounded-2xl p-6 shadow-xl hidden md:block">
                 <p className="text-4xl font-bold">10+</p>
                 <p className="text-red-100">års erfarenhet</p>
@@ -561,6 +562,17 @@ export default function HomePage() {
               <div className="absolute -top-6 -right-6 bg-white text-stone-900 rounded-2xl p-6 shadow-xl hidden md:block">
                 <p className="text-4xl font-bold text-red-600">30.000+</p>
                 <p className="text-stone-500">Produkter i sortimentet</p>
+              </div>
+              {/* Mobile: Stats cards below image */}
+              <div className="grid grid-cols-2 gap-3 mt-4 md:hidden">
+                <div className="bg-red-600 text-white rounded-xl p-4 text-center shadow-lg">
+                  <p className="text-3xl font-bold">10+</p>
+                  <p className="text-red-100 text-sm">års erfarenhet</p>
+                </div>
+                <div className="bg-white text-stone-900 rounded-xl p-4 text-center shadow-lg border border-stone-100">
+                  <p className="text-3xl font-bold text-red-600">30.000+</p>
+                  <p className="text-stone-500 text-sm">Produkter</p>
+                </div>
               </div>
             </div>
           </div>
