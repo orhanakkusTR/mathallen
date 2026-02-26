@@ -51,21 +51,12 @@ const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malm
 function getImageUrl(url) {
   if (!url) return null;
   
-  // If it starts with /uploads, prepend the base URL
+  // If it starts with /uploads or /api/uploads, prepend the base URL
   if (url.startsWith('/uploads')) {
+    return `${BASE_URL}/api${url}`;
+  }
+  if (url.startsWith('/api/uploads')) {
     return `${BASE_URL}${url}`;
-  }
-  
-  // Google Drive file link: https://drive.google.com/file/d/FILE_ID/view
-  const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([^\/]+)/);
-  if (driveFileMatch) {
-    return `https://drive.google.com/uc?export=view&id=${driveFileMatch[1]}`;
-  }
-  
-  // Google Drive open link: https://drive.google.com/open?id=FILE_ID
-  const driveOpenMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
-  if (driveOpenMatch) {
-    return `https://drive.google.com/uc?export=view&id=${driveOpenMatch[1]}`;
   }
   
   // Already a direct link or other URL
