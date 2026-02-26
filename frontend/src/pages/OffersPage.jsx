@@ -90,7 +90,7 @@ export default function OffersPage() {
                 {offers.map((offer, index) => (
                   <div
                     key={offer.id}
-                    className="bg-white rounded-2xl overflow-hidden shadow-md border border-stone-100 mb-6"
+                    className="bg-white rounded-2xl overflow-hidden shadow-md border border-stone-100 mb-8"
                     data-testid={`offer-item-mobile-${index}`}
                   >
                     <div className="flex">
