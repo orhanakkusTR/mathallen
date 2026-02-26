@@ -798,6 +798,26 @@ export default function AdminDashboard() {
               </div>
             </div>
 
+            {/* Multi-buy option */}
+            <div className="space-y-2">
+              <Label htmlFor="multi_buy">Flerköp (2 För, 3 För, etc.)</Label>
+              <Select
+                value={formData.multi_buy}
+                onValueChange={(value) => setFormData({ ...formData, multi_buy: value })}
+              >
+                <SelectTrigger data-testid="offer-multi-buy">
+                  <SelectValue placeholder="Välj flerköp (valfritt)" />
+                </SelectTrigger>
+                <SelectContent>
+                  {multiBuyOptions.map((option) => (
+                    <SelectItem key={option.value || "none"} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="week_number">Vecka</Label>
