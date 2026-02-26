@@ -178,7 +178,7 @@ export default function AboutPage() {
               Våra värderingar
             </h2>
             <p className="text-stone-600 text-lg max-w-2xl mx-auto">
-              Fyra pelare som guidar oss i allt vi gör
+              Det som definierar Mathallen.
             </p>
           </div>
           
@@ -197,7 +197,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Kvalitet</h3>
                 <p className="text-white/90 text-sm leading-relaxed hidden md:block">
-                  Vi väljer endast de bästa produkterna från pålitliga leverantörer.
+                  Noggrant utvalda produkter och färskhet i varje köp.
                 </p>
               </div>
             </div>
@@ -216,7 +216,26 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Prisvärdhet</h3>
                 <p className="text-white/90 text-sm leading-relaxed hidden md:block">
-                  Bra priser utan att kompromissa med kvaliteten.
+                  Bra mat till rätt pris, varje dag.
+                </p>
+              </div>
+            </div>
+
+            {/* Mångfald */}
+            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
+              <img
+                src="https://images.pexels.com/photos/2252584/pexels-photo-2252584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                alt="Mångfald"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
+                  <Leaf className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-2">Mångfald</h3>
+                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
+                  Ett brett sortiment med smaker från hela världen.
                 </p>
               </div>
             </div>
@@ -235,26 +254,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold mb-2">Kundfokus</h3>
                 <p className="text-white/90 text-sm leading-relaxed hidden md:block">
-                  Din shoppingupplevelse är vår prioritet.
-                </p>
-              </div>
-            </div>
-
-            {/* Lokalt engagemang */}
-            <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
-              <img
-                src="https://images.pexels.com/photos/2252584/pexels-photo-2252584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                alt="Lokalt engagemang"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
-                  <Leaf className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-2">Lokalt</h3>
-                <p className="text-white/90 text-sm leading-relaxed hidden md:block">
-                  Vi stödjer lokala producenter i Malmö.
+                  Personlig service och omtanke i varje möte.
                 </p>
               </div>
             </div>
