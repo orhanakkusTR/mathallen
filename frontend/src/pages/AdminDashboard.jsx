@@ -187,7 +187,7 @@ export default function AdminDashboard() {
       product_name: "",
       original_price: "",
       offer_price: "",
-      unit: "st",
+      unit: "none",
       image_url: "",
       category: categories[0],
       week_number: currentWeek,
