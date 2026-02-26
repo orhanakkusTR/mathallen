@@ -13,6 +13,7 @@ import AdminDashboard from "@/pages/AdminDashboard";
 // Layout & Utils
 import Layout from "@/components/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
+import CookieConsent from "@/components/CookieConsent";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
+        <CookieConsent />
       </BrowserRouter>
       <Toaster position="top-right" richColors />
     </div>
