@@ -88,7 +88,7 @@ const categories = [
   "Specerier",
 ];
 
-const units = ["cl", "st", "g", "kg", "l", "ml"];
+const units = ["", "cl", "st", "g", "kg", "l", "ml"];
 
 function getWeekNumber(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
