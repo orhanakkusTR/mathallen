@@ -36,12 +36,10 @@ export default function AboutPage() {
               Om oss
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4 md:mb-6">
-              Din lokala stormarknad sedan <span className="text-red-500">1985</span>
+              Din lokala stormarknad sedan <span className="text-red-500">2020</span>
             </h1>
             <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg">
-              Mathallen Malmö är en uppskattad och välbesökt stormarknad i Malmö som 
-              kombinerar hög kvalitet, rimliga priser och attraktiva veckokampanjer 
-              under ett och samma tak.
+              Mathallen Malmö är en uppskattad och välbesökt matbutik som förenar mångfald, kvalitet och bra priser – med ett brett sortiment och attraktiva veckokampanjer under ett tak.
             </p>
           </div>
           
