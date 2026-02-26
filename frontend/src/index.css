@@ -224,7 +224,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-/* Ticket tear edge - clean perforation */
+/* Ticket tear edge - sharp triangles */
 .ticket-edge {
     position: relative;
 }
@@ -232,12 +232,13 @@ input:focus, textarea:focus, select:focus {
 .ticket-edge::before {
     content: '';
     position: absolute;
-    top: -8px;
+    top: -10px;
     left: 0;
     right: 0;
-    height: 8px;
+    height: 10px;
     background: 
-        radial-gradient(circle at 8px 0, transparent 8px, #facc15 8px);
-    background-size: 16px 8px;
+        linear-gradient(45deg, transparent 50%, #facc15 50%),
+        linear-gradient(-45deg, transparent 50%, #facc15 50%);
+    background-size: 20px 10px;
     background-position: 0 0;
 }
