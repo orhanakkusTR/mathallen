@@ -196,6 +196,40 @@ export default function AdminDashboard() {
     setImagePreview(convertToDirectImageUrl(url));
   };
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Filen är för stor. Max 5MB tillåtet.");
+      return;
+    }
+
+    setUploading(true);
+    const uploadFormData = new FormData();
+    uploadFormData.append("file", file);
+
+    try {
+      const response = await axios.post(`${API}/upload`, uploadFormData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const imageUrl = response.data.url;
+      setFormData({ ...formData, image_url: imageUrl });
+      setImagePreview(imageUrl);
+      toast.success("Bilden har laddats upp!");
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.error("Kunde inte ladda upp bilden");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
