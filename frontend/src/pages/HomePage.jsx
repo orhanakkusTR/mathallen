@@ -65,16 +65,10 @@ export default function HomePage() {
             muted
             loop
             playsInline
+            poster="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=1920"
             className="w-full h-full object-cover"
           >
-            <source src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/wqjiw7h5_mat-video.mov" type="video/quicktime" />
             <source src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/wqjiw7h5_mat-video.mov" type="video/mp4" />
-            {/* Fallback image */}
-            <img
-              src="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=1920"
-              alt="Mathallen Malmö"
-              className="w-full h-full object-cover"
-            />
           </video>
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
