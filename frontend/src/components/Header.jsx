@@ -131,6 +131,7 @@ export default function Header() {
               <Menu className="w-6 h-6 text-stone-700" />
             )}
           </button>
+          </div>
         </div>
       </div>
 
