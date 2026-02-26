@@ -300,18 +300,39 @@ export default function OffersPage() {
                   
                   {/* Price Tag - Below image, full width */}
                   <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
-                    <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
-                    <div className="flex items-start justify-center">
-                      <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                        {Math.floor(offer.offer_price)}
-                      </span>
-                      <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                        {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
-                      </span>
-                      {offer.unit && (
-                        <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
-                      )}
-                    </div>
+                    {/* Show "X För" in price tag if multi_buy exists but no unit */}
+                    {offer.multi_buy && !offer.unit ? (
+                      <>
+                        <div className="flex items-center justify-center gap-2 mb-1">
+                          <span className="bg-red-600 text-white font-bold text-xs md:text-sm px-2 py-0.5 rounded">
+                            {offer.multi_buy} För
+                          </span>
+                        </div>
+                        <div className="flex items-start justify-center">
+                          <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
+                            {Math.floor(offer.offer_price)}
+                          </span>
+                          <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
+                            {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : ':-'}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
+                        <div className="flex items-start justify-center">
+                          <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
+                            {Math.floor(offer.offer_price)}
+                          </span>
+                          <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
+                            {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
+                          </span>
+                          {offer.unit && (
+                            <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
+                          )}
+                        </div>
+                      </>
+                    )}
                   </div>
                   
                   {/* Product Info */}
