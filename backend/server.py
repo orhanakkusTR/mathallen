@@ -121,6 +121,15 @@ class ContactMessageCreate(BaseModel):
     phone: Optional[str] = None
     message: str
 
+class NewsletterSubscription(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    email: EmailStr
+    subscribed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    is_active: bool = True
+
+class NewsletterSubscribe(BaseModel):
+    email: EmailStr
+
 # ============== AUTH HELPERS ==============
 
 def hash_password(password: str) -> str:
