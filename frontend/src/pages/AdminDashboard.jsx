@@ -109,6 +109,9 @@ export default function AdminDashboard() {
     sort_order: 0,
   });
 
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef(null);
+
   const token = localStorage.getItem("mathallen_admin_token");
 
   const axiosAuth = axios.create({
