@@ -14,6 +14,7 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import Layout from "@/components/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
+import ChatBot from "@/components/ChatBot";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
         <CookieConsent />
+        <ChatBot />
       </BrowserRouter>
       <Toaster position="top-right" richColors />
     </div>
