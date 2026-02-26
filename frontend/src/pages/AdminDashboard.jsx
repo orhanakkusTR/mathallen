@@ -44,11 +44,17 @@ import { toast } from "sonner";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png";
 
-// Convert Google Drive links to direct image URLs
-function convertToDirectImageUrl(url) {
+// Convert image URLs - handles both uploaded files and external URLs
+function getImageUrl(url) {
   if (!url) return null;
+  
+  // If it starts with /uploads, prepend the base URL
+  if (url.startsWith('/uploads')) {
+    return `${BASE_URL}${url}`;
+  }
   
   // Google Drive file link: https://drive.google.com/file/d/FILE_ID/view
   const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([^\/]+)/);
