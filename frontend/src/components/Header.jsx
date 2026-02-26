@@ -94,7 +94,7 @@ export default function Header() {
                 }`}
               >
                 {link.href === "/erbjudanden" && (
-                  <span className="absolute -top-2 -right-1 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+                  <span className="absolute -top-2 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
                     REA
                   </span>
                 )}
@@ -147,7 +147,7 @@ export default function Header() {
                 }`}
               >
                 {link.href === "/erbjudanden" && (
-                  <span className="absolute top-2 right-3 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                  <span className="absolute top-2 right-3 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
                     REA
                   </span>
                 )}
