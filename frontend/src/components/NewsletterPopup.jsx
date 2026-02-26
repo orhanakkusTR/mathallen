@@ -15,23 +15,24 @@ export default function NewsletterPopup() {
   const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
-    // Check if user has already seen/dismissed the popup recently
-    const lastDismissed = localStorage.getItem("newsletter_popup_dismissed");
+    // Check if user has already subscribed
     const hasSubscribed = localStorage.getItem("newsletter_subscribed");
     
     if (hasSubscribed) {
       return; // Don't show if already subscribed
     }
     
+    // Check if user has dismissed the popup before
+    const lastDismissed = localStorage.getItem("newsletter_popup_dismissed");
+    
     if (lastDismissed) {
-      const dismissedTime = parseInt(lastDismissed);
-      const hoursSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60);
-      if (hoursSinceDismissed < 24) {
-        return; // Don't show if dismissed within last 24 hours
-      }
+      // Show minimized version immediately
+      setIsVisible(true);
+      setIsMinimized(true);
+      return;
     }
 
-    // Show popup after 7 seconds
+    // Show full popup after 7 seconds for first-time visitors
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 7000);
