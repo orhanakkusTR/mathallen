@@ -1008,6 +1008,19 @@ export default function AdminDashboard() {
               />
             </div>
 
+            <div className="flex items-center justify-between py-2 px-3 bg-red-50 rounded-lg border border-red-200">
+              <div>
+                <Label htmlFor="is_best_price" className="cursor-pointer text-red-700">Bästa Pris</Label>
+                <p className="text-xs text-red-500">Visar en röd "Bästa Pris" banner på produktkortet</p>
+              </div>
+              <Switch
+                id="is_best_price"
+                checked={formData.is_best_price}
+                onCheckedChange={(checked) => setFormData({ ...formData, is_best_price: checked })}
+                data-testid="offer-is-best-price"
+              />
+            </div>
+
             <DialogFooter className="gap-2">
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                 Avbryt
