@@ -176,7 +176,7 @@ export default function HomePage() {
               <span className="text-red-500">Mathallen</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
-              Kvalitet med hjärta, priser med omtanke och kampanjer som märks i plånboken – mitt i Malmö.
+              Upptäck veckans bästa priser på utvalda favoriter – passa på att spara mer.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
