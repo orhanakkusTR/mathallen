@@ -199,86 +199,71 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Veckans erbjudanden */}
+      {/* Produktgalleri */}
       <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">
-                Veckans erbjudanden
-              </h2>
-              <p className="text-stone-600">
-                Ta del av våra bästa priser just nu
-              </p>
-            </div>
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-red-200 hover:bg-red-50"
-              data-testid="view-all-offers-button"
-            >
-              <Link to="/erbjudanden">
-                Se alla erbjudanden
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-3">
+              Från våra hyllor
+            </h2>
+            <p className="text-stone-600 max-w-2xl mx-auto">
+              Upptäck vårt breda sortiment av färska produkter och kvalitetsvaror
+            </p>
           </div>
 
-          {loading ? (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-stone-50 rounded-2xl p-6 animate-pulse">
-                  <div className="w-full aspect-square bg-stone-200 rounded-xl mb-4" />
-                  <div className="h-4 bg-stone-200 rounded w-3/4 mb-2" />
-                  <div className="h-6 bg-stone-200 rounded w-1/2" />
-                </div>
-              ))}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Färska frukter"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Färska frukter</p>
+                <p className="text-white/80 text-sm">Dagliga leveranser</p>
+              </div>
             </div>
-          ) : offers.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {offers.map((offer, index) => (
-                <div
-                  key={offer.id}
-                  className="bg-stone-50 rounded-2xl p-4 md:p-6 border-2 border-dashed border-red-200 hover:shadow-lg transition-shadow"
-                  data-testid={`offer-card-${index}`}
-                >
-                  <div className="relative mb-4">
-                    {offer.image_url ? (
-                      <img
-                        src={offer.image_url}
-                        alt={offer.product_name}
-                        className="w-full aspect-square object-cover rounded-xl"
-                      />
-                    ) : (
-                      <div className="w-full aspect-square bg-red-100 rounded-xl flex items-center justify-center">
-                        <ShoppingBasket className="w-12 h-12 text-red-300" />
-                      </div>
-                    )}
-                    <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      ERBJUDANDE
-                    </span>
-                  </div>
-                  <h3 className="font-semibold text-stone-900 mb-1">{offer.product_name}</h3>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-red-600">
-                      {offer.offer_price} kr
-                    </span>
-                    <span className="text-sm text-stone-500">/{offer.unit}</span>
-                  </div>
-                  {offer.original_price && (
-                    <p className="text-sm text-stone-400 line-through">
-                      Ord. pris {offer.original_price} kr
-                    </p>
-                  )}
-                </div>
-              ))}
+            
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Grönsaker"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Grönsaker</p>
+                <p className="text-white/80 text-sm">Alltid färskt</p>
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-12 bg-stone-50 rounded-2xl">
-              <ShoppingBasket className="w-16 h-16 text-stone-300 mx-auto mb-4" />
-              <p className="text-stone-500">Inga aktiva erbjudanden just nu. Kom tillbaka snart!</p>
+            
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/65175/pexels-photo-65175.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Kött & chark"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Kött & chark</p>
+                <p className="text-white/80 text-sm">Kvalitetsprodukter</p>
+              </div>
             </div>
-          )}
+            
+            <div className="group relative overflow-hidden rounded-2xl aspect-square">
+              <img
+                src="https://images.pexels.com/photos/1435706/pexels-photo-1435706.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Mejeri"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <p className="font-semibold text-lg">Mejeri</p>
+                <p className="text-white/80 text-sm">Fräscht varje dag</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
