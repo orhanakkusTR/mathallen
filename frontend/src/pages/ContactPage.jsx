@@ -278,48 +278,70 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Store Section - Single Map */}
-      <section id="stores" className="bg-stone-900">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            {/* Store Info */}
-            <div className="text-white" data-testid="store-malmo">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6">Mathallen Malmö</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <p className="text-stone-300">
-                    Lantmannagatan 59,<br />
-                    214 48 Malmö
-                  </p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-red-400 flex-shrink-0" />
-                  <a href="tel:+46409244220" className="text-stone-300 hover:text-white transition-colors">
-                    040-92 44 20
-                  </a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-red-400 flex-shrink-0" />
-                  <p className="text-stone-300">Alla dagar: 07:00 - 22:00</p>
-                </div>
+      {/* Two Stores Section */}
+      <section id="stores" className="bg-stone-100">
+        <div className="grid md:grid-cols-2">
+          {/* Store 1 - Mathallen Malmö */}
+          <div className="bg-stone-900 text-white p-8 md:p-12" data-testid="store-malmo">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Malmö</h3>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="text-stone-300">
+                  Lantmannagatan 59,<br />
+                  214 48 Malmö
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <a href="tel:+46409244220" className="text-stone-300 hover:text-white transition-colors">
+                  040-92 44 20
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <p className="text-stone-300">Alla dagar: 07:00 - 22:00</p>
               </div>
             </div>
           </div>
-          
-          {/* Full Width Map */}
-          <div className="h-[350px] md:h-[400px] rounded-2xl overflow-hidden">
-            <iframe
-              title="Mathallen Malmö Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+
+          {/* Store 2 - Mathallen Lugnet */}
+          <div className="bg-red-600 text-white p-8 md:p-12" data-testid="store-lugnet">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">Mathallen Lugnet</h3>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-red-200 flex-shrink-0 mt-0.5" />
+                <p className="text-red-100">
+                  Lugna gatan 2,<br />
+                  211 60 Malmö
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-red-200 flex-shrink-0" />
+                <a href="tel:+46409244220" className="text-red-100 hover:text-white transition-colors">
+                  040-92 44 20
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-red-200 flex-shrink-0" />
+                <p className="text-red-100">Alla dagar: 07:00 - 22:00</p>
+              </div>
+            </div>
           </div>
+        </div>
+        
+        {/* Single Full Width Map */}
+        <div className="h-[350px] md:h-[400px]">
+          <iframe
+            title="Mathallen Malmö Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2254.5!2d13.0182!3d55.5872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4653a3f1c9d3d3d3%3A0x0!2sLantmannagatan%2059%2C%20214%2048%20Malm%C3%B6!5e0!3m2!1ssv!2sse!4v1700000000000!5m2!1ssv!2sse"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </section>
     </div>
