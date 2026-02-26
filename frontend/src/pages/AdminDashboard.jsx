@@ -837,34 +837,13 @@ export default function AdminDashboard() {
               <p className="text-xs text-stone-500">Max 5MB. Format: JPG, PNG, WebP, GIF</p>
             </div>
 
-            {/* Or use URL */}
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-stone-200" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-stone-400">eller ange länk</span>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Input
-                id="image_url"
-                type="url"
-                value={formData.image_url}
-                onChange={(e) => handleImageUrlChange(e.target.value)}
-                placeholder="https://example.com/bild.jpg"
-                data-testid="offer-image-url"
-              />
-            </div>
-
             {/* Image Preview */}
             <div className="space-y-2">
               <Label>Förhandsgranskning</Label>
               {imagePreview ? (
                 <div className="relative bg-stone-50 rounded-xl overflow-hidden border-2 border-stone-200 p-4">
                   <img
-                    src={imagePreview.startsWith('/') ? `${API.replace('/api', '')}${imagePreview}` : imagePreview}
+                    src={imagePreview.startsWith('/') ? `${BASE_URL}${imagePreview}` : imagePreview}
                     alt="Preview"
                     className="w-full h-48 object-contain mx-auto"
                     onError={(e) => {
@@ -876,20 +855,18 @@ export default function AdminDashboard() {
                     <Image className="w-12 h-12 mb-2" />
                     <p className="text-sm">Kunde inte ladda bilden</p>
                   </div>
-                  {imagePreview && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="absolute top-2 right-2 bg-white/80 hover:bg-white"
-                      onClick={() => {
-                        setFormData({ ...formData, image_url: "" });
-                        setImagePreview("");
-                      }}
-                    >
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </Button>
-                  )}
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute top-2 right-2 bg-white/80 hover:bg-white"
+                    onClick={() => {
+                      setFormData({ ...formData, image_url: "" });
+                      setImagePreview("");
+                    }}
+                  >
+                    <Trash2 className="w-4 h-4 text-red-500" />
+                  </Button>
                 </div>
               ) : (
                 <div 
