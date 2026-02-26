@@ -196,7 +196,7 @@ async def get_offers(week: Optional[int] = None, year: Optional[int] = None, act
     if active_only:
         query["is_active"] = True
     
-    offers = await db.offers.find(query, {"_id": 0}).sort("created_at", -1).to_list(100)
+    offers = await db.offers.find(query, {"_id": 0}).sort("sort_order", 1).to_list(100)
     for offer in offers:
         if isinstance(offer.get('created_at'), str):
             offer['created_at'] = datetime.fromisoformat(offer['created_at'])
