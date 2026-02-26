@@ -1,10 +1,36 @@
-import { useState, useEffect } from "react";
-import { Tag, Calendar, ShoppingBasket } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { Tag, Calendar, ShoppingBasket, Filter, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
+// All available categories for filtering
+const allCategories = [
+  "Bröd & Bakverk",
+  "Tobak",
+  "Bröd - Eget",
+  "Vegetariskt",
+  "Blommor",
+  "Special",
+  "Drycker",
+  "Konfektyr",
+  "Fisk",
+  "Frukt & Grönt",
+  "Snacks",
+  "Djur",
+  "Chark",
+  "Ost",
+  "Kött",
+  "Kött - Eget i disk",
+  "Mejeri",
+  "Kroppsvård",
+  "Grov-kem",
+  "Djupfryst",
+  "Läkemedel",
+  "Specerier",
+];
 
 // Convert image URLs - handles both uploaded files and external URLs
 function getImageUrl(url) {
