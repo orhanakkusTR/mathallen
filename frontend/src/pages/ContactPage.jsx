@@ -71,8 +71,7 @@ export default function ContactPage() {
               className="w-full h-full object-cover"
               poster="https://images.unsplash.com/photo-1753354868473-94c8ac971269?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1200"
             >
-              <source src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/6kukt8zj_video-1.mov" type="video/mp4" />
-              <source src="/contact-video.mov" type="video/quicktime" />
+              <source src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/djuy8tlu_video-3.mov" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-stone-900/60 via-transparent to-transparent md:from-stone-900 md:via-transparent md:to-transparent" />
           </div>
