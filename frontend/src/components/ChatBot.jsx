@@ -11,7 +11,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState([
     {
       type: "bot",
-      text: "Hej! 👋 Jag är Mathallens virtuella assistent. Skriv namnet på en produkt så kollar jag om vi har den i butiken!",
+      text: "Hej och välkommen till Mathallen! 👋\n\nJag kan hjälpa dig med:\n• Öppettider\n• Adresser till våra butiker\n• Kontaktuppgifter\n\nSkriv din fråga så hjälper jag dig!",
     },
   ]);
   const [input, setInput] = useState("");
