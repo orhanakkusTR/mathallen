@@ -324,10 +324,7 @@ export default function OffersPage() {
                           </span>
                           <div className="flex items-start">
                             <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                              {Math.floor(offer.offer_price)}
-                            </span>
-                            <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                              {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : ':-'}
+                              {Math.floor(offer.offer_price)}:-
                             </span>
                           </div>
                         </div>
