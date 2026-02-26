@@ -487,6 +487,39 @@ async def setup_admin():
 # Include the router in the main app
 app.include_router(api_router)
 
+# Serve uploaded files statically
+app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
+# ---- FILE UPLOAD ----
+@app.post("/api/upload")
+async def upload_file(file: UploadFile = File(...), credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Upload a product image"""
+    verify_token(credentials)
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/webp", "image/gif"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(status_code=400, detail="Endast bildformat är tillåtna (JPG, PNG, WebP, GIF)")
+    
+    # Generate unique filename
+    file_ext = file.filename.split(".")[-1] if "." in file.filename else "jpg"
+    unique_filename = f"{uuid.uuid4()}.{file_ext}"
+    file_path = UPLOAD_DIR / unique_filename
+    
+    # Save file
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Return the URL path
+        return {
+            "url": f"/uploads/{unique_filename}",
+            "filename": unique_filename
+        }
+    except Exception as e:
+        logger.error(f"File upload error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Kunde inte ladda upp filen")
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
