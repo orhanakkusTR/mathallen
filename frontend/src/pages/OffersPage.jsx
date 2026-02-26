@@ -132,8 +132,8 @@ export default function OffersPage() {
                       </p>
                       {offer.original_price && (
                         <div className="bg-stone-100 rounded-lg py-2 px-3">
-                          <span className="text-stone-600 text-sm font-medium">Ord pris </span>
-                          <span className="text-red-600 text-base font-bold line-through">{offer.original_price} kr/{offer.unit}</span>
+                          <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
+                          <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">{offer.original_price} kr/{offer.unit}</span>
                         </div>
                       )}
                     </div>
