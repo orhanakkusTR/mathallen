@@ -125,66 +125,6 @@ export default function AdminDashboard() {
     }
   };
 
-  const fetchProducts = async (search = "") => {
-    try {
-      const res = await axios.get(`${API}/products`, {
-        params: { search, limit: 100 }
-      });
-      setProducts(res.data.products);
-      setProductTotal(res.data.total);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  const handleProductSearch = (e) => {
-    e.preventDefault();
-    fetchProducts(productSearch);
-  };
-
-  const handleBulkAddProducts = async () => {
-    const productList = bulkProducts.split('\n').filter(p => p.trim());
-    if (productList.length === 0) {
-      toast.error("Ange minst en produkt");
-      return;
-    }
-    
-    try {
-      const res = await axiosAuth.post("/products/bulk", { products: productList });
-      toast.success(res.data.message);
-      setBulkProducts("");
-      fetchProducts();
-    } catch (error) {
-      console.error("Error adding products:", error);
-      toast.error("Kunde inte lägga till produkter");
-    }
-  };
-
-  const handleDeleteProduct = async (productId) => {
-    try {
-      await axiosAuth.delete(`/products/${productId}`);
-      toast.success("Produkt borttagen");
-      fetchProducts(productSearch);
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      toast.error("Kunde inte ta bort produkt");
-    }
-  };
-
-  const handleDeleteAllProducts = async () => {
-    if (!window.confirm("Är du säker på att du vill ta bort ALLA produkter? Detta kan inte ångras.")) {
-      return;
-    }
-    try {
-      const res = await axiosAuth.delete("/products");
-      toast.success(res.data.message);
-      fetchProducts();
-    } catch (error) {
-      console.error("Error deleting products:", error);
-      toast.error("Kunde inte ta bort produkter");
-    }
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("mathallen_admin_token");
     navigate("/admin");
