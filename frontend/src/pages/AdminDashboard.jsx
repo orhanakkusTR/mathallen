@@ -199,7 +199,7 @@ export default function AdminDashboard() {
 
   const handleImageUrlChange = (url) => {
     setFormData({ ...formData, image_url: url });
-    setImagePreview(convertToDirectImageUrl(url));
+    setImagePreview(getImageUrl(url));
   };
 
   const handleFileUpload = async (e) => {
