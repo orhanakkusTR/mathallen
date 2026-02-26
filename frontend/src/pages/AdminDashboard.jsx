@@ -256,7 +256,7 @@ export default function AdminDashboard() {
       ...formData,
       offer_price: parseFloat(formData.offer_price),
       original_price: formData.original_price ? parseFloat(formData.original_price) : null,
-      multi_buy: formData.multi_buy && formData.multi_buy !== "none" ? parseInt(formData.multi_buy) : null,
+      multi_buy: formData.multi_buy ? parseInt(formData.multi_buy) : null,
     };
 
     try {
