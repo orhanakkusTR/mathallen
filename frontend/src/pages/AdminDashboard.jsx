@@ -12,6 +12,12 @@ import {
   Save,
   Eye,
   EyeOff,
+  GripVertical,
+  Users,
+  Image,
+  ExternalLink,
+  ChevronUp,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -58,10 +64,12 @@ function getWeekNumber(date) {
 export default function AdminDashboard() {
   const [offers, setOffers] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingOffer, setEditingOffer] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
 
   const currentWeek = getWeekNumber(new Date());
@@ -77,6 +85,7 @@ export default function AdminDashboard() {
     week_number: currentWeek,
     year: currentYear,
     is_active: true,
+    sort_order: 0,
   });
 
   const token = localStorage.getItem("mathallen_admin_token");
@@ -96,12 +105,16 @@ export default function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const [offersRes, messagesRes] = await Promise.all([
+      const [offersRes, messagesRes, subscribersRes] = await Promise.all([
         axiosAuth.get("/offers?active_only=false"),
         axiosAuth.get("/contact/messages"),
+        axiosAuth.get("/newsletter/subscribers"),
       ]);
-      setOffers(offersRes.data);
+      // Sort offers by sort_order
+      const sortedOffers = offersRes.data.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+      setOffers(sortedOffers);
       setMessages(messagesRes.data);
+      setSubscribers(subscribersRes.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response?.status === 401) {
@@ -120,6 +133,7 @@ export default function AdminDashboard() {
 
   const openCreateDialog = () => {
     setEditingOffer(null);
+    setImagePreview("");
     setFormData({
       product_name: "",
       original_price: "",
@@ -130,12 +144,14 @@ export default function AdminDashboard() {
       week_number: currentWeek,
       year: currentYear,
       is_active: true,
+      sort_order: offers.length,
     });
     setIsDialogOpen(true);
   };
 
   const openEditDialog = (offer) => {
     setEditingOffer(offer);
+    setImagePreview(offer.image_url || "");
     setFormData({
       product_name: offer.product_name,
       original_price: offer.original_price?.toString() || "",
@@ -146,8 +162,14 @@ export default function AdminDashboard() {
       week_number: offer.week_number,
       year: offer.year,
       is_active: offer.is_active,
+      sort_order: offer.sort_order || 0,
     });
     setIsDialogOpen(true);
+  };
+
+  const handleImageUrlChange = (url) => {
+    setFormData({ ...formData, image_url: url });
+    setImagePreview(url);
   };
 
   const handleSubmit = async (e) => {
@@ -197,10 +219,33 @@ export default function AdminDashboard() {
     }
   };
 
+  const moveOffer = async (index, direction) => {
+    const newOffers = [...offers];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    
+    if (targetIndex < 0 || targetIndex >= newOffers.length) return;
+    
+    // Swap positions
+    [newOffers[index], newOffers[targetIndex]] = [newOffers[targetIndex], newOffers[index]];
+    
+    // Update sort_order for both
+    try {
+      await Promise.all([
+        axiosAuth.put(`/offers/${newOffers[index].id}`, { sort_order: index }),
+        axiosAuth.put(`/offers/${newOffers[targetIndex].id}`, { sort_order: targetIndex }),
+      ]);
+      setOffers(newOffers);
+      toast.success("Ordningen har uppdaterats!");
+    } catch (error) {
+      console.error("Error updating order:", error);
+      toast.error("Kunde inte uppdatera ordningen.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-stone-100 flex items-center justify-center">
-        <div className="spinner" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
       </div>
     );
   }
@@ -208,7 +253,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Header */}
-      <header className="bg-red-600 text-white py-4 sticky top-0 z-50">
+      <header className="bg-stone-900 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
@@ -216,25 +261,27 @@ export default function AdminDashboard() {
               alt="Mathallen Malmö" 
               className="h-10 w-auto"
             />
+            <span className="text-stone-400 text-sm hidden sm:inline">Admin Panel</span>
           </div>
           <div className="flex items-center gap-4">
             <a
               href="/"
               target="_blank"
-              className="text-red-100 hover:text-white text-sm transition-colors"
+              className="text-stone-400 hover:text-white text-sm transition-colors flex items-center gap-1"
               data-testid="view-site-link"
             >
-              Visa webbplatsen →
+              <ExternalLink className="w-4 h-4" />
+              <span className="hidden sm:inline">Visa webbplatsen</span>
             </a>
             <Button
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="text-red-100 hover:text-white hover:bg-red-700"
+              className="text-stone-400 hover:text-white hover:bg-stone-800"
               data-testid="logout-button"
             >
-              <LogOut className="w-4 h-4 mr-2" />
-              Logga ut
+              <LogOut className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Logga ut</span>
             </Button>
           </div>
         </div>
@@ -242,35 +289,36 @@ export default function AdminDashboard() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+        {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm" data-testid="stat-active-offers">
+          <div className="bg-white rounded-xl p-5 shadow-sm" data-testid="stat-active-offers">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
                 <Tag className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-stone-900">
-                  {offers.filter((o) => o.is_active).length}
+                  {offers.filter((o) => o.is_active && o.week_number === currentWeek && o.year === currentYear).length}
                 </p>
-                <p className="text-stone-500 text-sm">Aktiva erbjudanden</p>
+                <p className="text-stone-500 text-sm">Aktiva denna vecka</p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm" data-testid="stat-total-offers">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-blue-500" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-stone-900">{offers.length}</p>
-                <p className="text-stone-500 text-sm">Totalt erbjudanden</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm" data-testid="stat-messages">
+          <div className="bg-white rounded-xl p-5 shadow-sm" data-testid="stat-subscribers">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
-                <Mail className="w-6 h-6 text-green-500" />
+                <Users className="w-6 h-6 text-green-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-stone-900">{subscribers.length}</p>
+                <p className="text-stone-500 text-sm">Prenumeranter</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-5 shadow-sm" data-testid="stat-messages">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                <Mail className="w-6 h-6 text-blue-600" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-stone-900">{messages.length}</p>
@@ -278,14 +326,14 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm" data-testid="stat-week">
+          <div className="bg-white rounded-xl p-5 shadow-sm" data-testid="stat-week">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-amber-500" />
+                <Calendar className="w-6 h-6 text-amber-600" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-stone-900">v.{currentWeek}</p>
-                <p className="text-stone-500 text-sm">Nuvarande vecka</p>
+                <p className="text-stone-500 text-sm">{currentYear}</p>
               </div>
             </div>
           </div>
@@ -293,15 +341,28 @@ export default function AdminDashboard() {
 
         {/* Tabs */}
         <Tabs defaultValue="offers" className="space-y-6">
-          <TabsList className="bg-white shadow-sm" data-testid="admin-tabs">
-            <TabsTrigger value="offers">Erbjudanden</TabsTrigger>
-            <TabsTrigger value="messages">Meddelanden</TabsTrigger>
+          <TabsList className="bg-white shadow-sm p-1 h-auto" data-testid="admin-tabs">
+            <TabsTrigger value="offers" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
+              <Tag className="w-4 h-4 mr-2" />
+              Erbjudanden
+            </TabsTrigger>
+            <TabsTrigger value="subscribers" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
+              <Users className="w-4 h-4 mr-2" />
+              Prenumeranter
+            </TabsTrigger>
+            <TabsTrigger value="messages" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
+              <Mail className="w-4 h-4 mr-2" />
+              Meddelanden
+            </TabsTrigger>
           </TabsList>
 
           {/* Offers Tab */}
           <TabsContent value="offers" className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-stone-900">Alla erbjudanden</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h2 className="text-xl font-semibold text-stone-900">Erbjudanden</h2>
+                <p className="text-stone-500 text-sm">Hantera och sortera veckans erbjudanden</p>
+              </div>
               <Button
                 onClick={openCreateDialog}
                 className="bg-red-600 hover:bg-red-700 text-white rounded-xl"
@@ -313,125 +374,247 @@ export default function AdminDashboard() {
             </div>
 
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <table className="w-full admin-table" data-testid="offers-table">
-                <thead>
-                  <tr className="border-b border-stone-100">
-                    <th className="text-left py-4 px-6 text-stone-600">Produkt</th>
-                    <th className="text-left py-4 px-6 text-stone-600 hidden md:table-cell">Kategori</th>
-                    <th className="text-left py-4 px-6 text-stone-600">Pris</th>
-                    <th className="text-left py-4 px-6 text-stone-600 hidden sm:table-cell">Vecka</th>
-                    <th className="text-left py-4 px-6 text-stone-600">Status</th>
-                    <th className="text-right py-4 px-6 text-stone-600">Åtgärder</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {offers.map((offer) => (
-                    <tr key={offer.id} className="border-b border-stone-50 last:border-0" data-testid={`offer-row-${offer.id}`}>
-                      <td className="py-4 px-6">
-                        <div className="flex items-center gap-3">
-                          {offer.image_url ? (
-                            <img
-                              src={offer.image_url}
-                              alt={offer.product_name}
-                              className="w-10 h-10 rounded-lg object-cover"
-                            />
-                          ) : (
-                            <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center">
-                              <Package className="w-5 h-5 text-stone-400" />
-                            </div>
+              <div className="overflow-x-auto">
+                <table className="w-full" data-testid="offers-table">
+                  <thead>
+                    <tr className="border-b border-stone-100 bg-stone-50">
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium w-20">Ordning</th>
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Produkt</th>
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium hidden md:table-cell">Kategori</th>
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Pris</th>
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium hidden sm:table-cell">Vecka</th>
+                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Status</th>
+                      <th className="text-right py-3 px-4 text-stone-600 text-sm font-medium">Åtgärder</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {offers.map((offer, index) => (
+                      <tr key={offer.id} className="border-b border-stone-50 last:border-0 hover:bg-stone-50" data-testid={`offer-row-${offer.id}`}>
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-1">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7"
+                              onClick={() => moveOffer(index, 'up')}
+                              disabled={index === 0}
+                            >
+                              <ChevronUp className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7"
+                              onClick={() => moveOffer(index, 'down')}
+                              disabled={index === offers.length - 1}
+                            >
+                              <ChevronDown className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-3">
+                            {offer.image_url ? (
+                              <img
+                                src={offer.image_url}
+                                alt={offer.product_name}
+                                className="w-12 h-12 rounded-lg object-cover border border-stone-100"
+                              />
+                            ) : (
+                              <div className="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center border border-stone-200">
+                                <Image className="w-5 h-5 text-stone-400" />
+                              </div>
+                            )}
+                            <span className="font-medium text-stone-900">{offer.product_name}</span>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 text-stone-600 text-sm hidden md:table-cell">{offer.category}</td>
+                        <td className="py-3 px-4">
+                          <span className="font-semibold text-red-600">{offer.offer_price}:-</span>
+                          {offer.original_price && (
+                            <span className="text-stone-400 text-sm ml-1 line-through">
+                              {offer.original_price}:-
+                            </span>
                           )}
-                          <span className="font-medium text-stone-900">{offer.product_name}</span>
-                        </div>
-                      </td>
-                      <td className="py-4 px-6 text-stone-600 hidden md:table-cell">{offer.category}</td>
-                      <td className="py-4 px-6">
-                        <span className="font-semibold text-red-600">{offer.offer_price}:-</span>
-                        {offer.original_price && (
-                          <span className="text-stone-400 text-sm ml-1 line-through">
-                            {offer.original_price}:-
+                        </td>
+                        <td className="py-3 px-4 hidden sm:table-cell">
+                          <span className={`text-sm px-2 py-1 rounded-full ${
+                            offer.week_number === currentWeek && offer.year === currentYear
+                              ? 'bg-green-100 text-green-700'
+                              : 'bg-stone-100 text-stone-600'
+                          }`}>
+                            v.{offer.week_number}
                           </span>
-                        )}
-                      </td>
-                      <td className="py-4 px-6 text-stone-600 hidden sm:table-cell">v.{offer.week_number}</td>
-                      <td className="py-4 px-6">
-                        <button
-                          onClick={() => toggleOfferActive(offer)}
-                          className="flex items-center gap-2"
-                          data-testid={`toggle-offer-${offer.id}`}
-                        >
-                          {offer.is_active ? (
-                            <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-medium">
-                              <Eye className="w-3 h-3" /> Aktiv
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1 text-stone-500 bg-stone-100 px-2 py-1 rounded-full text-xs font-medium">
-                              <EyeOff className="w-3 h-3" /> Inaktiv
-                            </span>
-                          )}
-                        </button>
-                      </td>
-                      <td className="py-4 px-6 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => openEditDialog(offer)}
-                            className="hover:bg-stone-100"
-                            data-testid={`edit-offer-${offer.id}`}
+                        </td>
+                        <td className="py-3 px-4">
+                          <button
+                            onClick={() => toggleOfferActive(offer)}
+                            className="flex items-center gap-2"
+                            data-testid={`toggle-offer-${offer.id}`}
                           >
-                            <Edit2 className="w-4 h-4 text-stone-600" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setDeleteConfirm(offer.id)}
-                            className="hover:bg-red-50"
-                            data-testid={`delete-offer-${offer.id}`}
-                          >
-                            <Trash2 className="w-4 h-4 text-red-500" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {offers.length === 0 && (
-                    <tr>
-                      <td colSpan="6" className="py-12 text-center text-stone-500">
-                        Inga erbjudanden ännu. Skapa ditt första!
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                            {offer.is_active ? (
+                              <span className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-medium">
+                                <Eye className="w-3 h-3" /> Aktiv
+                              </span>
+                            ) : (
+                              <span className="flex items-center gap-1 text-stone-500 bg-stone-100 px-2 py-1 rounded-full text-xs font-medium">
+                                <EyeOff className="w-3 h-3" /> Inaktiv
+                              </span>
+                            )}
+                          </button>
+                        </td>
+                        <td className="py-3 px-4 text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => openEditDialog(offer)}
+                              className="hover:bg-stone-100 h-8 w-8"
+                              data-testid={`edit-offer-${offer.id}`}
+                            >
+                              <Edit2 className="w-4 h-4 text-stone-600" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => setDeleteConfirm(offer.id)}
+                              className="hover:bg-red-50 h-8 w-8"
+                              data-testid={`delete-offer-${offer.id}`}
+                            >
+                              <Trash2 className="w-4 h-4 text-red-500" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {offers.length === 0 && (
+                      <tr>
+                        <td colSpan="7" className="py-12 text-center text-stone-500">
+                          <Package className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+                          <p>Inga erbjudanden ännu.</p>
+                          <p className="text-sm">Klicka på "Nytt erbjudande" för att skapa ditt första!</p>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
+          </TabsContent>
+
+          {/* Subscribers Tab */}
+          <TabsContent value="subscribers" className="space-y-4">
+            <div>
+              <h2 className="text-xl font-semibold text-stone-900">Prenumeranter</h2>
+              <p className="text-stone-500 text-sm">E-postadresser som prenumererar på nyhetsbrevet</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              {subscribers.length > 0 ? (
+                <div className="overflow-x-auto">
+                  <table className="w-full" data-testid="subscribers-table">
+                    <thead>
+                      <tr className="border-b border-stone-100 bg-stone-50">
+                        <th className="text-left py-3 px-6 text-stone-600 text-sm font-medium">#</th>
+                        <th className="text-left py-3 px-6 text-stone-600 text-sm font-medium">E-postadress</th>
+                        <th className="text-left py-3 px-6 text-stone-600 text-sm font-medium">Prenumererat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {subscribers.map((sub, index) => (
+                        <tr key={sub.id} className="border-b border-stone-50 last:border-0 hover:bg-stone-50">
+                          <td className="py-3 px-6 text-stone-500">{index + 1}</td>
+                          <td className="py-3 px-6">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                                <Mail className="w-4 h-4 text-green-600" />
+                              </div>
+                              <span className="font-medium text-stone-900">{sub.email}</span>
+                            </div>
+                          </td>
+                          <td className="py-3 px-6 text-stone-500 text-sm">
+                            {new Date(sub.subscribed_at).toLocaleDateString("sv-SE", {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="py-12 text-center text-stone-500">
+                  <Users className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+                  <p>Inga prenumeranter ännu.</p>
+                  <p className="text-sm">När besökare prenumererar på nyhetsbrevet visas de här.</p>
+                </div>
+              )}
+            </div>
+
+            {subscribers.length > 0 && (
+              <div className="flex justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    const emails = subscribers.map(s => s.email).join('\n');
+                    navigator.clipboard.writeText(emails);
+                    toast.success("E-postadresser kopierade till urklipp!");
+                  }}
+                  className="rounded-xl"
+                >
+                  Kopiera alla e-postadresser
+                </Button>
+              </div>
+            )}
           </TabsContent>
 
           {/* Messages Tab */}
           <TabsContent value="messages" className="space-y-4">
-            <h2 className="text-xl font-semibold text-stone-900">Meddelanden från kunder</h2>
+            <div>
+              <h2 className="text-xl font-semibold text-stone-900">Meddelanden</h2>
+              <p className="text-stone-500 text-sm">Meddelanden från kontaktformuläret</p>
+            </div>
+            
             <div className="space-y-4" data-testid="messages-list">
-              {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className="bg-white rounded-xl p-6 shadow-sm"
-                  data-testid={`message-${msg.id}`}
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-semibold text-stone-900">{msg.name}</h3>
-                      <p className="text-stone-500 text-sm">{msg.email}</p>
-                      {msg.phone && <p className="text-stone-500 text-sm">{msg.phone}</p>}
+              {messages.length > 0 ? (
+                messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className="bg-white rounded-xl p-6 shadow-sm"
+                    data-testid={`message-${msg.id}`}
+                  >
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
+                      <div>
+                        <h3 className="font-semibold text-stone-900">{msg.name}</h3>
+                        <a href={`mailto:${msg.email}`} className="text-red-600 hover:text-red-700 text-sm">
+                          {msg.email}
+                        </a>
+                        {msg.phone && (
+                          <p className="text-stone-500 text-sm">
+                            <a href={`tel:${msg.phone}`} className="hover:text-stone-700">{msg.phone}</a>
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-stone-400 text-xs bg-stone-100 px-2 py-1 rounded-full">
+                        {new Date(msg.created_at).toLocaleDateString("sv-SE", {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </span>
                     </div>
-                    <span className="text-stone-400 text-xs">
-                      {new Date(msg.created_at).toLocaleDateString("sv-SE")}
-                    </span>
+                    <p className="text-stone-700 bg-stone-50 rounded-lg p-4 text-sm leading-relaxed">{msg.message}</p>
                   </div>
-                  <p className="text-stone-700 bg-stone-50 rounded-lg p-4">{msg.message}</p>
-                </div>
-              ))}
-              {messages.length === 0 && (
+                ))
+              ) : (
                 <div className="bg-white rounded-xl p-12 text-center text-stone-500">
-                  Inga meddelanden ännu.
+                  <Mail className="w-12 h-12 text-stone-300 mx-auto mb-3" />
+                  <p>Inga meddelanden ännu.</p>
+                  <p className="text-sm">När kunder skickar meddelanden via kontaktformuläret visas de här.</p>
                 </div>
               )}
             </div>
@@ -441,7 +624,7 @@ export default function AdminDashboard() {
 
       {/* Create/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-lg" data-testid="offer-dialog">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto" data-testid="offer-dialog">
           <DialogHeader>
             <DialogTitle>
               {editingOffer ? "Redigera erbjudande" : "Nytt erbjudande"}
@@ -557,18 +740,36 @@ export default function AdminDashboard() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="image_url">Bild-URL</Label>
+              <Label htmlFor="image_url">Bild-URL (Google Drive eller annan länk)</Label>
               <Input
                 id="image_url"
                 type="url"
                 value={formData.image_url}
-                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                placeholder="https://..."
+                onChange={(e) => handleImageUrlChange(e.target.value)}
+                placeholder="https://drive.google.com/... eller https://..."
                 data-testid="offer-image-url"
               />
+              <p className="text-xs text-stone-500">
+                Tips: Ladda upp bilden till Google Drive, högerklicka → "Hämta länk" → Klistra in här
+              </p>
             </div>
 
-            <div className="flex items-center justify-between">
+            {/* Image Preview */}
+            {imagePreview && (
+              <div className="space-y-2">
+                <Label>Förhandsgranskning</Label>
+                <div className="relative w-full h-40 bg-stone-100 rounded-xl overflow-hidden border border-stone-200">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="w-full h-full object-contain"
+                    onError={() => setImagePreview("")}
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between py-2 px-3 bg-stone-50 rounded-lg">
               <Label htmlFor="is_active" className="cursor-pointer">Aktivt erbjudande</Label>
               <Switch
                 id="is_active"
@@ -578,13 +779,13 @@ export default function AdminDashboard() {
               />
             </div>
 
-            <DialogFooter>
+            <DialogFooter className="gap-2">
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                 Avbryt
               </Button>
               <Button type="submit" className="bg-red-600 hover:bg-red-700" data-testid="save-offer-button">
                 <Save className="w-4 h-4 mr-2" />
-                {editingOffer ? "Spara ändringar" : "Skapa erbjudande"}
+                {editingOffer ? "Spara" : "Skapa"}
               </Button>
             </DialogFooter>
           </form>
@@ -600,7 +801,7 @@ export default function AdminDashboard() {
               Är du säker på att du vill ta bort detta erbjudande? Denna åtgärd kan inte ångras.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setDeleteConfirm(null)}>
               Avbryt
             </Button>
