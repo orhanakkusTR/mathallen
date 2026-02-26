@@ -95,7 +95,7 @@ export default function Header() {
                 }`}
               >
                 {link.href === "/erbjudanden" && (
-                  <span className="absolute -top-2 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+                  <span className="absolute -top-4 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
                     REA
                   </span>
                 )}
