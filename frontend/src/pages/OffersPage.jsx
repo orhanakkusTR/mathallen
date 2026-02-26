@@ -406,11 +406,11 @@ export default function OffersPage() {
             </div>
             <div className="flex items-center gap-4">
               <div className="text-center px-6 py-4 bg-stone-800 rounded-xl">
-                <p className="text-3xl font-bold text-red-500">30.000+</p>
+                <p className="text-3xl font-bold text-red-500">45.000+</p>
                 <p className="text-stone-400 text-sm">Produkter i sortimentet</p>
               </div>
               <div className="text-center px-6 py-4 bg-stone-800 rounded-xl">
-                <p className="text-3xl font-bold text-red-500">10+</p>
+                <p className="text-3xl font-bold text-red-500">5+</p>
                 <p className="text-stone-400 text-sm">År av erfarenhet</p>
               </div>
             </div>
