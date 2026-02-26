@@ -10,6 +10,10 @@ import ShopPage from "@/pages/ShopPage";
 import ContactPage from "@/pages/ContactPage";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
+import AllmannaVillkorPage from "@/pages/AllmannaVillkorPage";
+import DataskyddPage from "@/pages/DataskyddPage";
+import TillganglighetPage from "@/pages/TillganglighetPage";
+import IntegritetspolicyPage from "@/pages/IntegritetspolicyPage";
 
 // Layout & Utils
 import Layout from "@/components/Layout";
@@ -28,6 +32,10 @@ function App() {
             <Route path="/erbjudanden" element={<OffersPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/kontakt" element={<ContactPage />} />
+            <Route path="/allmanna-villkor" element={<AllmannaVillkorPage />} />
+            <Route path="/dataskydd" element={<DataskyddPage />} />
+            <Route path="/tillganglighet" element={<TillganglighetPage />} />
+            <Route path="/integritetspolicy" element={<IntegritetspolicyPage />} />
           </Route>
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
