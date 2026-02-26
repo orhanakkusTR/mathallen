@@ -82,6 +82,7 @@ class Offer(BaseModel):
     is_active: bool = True
     sort_order: int = 0
     multi_buy: Optional[int] = None  # 2 för, 3 för, 4 för - null means no multi-buy
+    is_best_price: bool = False  # Bästa Pris badge
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class OfferCreate(BaseModel):
@@ -96,6 +97,7 @@ class OfferCreate(BaseModel):
     is_active: bool = True
     sort_order: int = 0
     multi_buy: Optional[int] = None
+    is_best_price: bool = False
 
 class OfferUpdate(BaseModel):
     product_name: Optional[str] = None
@@ -109,6 +111,7 @@ class OfferUpdate(BaseModel):
     is_active: Optional[bool] = None
     sort_order: Optional[int] = None
     multi_buy: Optional[int] = None
+    is_best_price: Optional[bool] = None
 
 class Category(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
