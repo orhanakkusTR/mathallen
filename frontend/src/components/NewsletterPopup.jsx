@@ -112,14 +112,6 @@ export default function NewsletterPopup() {
         {/* Header with gradient */}
         <div className="bg-gradient-to-r from-red-600 to-red-700 px-5 py-4 relative">
           <button
-            onClick={handleMinimize}
-            className="absolute right-12 top-4 text-white/80 hover:text-white transition-colors"
-            title="Minimera"
-            data-testid="newsletter-minimize-button"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-          <button
             onClick={handleClose}
             className="absolute right-4 top-4 text-white/80 hover:text-white transition-colors"
             title="Stäng"
