@@ -520,7 +520,7 @@ export default function HomePage() {
                 <span className="text-red-500">1985</span>
               </h2>
               <p className="text-stone-300 text-lg mb-8 leading-relaxed">
-                Med över 35 års erfarenhet har vi byggt upp ett förtroende hos 
+                Med över 10 års erfarenhet har vi byggt upp ett förtroende hos 
                 Malmöborna. Vår passion för kvalitet och service gör oss till 
                 mer än bara en butik – vi är en del av samhället.
               </p>
@@ -555,8 +555,12 @@ export default function HomePage() {
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-red-600 text-white rounded-2xl p-6 shadow-xl hidden md:block">
-                <p className="text-4xl font-bold">35+</p>
+                <p className="text-4xl font-bold">10+</p>
                 <p className="text-red-100">års erfarenhet</p>
+              </div>
+              <div className="absolute -top-6 -right-6 bg-white text-stone-900 rounded-2xl p-6 shadow-xl hidden md:block">
+                <p className="text-4xl font-bold text-red-600">30.000+</p>
+                <p className="text-stone-500">Produkter i sortimentet</p>
               </div>
             </div>
           </div>
