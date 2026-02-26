@@ -487,8 +487,8 @@ async def setup_admin():
 # Include the router in the main app
 app.include_router(api_router)
 
-# Serve uploaded files statically
-app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+# Serve uploaded files at /api/uploads (to go through ingress properly)
+app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
 # ---- FILE UPLOAD ----
 @app.post("/api/upload")
@@ -509,9 +509,9 @@ async def upload_file(file: UploadFile = File(...), admin = Depends(get_current_
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
-        # Return the URL path
+        # Return the URL path (using /api/uploads for ingress routing)
         return {
-            "url": f"/uploads/{unique_filename}",
+            "url": f"/api/uploads/{unique_filename}",
             "filename": unique_filename
         }
     except Exception as e:
