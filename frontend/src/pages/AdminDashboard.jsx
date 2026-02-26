@@ -773,8 +773,8 @@ export default function AdminDashboard() {
                   </SelectTrigger>
                   <SelectContent>
                     {units.map((unit) => (
-                      <SelectItem key={unit} value={unit}>
-                        {unit}
+                      <SelectItem key={unit.value} value={unit.value}>
+                        {unit.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
