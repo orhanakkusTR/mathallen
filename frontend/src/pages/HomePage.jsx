@@ -58,7 +58,6 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       <SEO 
-        title={null}
         description="Mathallen Malmö - Din lokala stormarknad sedan 1985. Kvalitet, prisvärdhet och attraktiva veckokampanjer. Över 30.000 produkter. Öppet alla dagar 07-22. Besök oss på Lantmannagatan 59, Malmö."
         url="/"
       />
