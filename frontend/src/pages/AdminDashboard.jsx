@@ -538,7 +538,7 @@ export default function AdminDashboard() {
                 <table className="w-full" data-testid="offers-table">
                   <thead>
                     <tr className="border-b border-stone-100 bg-stone-50">
-                      <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium w-20">Ordning</th>
+                      <th className="text-left py-3 px-3 text-stone-600 text-sm font-medium w-24">Sıra</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Produkt</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium hidden md:table-cell">Kategori</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Pris</th>
@@ -549,27 +549,29 @@ export default function AdminDashboard() {
                   </thead>
                   <tbody>
                     {offers.map((offer, index) => (
-                      <tr key={offer.id} className="border-b border-stone-50 last:border-0 hover:bg-stone-50" data-testid={`offer-row-${offer.id}`}>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-1">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-7 w-7"
-                              onClick={() => moveOffer(index, 'up')}
-                              disabled={index === 0}
-                            >
-                              <ChevronUp className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-7 w-7"
-                              onClick={() => moveOffer(index, 'down')}
-                              disabled={index === offers.length - 1}
-                            >
-                              <ChevronDown className="w-4 h-4" />
-                            </Button>
+                      <tr 
+                        key={offer.id} 
+                        className={`border-b border-stone-50 last:border-0 hover:bg-stone-50 cursor-grab active:cursor-grabbing transition-colors ${
+                          dragOverItem === index ? 'bg-red-50 border-red-200' : ''
+                        } ${draggedItem === index ? 'opacity-50' : ''}`}
+                        data-testid={`offer-row-${offer.id}`}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragEnd={handleDragEnd}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDrop={(e) => handleDrop(e, index)}
+                      >
+                        <td className="py-3 px-3">
+                          <div className="flex items-center gap-2">
+                            <GripVertical className="w-4 h-4 text-stone-400 cursor-grab" />
+                            <input
+                              type="number"
+                              min="1"
+                              value={index + 1}
+                              onChange={(e) => updateSortOrder(offer.id, e.target.value)}
+                              className="w-12 h-8 text-center text-sm font-medium border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                              data-testid={`sort-order-${offer.id}`}
+                            />
                           </div>
                         </td>
                         <td className="py-3 px-4">
