@@ -174,7 +174,7 @@ export default function HomePage() {
               Varför välja Mathallen?
             </h2>
             <p className="text-stone-600 text-base md:text-lg max-w-2xl mx-auto">
-              Vi kombinerar kvalitet och prisvärdhet för att ge dig den bästa shoppingupplevelsen i Malmö.
+              Ett brett sortiment för hela familjen, med smaker från världens alla hörn – där kvalitet och bra priser möts.
             </p>
           </div>
           
