@@ -495,37 +495,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Newsletter Section */}
       <section className="py-12 md:py-16 bg-gradient-to-br from-red-600 to-red-700">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 text-white/80 font-medium text-sm mb-3 bg-white/10 px-4 py-2 rounded-full">
+                <Mail className="w-4 h-4" />
+                Nyhetsbrev
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Besök oss idag!
+                Missa aldrig ett erbjudande!
               </h2>
               <p className="text-red-100 text-lg max-w-xl">
-                Vi finns på Lantmannagatan 59 i Malmö. Välkommen in för att 
-                upptäcka veckans bästa erbjudanden och färska produkter.
+                Prenumerera på vårt nyhetsbrev och få veckans bästa kampanjer 
+                direkt i din inkorg. Helt gratis!
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-red-600 hover:bg-stone-100 rounded-full px-8"
-                data-testid="cta-contact-button"
-              >
-                <Link to="/kontakt">Hitta till oss</Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 rounded-full px-8"
-                data-testid="cta-offers-button"
-              >
-                <Link to="/erbjudanden">Se erbjudanden</Link>
-              </Button>
+            <div className="w-full lg:w-auto">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400" />
+                  <Input
+                    type="email"
+                    placeholder="Din e-postadress"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="pl-12 pr-4 py-6 rounded-full bg-white border-0 text-stone-900 placeholder:text-stone-400 w-full sm:w-80 text-base"
+                    data-testid="newsletter-email-input"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={subscribing}
+                  className="bg-stone-900 hover:bg-stone-800 text-white rounded-full px-8 py-6"
+                  data-testid="newsletter-submit-button"
+                >
+                  {subscribing ? (
+                    "Skickar..."
+                  ) : (
+                    <>
+                      Prenumerera
+                      <Send className="w-4 h-4 ml-2" />
+                    </>
+                  )}
+                </Button>
+              </form>
+              <p className="text-red-200 text-sm mt-3 text-center sm:text-left">
+                Vi skickar max ett mail per vecka. Avsluta när du vill.
+              </p>
             </div>
           </div>
         </div>
