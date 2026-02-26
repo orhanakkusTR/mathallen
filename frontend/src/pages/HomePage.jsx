@@ -9,6 +9,79 @@ import axios from "axios";
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
+// Customer reviews data
+const customerReviews = [
+  {
+    id: 1,
+    name: "Anna Karlsson",
+    initials: "AK",
+    color: "red",
+    rating: 5,
+    text: "Fantastisk butik med ett brett sortiment! Personalen är alltid hjälpsam och veckans erbjudanden är verkligen prisvärda. Vår familjs favoritbutik!",
+    time: "2 veckor sedan",
+    platform: "google"
+  },
+  {
+    id: 2,
+    name: "Magnus Lindqvist",
+    initials: "ML",
+    color: "blue",
+    rating: 5,
+    text: "Bästa stormarknaden i Malmö! Fräscha grönsaker, bra kött och alltid trevlig service. Har handlat här i över 5 år och kommer fortsätta.",
+    time: "1 månad sedan",
+    platform: "google"
+  },
+  {
+    id: 3,
+    name: "Sofia Nilsson",
+    initials: "SN",
+    color: "green",
+    rating: 5,
+    text: "Gillar verkligen deras färskvaror och charkuteriavdelning. Priserna är rimliga och kampanjerna är alltid värda att kolla in. Rekommenderas!",
+    time: "3 veckor sedan",
+    platform: "facebook"
+  },
+  {
+    id: 4,
+    name: "Erik Johansson",
+    initials: "EJ",
+    color: "purple",
+    rating: 5,
+    text: "Alltid fräscha produkter och bra priser. Personalen är vänlig och butiken är välorganiserad. Min favoritbutik för veckans matinköp!",
+    time: "1 vecka sedan",
+    platform: "google"
+  },
+  {
+    id: 5,
+    name: "Linda Andersson",
+    initials: "LA",
+    color: "orange",
+    rating: 4,
+    text: "Stort utbud av internationella produkter. Perfekt för oss som gillar att laga mat från olika kulturer. Kommer definitivt tillbaka!",
+    time: "2 månader sedan",
+    platform: "google"
+  },
+  {
+    id: 6,
+    name: "Oscar Pettersson",
+    initials: "OP",
+    color: "teal",
+    rating: 5,
+    text: "Supernöjd med servicen! Köttdisken har alltid färska produkter och personalen hjälper gärna till med tips. Rekommenderar starkt!",
+    time: "3 veckor sedan",
+    platform: "facebook"
+  }
+];
+
+const colorClasses = {
+  red: { bg: "bg-red-100", text: "text-red-600" },
+  blue: { bg: "bg-blue-100", text: "text-blue-600" },
+  green: { bg: "bg-green-100", text: "text-green-600" },
+  purple: { bg: "bg-purple-100", text: "text-purple-600" },
+  orange: { bg: "bg-orange-100", text: "text-orange-600" },
+  teal: { bg: "bg-teal-100", text: "text-teal-600" }
+};
+
 // Convert image URLs - handles both uploaded files and external URLs
 function getImageUrl(url) {
   if (!url) return null;
