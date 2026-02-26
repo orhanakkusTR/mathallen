@@ -75,6 +75,7 @@ class Offer(BaseModel):
     week_number: int
     year: int
     is_active: bool = True
+    sort_order: int = 0
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class OfferCreate(BaseModel):
@@ -87,6 +88,7 @@ class OfferCreate(BaseModel):
     week_number: int
     year: int
     is_active: bool = True
+    sort_order: int = 0
 
 class OfferUpdate(BaseModel):
     product_name: Optional[str] = None
@@ -98,6 +100,7 @@ class OfferUpdate(BaseModel):
     week_number: Optional[int] = None
     year: Optional[int] = None
     is_active: Optional[bool] = None
+    sort_order: Optional[int] = None
 
 class Category(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
