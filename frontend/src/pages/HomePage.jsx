@@ -434,10 +434,7 @@ export default function HomePage() {
                             </span>
                             <div className="flex items-start">
                               <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                                {Math.floor(offer.offer_price)}
-                              </span>
-                              <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                                {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : ':-'}
+                                {Math.floor(offer.offer_price)}:-
                               </span>
                             </div>
                           </div>
@@ -447,10 +444,7 @@ export default function HomePage() {
                           <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
                           <div className="flex items-start justify-center">
                             <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                              {Math.floor(offer.offer_price)}
-                            </span>
-                            <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                              {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
+                              {Math.floor(offer.offer_price)}:-
                             </span>
                             {offer.unit && (
                               <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
@@ -472,7 +466,7 @@ export default function HomePage() {
                         <div className="bg-stone-100 rounded-lg py-2 px-3">
                           <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
                           <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">
-                            {offer.original_price} kr{offer.unit ? `/${offer.unit}` : ''}
+                            {Math.floor(offer.original_price)}:-{offer.unit ? `/${offer.unit}` : ''}
                           </span>
                         </div>
                       )}
