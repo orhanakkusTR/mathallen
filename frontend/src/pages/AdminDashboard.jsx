@@ -793,22 +793,18 @@ export default function AdminDashboard() {
 
             {/* Multi-buy option */}
             <div className="space-y-2">
-              <Label htmlFor="multi_buy">Flerköp (2 För, 3 För, etc.)</Label>
-              <Select
+              <Label htmlFor="multi_buy">Flerköp (X För)</Label>
+              <Input
+                id="multi_buy"
+                type="number"
+                min="2"
+                max="99"
                 value={formData.multi_buy}
-                onValueChange={(value) => setFormData({ ...formData, multi_buy: value })}
-              >
-                <SelectTrigger data-testid="offer-multi-buy">
-                  <SelectValue placeholder="Välj flerköp (valfritt)" />
-                </SelectTrigger>
-                <SelectContent>
-                  {multiBuyOptions.map((option) => (
-                    <SelectItem key={option.value || "none"} value={option.value}>
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                onChange={(e) => setFormData({ ...formData, multi_buy: e.target.value })}
+                placeholder="T.ex. 2, 3, 10 (lämna tomt om ingen)"
+                data-testid="offer-multi-buy"
+              />
+              <p className="text-xs text-stone-500">Lämna tomt om produkten inte har flerköpserbjudande</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
