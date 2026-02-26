@@ -40,7 +40,8 @@ export default function NewsletterPopup() {
   }, []);
 
   const handleClose = () => {
-    setIsVisible(false);
+    // Instead of hiding completely, minimize to the side
+    setIsMinimized(true);
     localStorage.setItem("newsletter_popup_dismissed", Date.now().toString());
   };
 
