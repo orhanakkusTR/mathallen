@@ -291,6 +291,15 @@ export default function OffersPage() {
                       </div>
                     )}
                     
+                    {/* Bästa Pris Ribbon - Top Left Corner */}
+                    {offer.is_best_price && (
+                      <div className="absolute top-0 left-0 overflow-hidden w-24 h-24 md:w-28 md:h-28">
+                        <div className="absolute transform -rotate-45 bg-red-600 text-white text-center font-bold py-1 left-[-34px] top-[20px] w-[140px] md:left-[-30px] md:top-[24px] md:w-[150px] shadow-md text-xs md:text-sm">
+                          Bästa Pris
+                        </div>
+                      </div>
+                    )}
+                    
                     {/* Multi-buy Badge - Only show if unit is also set */}
                     {offer.multi_buy && offer.unit && (
                       <div className="absolute top-3 right-3 md:top-4 md:right-4">
