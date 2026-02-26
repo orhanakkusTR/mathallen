@@ -252,6 +252,8 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-stone-100">
+      <SEO title="Admin Dashboard" noindex={true} />
+      
       {/* Header */}
       <header className="bg-stone-900 text-white py-4 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
