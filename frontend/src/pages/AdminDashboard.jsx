@@ -330,6 +330,78 @@ export default function AdminDashboard() {
     }
   };
 
+  // Update sort order by number input
+  const updateSortOrder = async (offerId, newOrder) => {
+    const orderNum = parseInt(newOrder);
+    if (isNaN(orderNum) || orderNum < 1) return;
+    
+    try {
+      await axiosAuth.put(`/offers/${offerId}`, { sort_order: orderNum - 1 });
+      toast.success("Ordningen har uppdaterats!");
+      fetchData();
+    } catch (error) {
+      console.error("Error updating order:", error);
+      toast.error("Kunde inte uppdatera ordningen.");
+    }
+  };
+
+  // Drag and drop handlers
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [dragOverItem, setDragOverItem] = useState(null);
+
+  const handleDragStart = (e, index) => {
+    setDraggedItem(index);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', e.target.outerHTML);
+    e.target.style.opacity = '0.5';
+  };
+
+  const handleDragEnd = (e) => {
+    e.target.style.opacity = '1';
+    setDraggedItem(null);
+    setDragOverItem(null);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    if (draggedItem === null) return;
+    setDragOverItem(index);
+  };
+
+  const handleDrop = async (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedItem === null || draggedItem === dropIndex) {
+      setDraggedItem(null);
+      setDragOverItem(null);
+      return;
+    }
+
+    const newOffers = [...offers];
+    const draggedOffer = newOffers[draggedItem];
+    
+    // Remove from old position
+    newOffers.splice(draggedItem, 1);
+    // Insert at new position
+    newOffers.splice(dropIndex, 0, draggedOffer);
+    
+    // Update all sort_orders
+    try {
+      await Promise.all(
+        newOffers.map((offer, idx) => 
+          axiosAuth.put(`/offers/${offer.id}`, { sort_order: idx })
+        )
+      );
+      setOffers(newOffers);
+      toast.success("Ordningen har uppdaterats!");
+    } catch (error) {
+      console.error("Error updating order:", error);
+      toast.error("Kunde inte uppdatera ordningen.");
+    }
+    
+    setDraggedItem(null);
+    setDragOverItem(null);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-stone-100 flex items-center justify-center">
