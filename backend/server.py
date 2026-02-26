@@ -437,9 +437,31 @@ async def get_product_categories():
 
 # ---- CHATBOT ----
 
+# Alcohol keywords to filter out
+ALCOHOL_KEYWORDS = [
+    "alkohol", "öl", "beer", "vin", "wine", "whisky", "whiskey", "vodka", 
+    "gin", "rom", "rum", "cognac", "brandy", "likör", "liquor", "sprit",
+    "champagne", "prosecco", "cider", "sake", "tequila", "absint", "calvados",
+    "grappa", "schnaps", "aquavit", "akvavit", "punsch", "glögg med alkohol",
+    "starköl", "folköl", "lättöl", "rödvin", "vitvin", "rosévin", "mousserande",
+    "systembolaget", "systemet", "spritdryck", "alkoholdryck"
+]
+
+STORE_INFO = """
+
+📍 Mathallen Malmö
+   Lantmannagatan 59, Lugna gatan 2, 214 48 Malmö
+   📞 040-92 44 20
+
+📍 Mathallen Lugnet
+   Lugna gatan 2, 211 60 Malmö
+   📞 040-92 44 20
+
+🕐 Öppet alla dagar: 07:00 - 22:00"""
+
 @api_router.post("/chat")
 async def chat_search(query: ChatQuery):
-    """Search for products and return chatbot response"""
+    """Smart chatbot - invites customers for all products except alcohol"""
     search_term = query.query.strip().lower()
     
     if len(search_term) < 2:
@@ -449,30 +471,24 @@ async def chat_search(query: ChatQuery):
             "products": []
         }
     
-    # Search for products matching the query
-    products = await db.products.find(
-        {"name": {"$regex": search_term, "$options": "i"}},
-        {"_id": 0, "name": 1, "category": 1}
-    ).limit(5).to_list(5)
+    # Check for alcohol-related queries
+    is_alcohol = any(keyword in search_term for keyword in ALCOHOL_KEYWORDS)
     
-    if products:
-        product_names = [p['name'] for p in products]
-        if len(products) == 1:
-            message = f"Ja, vi har {product_names[0]} i vårt sortiment! Välkommen in till butiken för att handla."
-        else:
-            message = f"Vi har flera matchande produkter: {', '.join(product_names[:3])}{'...' if len(products) > 3 else ''}. Välkommen in till Mathallen!"
-        
-        return {
-            "found": True,
-            "message": message,
-            "products": products
-        }
-    else:
+    if is_alcohol:
         return {
             "found": False,
-            "message": f"Tyvärr kunde vi inte hitta '{query.query}' i vårt sortiment. Kontakta oss gärna om du har frågor!",
+            "message": f"Tyvärr säljer vi inte alkoholhaltiga produkter på Mathallen. För alkohol hänvisar vi till Systembolaget. Men vi har ett stort utbud av alkoholfria alternativ! Välkommen in!{STORE_INFO}",
             "products": []
         }
+    
+    # For all other products - welcome them!
+    product_name = query.query.strip()
+    
+    return {
+        "found": True,
+        "message": f"Ja, vi har {product_name} i vårt sortiment! 🛒 Välkommen in till Mathallen så hjälper vi dig att hitta det du söker.{STORE_INFO}",
+        "products": []
+    }
 
 # ---- ADMIN SETUP ----
 
