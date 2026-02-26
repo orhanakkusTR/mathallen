@@ -279,7 +279,7 @@ export default function ContactPage() {
       </section>
 
       {/* Two Stores Section */}
-      <section className="bg-stone-100">
+      <section id="stores" className="bg-stone-100">
         <div className="grid md:grid-cols-2">
           {/* Store 1 - Mathallen Malmö */}
           <div className="bg-stone-900 text-white" data-testid="store-malmo">
