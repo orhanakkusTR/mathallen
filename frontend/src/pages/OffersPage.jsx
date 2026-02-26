@@ -127,96 +127,238 @@ export default function OffersPage() {
         </div>
       </section>
 
-      {/* Offers Grid */}
+      {/* Offers Grid with Filter */}
       <section className="py-12 md:py-16 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl p-6 animate-pulse">
-                  <div className="w-full aspect-square bg-stone-200 rounded-xl mb-4" />
-                  <div className="h-4 bg-stone-200 rounded w-3/4 mb-2" />
-                  <div className="h-6 bg-stone-200 rounded w-1/2" />
-                </div>
-              ))}
-            </div>
-          ) : offers.length > 0 ? (
-            <>
-              {/* Grid cards - Both mobile and desktop */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                {offers.map((offer, index) => (
-                  <div
-                    key={offer.id}
-                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-stone-100"
-                    data-testid={`offer-item-${index}`}
-                  >
-                    {/* Product Image - Full width, fills container */}
-                    <div className="aspect-square overflow-hidden">
-                      {offer.image_url ? (
-                        <img
-                          src={getImageUrl(offer.image_url)}
-                          alt={offer.product_name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-stone-100 flex items-center justify-center">
-                          <ShoppingBasket className="w-16 h-16 text-stone-300" />
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Price Tag - Below image, full width */}
-                    <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
-                      <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
-                      <div className="flex items-start justify-center">
-                        <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                          {Math.floor(offer.offer_price)}
-                        </span>
-                        <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
-                          {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
-                        </span>
-                        <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Product Info */}
-                    <div className="p-4 text-center">
-                      <h3 className="font-bold text-stone-900 text-sm md:text-base leading-tight mb-1">
-                        {offer.product_name}
-                      </h3>
-                      <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-3">
-                        {offer.category}
-                      </p>
-                      {offer.original_price && (
-                        <div className="bg-stone-100 rounded-lg py-2 px-3">
-                          <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
-                          <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">{offer.original_price} kr/{offer.unit}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="text-center py-20 bg-white rounded-2xl">
-              <ShoppingBasket className="w-20 h-20 text-stone-200 mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-stone-900 mb-2">
-                Inga erbjudanden just nu
-              </h3>
-              <p className="text-stone-500 mb-6">
-                Vi uppdaterar våra erbjudanden varje vecka. Kom tillbaka snart!
-              </p>
-              <Button
-                onClick={() => setSelectedCategory("all")}
-                variant="outline"
-                className="rounded-full"
-                data-testid="reset-filter-button"
+          
+          {/* Mobile Filter Button */}
+          {!loading && availableCategories.length > 0 && (
+            <div className="lg:hidden mb-6">
+              <button
+                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                className="w-full flex items-center justify-between bg-white px-4 py-3 rounded-xl shadow-sm border border-stone-200"
+                data-testid="mobile-filter-toggle"
               >
-                Visa alla kategorier
-              </Button>
+                <div className="flex items-center gap-2">
+                  <Filter className="w-5 h-5 text-stone-600" />
+                  <span className="font-medium text-stone-800">
+                    {selectedCategory === "all" ? "Filtrera kategori" : selectedCategory}
+                  </span>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-stone-500 transition-transform ${mobileFilterOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {/* Mobile Filter Dropdown */}
+              {mobileFilterOpen && (
+                <div className="mt-2 bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden">
+                  <button
+                    onClick={() => {
+                      setSelectedCategory("all");
+                      setMobileFilterOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors ${
+                      selectedCategory === "all" 
+                        ? "bg-red-50 text-red-700" 
+                        : "text-stone-700 hover:bg-stone-50"
+                    }`}
+                    data-testid="mobile-filter-all"
+                  >
+                    Visa alla ({offers.length})
+                  </button>
+                  {availableCategories.map(category => {
+                    const count = offers.filter(o => o.category === category).length;
+                    return (
+                      <button
+                        key={category}
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          setMobileFilterOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors border-t border-stone-100 ${
+                          selectedCategory === category 
+                            ? "bg-red-50 text-red-700" 
+                            : "text-stone-700 hover:bg-stone-50"
+                        }`}
+                        data-testid={`mobile-filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
+                      >
+                        {category} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
+
+          <div className="flex gap-8">
+            {/* Main Content */}
+            <div className="flex-1">
+              {/* Active Filter Indicator */}
+              {selectedCategory !== "all" && (
+                <div className="mb-6 flex items-center gap-2">
+                  <span className="text-stone-600 text-sm">Filtrerat på:</span>
+                  <span className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-3 py-1.5 rounded-full text-sm font-medium">
+                    {selectedCategory}
+                    <button 
+                      onClick={() => setSelectedCategory("all")}
+                      className="hover:bg-red-200 rounded-full p-0.5 transition-colors"
+                      data-testid="clear-filter-button"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </span>
+                  <span className="text-stone-500 text-sm">({filteredOffers.length} produkter)</span>
+                </div>
+              )}
+
+              {loading ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                  {[...Array(8)].map((_, i) => (
+                    <div key={i} className="bg-white rounded-2xl p-6 animate-pulse">
+                      <div className="w-full aspect-square bg-stone-200 rounded-xl mb-4" />
+                      <div className="h-4 bg-stone-200 rounded w-3/4 mb-2" />
+                      <div className="h-6 bg-stone-200 rounded w-1/2" />
+                    </div>
+                  ))}
+                </div>
+              ) : filteredOffers.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                  {filteredOffers.map((offer, index) => (
+                    <div
+                      key={offer.id}
+                      className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-stone-100"
+                      data-testid={`offer-item-${index}`}
+                    >
+                      {/* Product Image - Full width, fills container */}
+                      <div className="aspect-square overflow-hidden">
+                        {offer.image_url ? (
+                          <img
+                            src={getImageUrl(offer.image_url)}
+                            alt={offer.product_name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-stone-100 flex items-center justify-center">
+                            <ShoppingBasket className="w-16 h-16 text-stone-300" />
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Price Tag - Below image, full width */}
+                      <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
+                        <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
+                        <div className="flex items-start justify-center">
+                          <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
+                            {Math.floor(offer.offer_price)}
+                          </span>
+                          <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
+                            {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
+                          </span>
+                          <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Product Info */}
+                      <div className="p-4 text-center">
+                        <h3 className="font-bold text-stone-900 text-sm md:text-base leading-tight mb-1">
+                          {offer.product_name}
+                        </h3>
+                        <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-3">
+                          {offer.category}
+                        </p>
+                        {offer.original_price && (
+                          <div className="bg-stone-100 rounded-lg py-2 px-3">
+                            <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
+                            <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">{offer.original_price} kr/{offer.unit}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-20 bg-white rounded-2xl">
+                  <ShoppingBasket className="w-20 h-20 text-stone-200 mx-auto mb-6" />
+                  <h3 className="text-xl font-semibold text-stone-900 mb-2">
+                    Inga erbjudanden i denna kategori
+                  </h3>
+                  <p className="text-stone-500 mb-6">
+                    Det finns inga aktiva erbjudanden i "{selectedCategory}" just nu.
+                  </p>
+                  <Button
+                    onClick={() => setSelectedCategory("all")}
+                    variant="outline"
+                    className="rounded-full"
+                    data-testid="reset-filter-button"
+                  >
+                    Visa alla kategorier
+                  </Button>
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Sidebar Filter */}
+            {!loading && availableCategories.length > 0 && (
+              <aside className="hidden lg:block w-64 flex-shrink-0">
+                <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-5 sticky top-24">
+                  <div className="flex items-center gap-2 mb-4 pb-4 border-b border-stone-100">
+                    <Filter className="w-5 h-5 text-red-600" />
+                    <h3 className="font-bold text-stone-900">Kategorier</h3>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <button
+                      onClick={() => setSelectedCategory("all")}
+                      className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        selectedCategory === "all" 
+                          ? "bg-red-600 text-white shadow-sm" 
+                          : "text-stone-700 hover:bg-stone-100"
+                      }`}
+                      data-testid="desktop-filter-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span>Visa alla</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${
+                          selectedCategory === "all" 
+                            ? "bg-white/20 text-white" 
+                            : "bg-stone-200 text-stone-600"
+                        }`}>
+                          {offers.length}
+                        </span>
+                      </div>
+                    </button>
+                    
+                    {availableCategories.map(category => {
+                      const count = offers.filter(o => o.category === category).length;
+                      return (
+                        <button
+                          key={category}
+                          onClick={() => setSelectedCategory(category)}
+                          className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                            selectedCategory === category 
+                              ? "bg-red-600 text-white shadow-sm" 
+                              : "text-stone-700 hover:bg-stone-100"
+                          }`}
+                          data-testid={`desktop-filter-${category.toLowerCase().replace(/\s+/g, '-')}`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="truncate pr-2">{category}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${
+                              selectedCategory === category 
+                                ? "bg-white/20 text-white" 
+                                : "bg-stone-200 text-stone-600"
+                            }`}>
+                              {count}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </aside>
+            )}
+          </div>
         </div>
       </section>
 
