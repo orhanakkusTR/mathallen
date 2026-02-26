@@ -4,10 +4,16 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
-// Convert Google Drive links to direct image URLs
-function convertToDirectImageUrl(url) {
+// Convert image URLs - handles both uploaded files and external URLs
+function getImageUrl(url) {
   if (!url) return null;
+  
+  // If it starts with /uploads, prepend the base URL
+  if (url.startsWith('/uploads')) {
+    return `${BASE_URL}${url}`;
+  }
   
   // Google Drive file link: https://drive.google.com/file/d/FILE_ID/view
   const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([^\/]+)/);
