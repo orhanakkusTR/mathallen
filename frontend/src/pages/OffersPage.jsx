@@ -288,18 +288,25 @@ export default function OffersPage() {
                     
                     {/* Multi-buy Badge */}
                     {offer.multi_buy && (
-                      <div className="absolute top-3 right-0 md:top-4 animate-slide-in-right">
+                      <div className="absolute -top-1 -right-1 md:top-0 md:right-0 animate-slide-in-right">
                         <div className="relative">
                           {/* Brush stroke background */}
-                          <svg viewBox="0 0 120 45" className="w-20 h-8 md:w-24 md:h-10">
+                          <svg viewBox="0 0 100 50" className="w-[85px] h-[42px] md:w-[100px] md:h-[50px] drop-shadow-lg">
                             <path 
-                              d="M5,8 Q0,22 8,35 Q15,45 35,42 L95,40 Q115,38 118,25 Q120,10 110,5 Q100,0 80,3 L20,6 Q8,7 5,8 Z" 
+                              d="M8,10 C3,15 2,25 5,35 C8,42 18,48 30,47 L75,45 C88,44 96,38 98,28 C100,18 95,8 85,5 C75,2 60,3 45,4 L20,7 C12,8 10,8 8,10 Z" 
                               fill="#dc2626"
+                            />
+                            <path 
+                              d="M12,12 C15,10 25,9 35,8 L70,6 C78,6 84,8 86,12" 
+                              stroke="#b91c1c" 
+                              strokeWidth="2" 
+                              fill="none"
+                              opacity="0.5"
                             />
                           </svg>
                           {/* Text overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-white font-black text-lg md:text-xl tracking-tight drop-shadow-sm">
+                          <div className="absolute inset-0 flex items-center justify-center pt-1">
+                            <span className="text-white font-black text-xl md:text-2xl tracking-tight drop-shadow-md" style={{textShadow: '1px 1px 2px rgba(0,0,0,0.3)'}}>
                               {offer.multi_buy} För
                             </span>
                           </div>
