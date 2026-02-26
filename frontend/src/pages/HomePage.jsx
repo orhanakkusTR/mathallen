@@ -135,22 +135,17 @@ export default function HomePage() {
             className="hidden lg:block absolute right-8 xl:right-16 bottom-12 group"
             data-testid="hero-weekly-offer-box"
           >
-            <div className="relative">
-              {/* Simple wire rings - clean and minimal */}
-              <div className="absolute -top-3 left-5 right-5 flex justify-between z-20">
-                {[...Array(4)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className="w-3 h-6 rounded-full border-2 border-gray-400"
-                    style={{
-                      background: 'linear-gradient(90deg, #d1d5db 0%, #f3f4f6 50%, #d1d5db 100%)'
-                    }}
-                  ></div>
-                ))}
+            <div className="relative shadow-2xl rounded-2xl overflow-hidden">
+              {/* Top white strip with holes */}
+              <div className="bg-white h-6 flex items-center justify-center gap-6 px-4">
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
               </div>
               
               {/* Calendar page */}
-              <div className="w-44 h-44 bg-red-600 hover:bg-red-700 transition-colors rounded-xl shadow-2xl text-white flex flex-col items-center justify-center">
+              <div className="w-44 h-40 bg-red-600 hover:bg-red-700 transition-colors text-white flex flex-col items-center justify-center">
                 <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
                 <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
                 <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
