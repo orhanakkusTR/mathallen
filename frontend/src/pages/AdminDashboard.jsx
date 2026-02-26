@@ -902,7 +902,6 @@ export default function AdminDashboard() {
                 </div>
               )}
             </div>
-            </div>
 
             <div className="flex items-center justify-between py-2 px-3 bg-stone-50 rounded-lg">
               <Label htmlFor="is_active" className="cursor-pointer">Aktivt erbjudande</Label>
