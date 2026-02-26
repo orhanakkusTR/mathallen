@@ -170,7 +170,7 @@ export default function AdminDashboard() {
 
   const openEditDialog = (offer) => {
     setEditingOffer(offer);
-    setImagePreview(offer.image_url || "");
+    setImagePreview(convertToDirectImageUrl(offer.image_url) || "");
     setFormData({
       product_name: offer.product_name,
       original_price: offer.original_price?.toString() || "",
