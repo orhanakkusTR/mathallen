@@ -342,7 +342,7 @@ export default function HomePage() {
                     </div>
                     
                     {/* Price Tag */}
-                    <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
+                    <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center ticket-edge">
                       {offer.multi_buy && !offer.unit ? (
                         <>
                           <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
