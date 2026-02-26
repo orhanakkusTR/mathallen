@@ -81,8 +81,8 @@ export default function Header() {
                 src={LOGO_URL} 
                 alt="Mathallen Malmö" 
                 className="h-12 md:h-16 w-auto relative z-10"
-            />
-          </Link>
+              />
+            </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
