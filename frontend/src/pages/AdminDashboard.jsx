@@ -64,12 +64,31 @@ function getImageUrl(url) {
 }
 
 const categories = [
-  "Färska frukter & grönsaker",
-  "Dagligvaror",
-  "Kött & chark",
+  "Bröd & Bakverk",
+  "Tobak",
+  "Bröd - Eget",
+  "Vegetariskt",
+  "Blommor",
+  "Special",
+  "Drycker",
+  "Konfektyr",
+  "Fisk",
+  "Frukt & Grönt",
+  "Snacks",
+  "Djur",
+  "Chark",
+  "Ost",
+  "Kött",
+  "Kött - Eget i disk",
   "Mejeri",
-  "Specialprodukter",
+  "Kroppsvård",
+  "Grov-kem",
+  "Djupfryst",
+  "Läkemedel",
+  "Specerier",
 ];
+
+const units = ["cl", "st", "g", "kg", "l", "ml"];
 
 function getWeekNumber(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
