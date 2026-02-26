@@ -211,7 +211,7 @@ async def get_current_offers():
     offers = await db.offers.find(
         {"week_number": current_week, "year": current_year, "is_active": True},
         {"_id": 0}
-    ).to_list(100)
+    ).sort("sort_order", 1).to_list(100)
     
     for offer in offers:
         if isinstance(offer.get('created_at'), str):
