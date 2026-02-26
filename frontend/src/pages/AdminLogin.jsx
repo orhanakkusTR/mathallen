@@ -49,6 +49,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-stone-900 flex items-center justify-center px-4">
+      <SEO title="Admin Login" noindex={true} />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img 
