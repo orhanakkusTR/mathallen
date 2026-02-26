@@ -64,10 +64,6 @@ export default function AdminDashboard() {
   const [offers, setOffers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [productTotal, setProductTotal] = useState(0);
-  const [productSearch, setProductSearch] = useState("");
-  const [bulkProducts, setBulkProducts] = useState("");
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingOffer, setEditingOffer] = useState(null);
@@ -104,7 +100,6 @@ export default function AdminDashboard() {
       return;
     }
     fetchData();
-    fetchProducts();
   }, [token, navigate]);
 
   const fetchData = async () => {
