@@ -765,28 +765,41 @@ export default function AdminDashboard() {
                 type="url"
                 value={formData.image_url}
                 onChange={(e) => handleImageUrlChange(e.target.value)}
-                placeholder="https://drive.google.com/... eller https://..."
+                placeholder="https://drive.google.com/file/d/.../view?usp=sharing"
                 data-testid="offer-image-url"
               />
               <p className="text-xs text-stone-500">
-                Tips: Ladda upp bilden till Google Drive, högerklicka → "Hämta länk" → Klistra in här
+                Tips: Ladda upp bilden till Google Drive → Högerklicka → "Dela" → "Alla med länken" → Kopiera länk
               </p>
             </div>
 
             {/* Image Preview */}
-            {imagePreview && (
-              <div className="space-y-2">
-                <Label>Förhandsgranskning</Label>
-                <div className="relative w-full h-40 bg-stone-100 rounded-xl overflow-hidden border border-stone-200">
+            <div className="space-y-2">
+              <Label>Förhandsgranskning</Label>
+              {imagePreview ? (
+                <div className="relative bg-stone-50 rounded-xl overflow-hidden border-2 border-dashed border-stone-200 p-4">
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    className="w-full h-full object-contain"
-                    onError={() => setImagePreview("")}
+                    className="w-full h-48 object-contain mx-auto"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
                   />
+                  <div className="hidden w-full h-48 items-center justify-center flex-col text-stone-400">
+                    <Image className="w-12 h-12 mb-2" />
+                    <p className="text-sm">Kunde inte ladda bilden</p>
+                    <p className="text-xs">Kontrollera att länken är korrekt och delad</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="bg-stone-50 rounded-xl border-2 border-dashed border-stone-200 p-8 text-center">
+                  <Image className="w-12 h-12 text-stone-300 mx-auto mb-2" />
+                  <p className="text-stone-400 text-sm">Klistra in en bild-URL ovan för att se förhandsgranskning</p>
+                </div>
+              )}
+            </div>
 
             <div className="flex items-center justify-between py-2 px-3 bg-stone-50 rounded-lg">
               <Label htmlFor="is_active" className="cursor-pointer">Aktivt erbjudande</Label>
