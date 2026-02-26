@@ -20,7 +20,7 @@ export default function ShopPage() {
   return (
     <div className="page-transition">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -28,11 +28,11 @@ export default function ShopPage() {
           }} />
         </div>
 
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+        <div className="relative z-10 max-w-2xl mx-auto px-4 text-center py-16">
           {/* Icon */}
-          <div className="mb-8">
-            <div className="w-24 h-24 md:w-32 md:h-32 bg-red-600 rounded-full flex items-center justify-center mx-auto shadow-2xl">
-              <ShoppingCart className="w-12 h-12 md:w-16 md:h-16 text-white" />
+          <div className="mb-6">
+            <div className="w-20 h-20 md:w-24 md:h-24 bg-red-600 rounded-full flex items-center justify-center mx-auto shadow-2xl">
+              <ShoppingCart className="w-10 h-10 md:w-12 md:h-12 text-white" />
             </div>
           </div>
 
@@ -43,16 +43,16 @@ export default function ShopPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Online Shop
           </h1>
-          <p className="text-xl md:text-2xl text-stone-300 mb-8">
+          <p className="text-lg md:text-xl text-stone-300 mb-8">
             Snart kan du handla dina favoritprodukter online!
           </p>
 
           {/* Description */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 mb-8">
-            <p className="text-stone-200 text-lg leading-relaxed">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 max-w-lg mx-auto">
+            <p className="text-stone-200 leading-relaxed">
               Vi arbetar hårt för att ge dig möjligheten att handla bekvämt hemifrån. 
               Samma kvalitet, samma priser, samma fantastiska erbjudanden – 
               direkt till din dörr i Malmö.
@@ -60,9 +60,9 @@ export default function ShopPage() {
           </div>
 
           {/* Email Signup */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl max-w-md mx-auto">
-            <div className="flex items-center gap-3 mb-4 justify-center">
-              <Mail className="w-6 h-6 text-red-600" />
+          <div className="bg-white rounded-2xl p-6 shadow-xl max-w-md mx-auto">
+            <div className="flex items-center gap-3 mb-3 justify-center">
+              <Mail className="w-5 h-5 text-red-600" />
               <h3 className="text-lg font-bold text-stone-900">
                 Bli först att få veta!
               </h3>
