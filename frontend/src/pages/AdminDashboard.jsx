@@ -212,7 +212,7 @@ export default function AdminDashboard() {
       year: offer.year,
       is_active: offer.is_active,
       sort_order: offer.sort_order || 0,
-      multi_buy: offer.multi_buy?.toString() || "",
+      multi_buy: offer.multi_buy?.toString() || "none",
     });
     setIsDialogOpen(true);
   };
