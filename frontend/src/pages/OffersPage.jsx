@@ -93,49 +93,48 @@ export default function OffersPage() {
                     className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-stone-100"
                     data-testid={`offer-item-${index}`}
                   >
-                    {/* Product Image */}
-                    <div className="bg-stone-50 p-4 md:p-6">
+                    {/* Product Image - Full width, fills container */}
+                    <div className="aspect-square overflow-hidden">
                       {offer.image_url ? (
                         <img
                           src={offer.image_url}
                           alt={offer.product_name}
-                          className="w-full aspect-square object-contain"
+                          className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full aspect-square flex items-center justify-center">
+                        <div className="w-full h-full bg-stone-100 flex items-center justify-center">
                           <ShoppingBasket className="w-16 h-16 text-stone-300" />
                         </div>
                       )}
                     </div>
                     
-                    {/* Price Tag */}
-                    <div className="flex justify-center -mt-5 relative z-10">
-                      <div className="bg-yellow-400 px-4 py-2 rounded-sm shadow-md text-center">
-                        <span className="text-red-600 font-bold text-xs md:text-sm block">Kampanj</span>
-                        <div className="flex items-baseline justify-center">
-                          <span className="text-red-600 font-black text-2xl md:text-3xl">
-                            {Math.floor(offer.offer_price)}
-                          </span>
-                          <span className="text-red-600 font-bold text-sm md:text-lg align-top">
-                            {String(offer.offer_price).includes('.') ? '.' + String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '.00'}
-                          </span>
-                          <span className="text-red-600 font-semibold text-xs md:text-sm ml-0.5">/{offer.unit}</span>
-                        </div>
+                    {/* Price Tag - Below image, full width */}
+                    <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
+                      <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
+                      <div className="flex items-start justify-center">
+                        <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
+                          {Math.floor(offer.offer_price)}
+                        </span>
+                        <span className="text-red-700 font-bold text-lg md:text-xl mt-0.5">
+                          {String(offer.offer_price).includes('.') ? String(offer.offer_price).split('.')[1].padEnd(2, '0').substring(0, 2) : '00'}
+                        </span>
+                        <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
                       </div>
                     </div>
                     
                     {/* Product Info */}
-                    <div className="p-4 pt-3 text-center">
+                    <div className="p-4 text-center">
                       <h3 className="font-bold text-stone-900 text-sm md:text-base leading-tight mb-1">
                         {offer.product_name}
                       </h3>
-                      <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-2">
+                      <p className="text-stone-500 text-xs md:text-sm uppercase tracking-wide mb-3">
                         {offer.category}
                       </p>
                       {offer.original_price && (
-                        <p className="text-stone-400 text-xs md:text-sm">
-                          Ord pris <span className="line-through">{offer.original_price} kr/{offer.unit}</span>
-                        </p>
+                        <div className="bg-stone-100 rounded-lg py-2 px-3">
+                          <span className="text-stone-600 text-sm font-medium">Ord pris </span>
+                          <span className="text-red-600 text-base font-bold line-through">{offer.original_price} kr/{offer.unit}</span>
+                        </div>
                       )}
                     </div>
                   </div>
