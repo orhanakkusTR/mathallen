@@ -288,28 +288,11 @@ export default function OffersPage() {
                     
                     {/* Multi-buy Badge */}
                     {offer.multi_buy && (
-                      <div className="absolute -top-1 -right-1 md:top-0 md:right-0 animate-slide-in-right">
-                        <div className="relative">
-                          {/* Brush stroke background */}
-                          <svg viewBox="0 0 100 50" className="w-[85px] h-[42px] md:w-[100px] md:h-[50px] drop-shadow-lg">
-                            <path 
-                              d="M8,10 C3,15 2,25 5,35 C8,42 18,48 30,47 L75,45 C88,44 96,38 98,28 C100,18 95,8 85,5 C75,2 60,3 45,4 L20,7 C12,8 10,8 8,10 Z" 
-                              fill="#dc2626"
-                            />
-                            <path 
-                              d="M12,12 C15,10 25,9 35,8 L70,6 C78,6 84,8 86,12" 
-                              stroke="#b91c1c" 
-                              strokeWidth="2" 
-                              fill="none"
-                              opacity="0.5"
-                            />
-                          </svg>
-                          {/* Text overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center pt-1">
-                            <span className="text-white font-black text-xl md:text-2xl tracking-tight drop-shadow-md" style={{textShadow: '1px 1px 2px rgba(0,0,0,0.3)'}}>
-                              {offer.multi_buy} För
-                            </span>
-                          </div>
+                      <div className="absolute top-3 right-3 md:top-4 md:right-4">
+                        <div className="bg-red-600 rounded-full px-4 py-2 md:px-5 md:py-2.5 shadow-lg">
+                          <span className="text-white font-black text-lg md:text-xl tracking-tight">
+                            {offer.multi_buy} För
+                          </span>
                         </div>
                       </div>
                     )}
