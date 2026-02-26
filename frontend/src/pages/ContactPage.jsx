@@ -52,12 +52,25 @@ export default function ContactPage() {
               <MapPin className="w-4 h-4" />
               Kontakta oss
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4 md:mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6 md:mb-8">
               Har du <span className="text-red-500">frågor?</span>
             </h1>
-            <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg">
-              Du hittar oss på Lantmannagatan 59 i Malmö – välkommen in och upptäck vårt breda sortiment.
-            </p>
+            <div className="flex flex-wrap gap-3">
+              <a 
+                href="tel:+46409244220" 
+                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-full transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                Ring till oss
+              </a>
+              <a 
+                href="#stores" 
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-full transition-colors backdrop-blur-sm"
+              >
+                <MapPin className="w-4 h-4" />
+                Hitta butik
+              </a>
+            </div>
           </div>
           
           {/* Right - Video (full bleed) */}
