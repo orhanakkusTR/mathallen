@@ -286,8 +286,8 @@ export default function OffersPage() {
                       </div>
                     )}
                     
-                    {/* Multi-buy Badge */}
-                    {offer.multi_buy && (
+                    {/* Multi-buy Badge - Only show if unit is also set */}
+                    {offer.multi_buy && offer.unit && (
                       <div className="absolute top-3 right-3 md:top-4 md:right-4">
                         <div className="bg-red-600 rounded-full px-4 py-2 md:px-5 md:py-2.5 shadow-lg">
                           <span className="text-white font-black text-lg md:text-xl tracking-tight">
