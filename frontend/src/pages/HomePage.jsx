@@ -129,30 +129,17 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Weekly Offer Card - Floating Calendar Style */}
+          {/* Weekly Offer Card - Floating */}
           <Link 
             to="/erbjudanden"
-            className="hidden lg:block absolute right-8 xl:right-16 bottom-12 group"
+            className="hidden lg:flex absolute right-8 xl:right-16 bottom-16 flex-col items-center justify-center w-44 h-44 bg-red-600 hover:bg-red-700 transition-colors rounded-2xl shadow-2xl text-white group"
             data-testid="hero-weekly-offer-box"
           >
-            <div className="relative shadow-2xl rounded-2xl overflow-hidden">
-              {/* Top white strip with holes */}
-              <div className="bg-white h-6 flex items-center justify-center gap-6 px-4">
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-300 shadow-inner"></div>
-              </div>
-              
-              {/* Calendar page */}
-              <div className="w-44 h-40 bg-red-600 hover:bg-red-700 transition-colors text-white flex flex-col items-center justify-center">
-                <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
-                <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
-                <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
-                  <span>Se alla</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
+            <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
+            <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
+            <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
+              <span>Se alla</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
         </div>
