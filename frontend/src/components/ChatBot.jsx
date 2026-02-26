@@ -148,7 +148,7 @@ export default function ChatBot() {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Sök efter en produkt..."
+                placeholder="Skriv din fråga..."
                 className="flex-1 rounded-full border-stone-200 focus:border-red-500"
                 disabled={loading}
                 data-testid="chatbot-input"
