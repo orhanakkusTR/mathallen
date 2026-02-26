@@ -27,16 +27,11 @@ export default function SEO({
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="title" content={fullTitle} />
       <meta name="description" content={metaDescription} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
-      
-      {/* Canonical URL */}
       <link rel="canonical" href={metaUrl} />
-      
-      {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={metaUrl} />
       <meta property="og:title" content={fullTitle} />
@@ -44,8 +39,6 @@ export default function SEO({
       <meta property="og:image" content={metaImage} />
       <meta property="og:site_name" content={SEO_CONFIG.siteName} />
       <meta property="og:locale" content="sv_SE" />
-      
-      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={metaUrl} />
       <meta name="twitter:title" content={fullTitle} />
