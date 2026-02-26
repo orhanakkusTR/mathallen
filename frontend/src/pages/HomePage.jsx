@@ -280,7 +280,7 @@ export default function HomePage() {
                 Veckans erbjudanden
               </h2>
               <p className="text-stone-600">
-                Ta del av våra bästa priser just nu
+                Ta del av våra starka kampanjer och extra bra priser – varje vecka.
               </p>
             </div>
             <Button
