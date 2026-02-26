@@ -5,6 +5,26 @@ import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+// Convert Google Drive links to direct image URLs
+function convertToDirectImageUrl(url) {
+  if (!url) return null;
+  
+  // Google Drive file link: https://drive.google.com/file/d/FILE_ID/view
+  const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([^\/]+)/);
+  if (driveFileMatch) {
+    return `https://drive.google.com/uc?export=view&id=${driveFileMatch[1]}`;
+  }
+  
+  // Google Drive open link: https://drive.google.com/open?id=FILE_ID
+  const driveOpenMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+  if (driveOpenMatch) {
+    return `https://drive.google.com/uc?export=view&id=${driveOpenMatch[1]}`;
+  }
+  
+  // Already a direct link or other URL
+  return url;
+}
+
 export default function OffersPage() {
   const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
