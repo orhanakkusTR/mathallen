@@ -186,7 +186,7 @@ export default function AdminDashboard() {
       year: currentYear,
       is_active: true,
       sort_order: offers.length,
-      multi_buy: "none",
+      multi_buy: "",
     });
     setIsDialogOpen(true);
   };
