@@ -304,7 +304,7 @@ export default function OffersPage() {
                   </div>
                   
                   {/* Price Tag - Below image, full width */}
-                  <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center">
+                  <div className="bg-yellow-400 px-4 py-3 md:py-4 text-center ticket-edge">
                     {/* Show "X För" on the left of price if multi_buy exists but no unit */}
                     {offer.multi_buy && !offer.unit ? (
                       <>
