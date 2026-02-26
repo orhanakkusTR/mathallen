@@ -107,7 +107,7 @@ export default function OffersPage() {
               Veckans <span className="text-red-500">erbjudanden</span>
             </h1>
             <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg mb-6">
-              Ta del av våra senaste kampanjer och spara pengar på dina favoritprodukter.
+              Upptäck veckans bästa priser på utvalda favoriter – passa på att spara mer.
             </p>
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-3 w-fit">
               <Calendar className="w-5 h-5 text-red-400" />
