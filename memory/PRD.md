@@ -1,94 +1,62 @@
 # Mathallen Malmö - Product Requirements Document
 
-## Original Problem Statement
-Design and build a corporate yet warm, accessible, and campaign-focused website for a reliable, modern, and customer-centric stormarknad (supermarket) in Malmö, named "Mathallen Malmö." The website's primary goals are to position the brand, highlight weekly campaigns, provide a simple and trustworthy user experience, and motivate customers to visit the physical store. The site is not for e-commerce.
+## Project Overview
+Corporate yet warm, accessible, and campaign-focused website for "Mathallen Malmö" - a reliable, modern, and customer-centric supermarket in Malmö, Sweden.
 
-## User Language
-Turkish
+**Primary Goals:**
+- Position the brand
+- Highlight weekly campaigns
+- Provide simple and trustworthy user experience
+- Motivate customers to visit the physical store
+- NOT for e-commerce
 
-## Core Requirements
+**User Language:** Turkish (communication), Swedish (website content)
 
-### 1. Homepage
-- Hero area with video, CTA for weekly offers
-- Customer reviews section
-- Newsletter signup
-- Content updated per user request
+---
 
-### 2. About Us Page
+## Core Features (Implemented)
+
+### 1. Homepage ✅
+- Hero area with video background
+- CTA for weekly offers
+- Customer reviews carousel (6 reviews - 4 Google, 2 Facebook)
+- Newsletter signup popup (floating, minimizable)
+- Product category highlights
+
+### 2. About Us (Om Oss) ✅
 - Company story and values
 - Image gallery
+- Customer reviews carousel
 
-### 3. Weekly Campaigns (Veckans Erbjudanden)
-- Page displaying all current product offers
-- Category filtering system (implemented)
-- Multi-Buy feature with conditional display logic (implemented)
-- Product card design with yellow price box
+### 3. Weekly Campaigns (Veckans Erbjudanden) ✅
+- Product offers with category filtering ("Filtrera efter kategori")
+- "Bästa Pris" red corner ribbon (admin-controllable)
+- Multi-buy display ("X För" in price box)
+- Price format: `XX:-` for whole numbers
 
-### 4. Store Information & Contact
+### 4. Store Information & Contact ✅
 - Address, hours, contact form
-- Maps for two locations
-- Hero section uses video
+- Two-column layout (store info + social media)
+- Full-width Google Maps embed
+- Email: info@mathallen.nu
 
-### 5. Admin Panel
-- Secure area for CRUD operations on weekly offers
+### 5. Admin Panel ✅
+- Secure authentication (JWT)
+- CRUD operations for offers
+- Image upload (now stored in MongoDB for persistence)
+- "Bästa Pris" toggle
 - View newsletter subscribers
-- See contact form messages
-- Unit (Enhet) field is optional
-- Multi-buy value is manual number input
-- Drag-and-drop and numerical input for reordering offers
-- Category dropdowns sorted alphabetically
+- View contact messages
+- Drag-and-drop offer reordering
 
-### 6. Shop Page
-- Placeholder for future e-commerce
+### 6. Legal Pages ✅
+- Allmänna Villkor (Terms)
+- Dataskydd (Data Protection)
+- Tillgänglighet (Accessibility)
+- Integritetspolicy (Privacy Policy)
 
-### 7. SEO
-- Optimized for search engines
-
-### 8. Header
-- White top bar, red main menu
-- Fully sticky behavior on desktop and mobile
-
-### 9. Footer
-- Credit section for "Orvedo Co."
-
----
-
-## What's Been Implemented
-
-### Session: 2026-02-26
-- **Ticket-edge effect removed** - User requested flat edges on yellow price boxes
-- **Admin Panel verified working** - Category and Unit dropdowns function correctly
-
-### Previous Sessions
-- Offers page category filtering
-- Multi-Buy "För" feature with conditional rendering
-- Header redesign (white top-bar, red main-menu)
-- Admin offer sorting (drag-and-drop + numerical)
-- Admin panel enhancements (optional unit, alphabetical categories)
-- Homepage offers section update
-- Video integration on Contact and Offers pages
-- Content & style updates
-- Data persistence clarification
-- Footer credits for Orvedo Co.
-
----
-
-## Pending Issues
-
-### P1 - High Priority
-1. **Email functionality not active** - Needs `RESEND_API_KEY` in backend/.env
-2. **"Write a Review" link placeholder** - Needs Google Maps review URL
-
-### P2 - Medium Priority
-1. **Hero video compatibility** - Recommend .mp4/.webm format for mat-video.mov
-
----
-
-## Upcoming Tasks
-- (P2) Enhance Google Maps integration with interactive map
-
-## Future/Backlog
-- (P2) Build Online Shop functionality
+### 7. Shop Page ✅
+- Placeholder page
 
 ---
 
@@ -97,28 +65,126 @@ Turkish
 ```
 /app/
 ├── backend/
-│   ├── server.py        # FastAPI app, all API endpoints
-│   └── uploads/         # Uploaded offer images
+│   ├── server.py          # FastAPI, MongoDB, JWT auth, image storage
+│   ├── requirements.txt
+│   └── .env
 ├── frontend/
-│   ├── public/
-│   │   ├── mat-video.mov
-│   │   ├── contact-video.mov
-│   │   └── logo-beyaz2.png
-│   └── src/
-│       ├── components/
-│       │   ├── Footer.jsx
-│       │   ├── Header.jsx
-│       │   └── Layout.jsx
-│       └── pages/
-│           ├── AboutPage.jsx
-│           ├── AdminDashboard.jsx
-│           ├── AdminLogin.jsx
-│           ├── ContactPage.jsx
-│           ├── HomePage.jsx
-│           ├── OffersPage.jsx
-│           └── ShopPage.jsx
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── components/
+│   │   │   ├── Header.jsx (sticky)
+│   │   │   ├── Footer.jsx (social links, legal links)
+│   │   │   ├── Layout.jsx
+│   │   │   └── NewsletterPopup.jsx
+│   │   └── pages/
+│   │       ├── HomePage.jsx
+│   │       ├── AboutPage.jsx
+│   │       ├── OffersPage.jsx
+│   │       ├── ContactPage.jsx
+│   │       ├── ShopPage.jsx
+│   │       ├── AdminLogin.jsx
+│   │       ├── AdminDashboard.jsx
+│   │       └── [Legal Pages].jsx
+│   └── .env
+└── memory/
+    └── PRD.md
 ```
 
+**Tech Stack:**
+- Frontend: React, Tailwind CSS, Shadcn UI
+- Backend: FastAPI, Python
+- Database: MongoDB
+- Image Storage: MongoDB (base64 encoded) - persistent across deployments
+
+**Key API Endpoints:**
+- `POST /api/auth/login` - Admin authentication
+- `GET/POST/PUT/DELETE /api/offers` - Offer CRUD
+- `POST /api/upload` - Image upload (saves to MongoDB)
+- `GET /api/images/{id}` - Serve images from MongoDB
+- `POST /api/contact` - Contact form submission
+- `POST /api/newsletter/subscribe` - Newsletter signup
+
+---
+
+## Database Schema
+
+### offers collection
+```json
+{
+  "id": "uuid",
+  "product_name": "string",
+  "original_price": "float|null",
+  "offer_price": "float",
+  "unit": "string",
+  "image_url": "string",
+  "category": "string",
+  "week_number": "int",
+  "year": "int",
+  "is_active": "bool",
+  "sort_order": "int",
+  "multi_buy": "int|null",
+  "is_best_price": "bool",
+  "created_at": "datetime"
+}
+```
+
+### images collection (NEW)
+```json
+{
+  "id": "filename",
+  "filename": "original_filename",
+  "content_type": "mime_type",
+  "data": "base64_encoded_string",
+  "size": "int",
+  "created_at": "datetime"
+}
+```
+
+---
+
+## Pending Issues
+
+### P1 - High Priority
+1. **Email functionality not active** - Requires `RESEND_API_KEY` from user
+2. **"Write a Review" link placeholder** - Requires Google Maps review URL from user
+
+### P2 - Medium Priority
+3. **Hero video compatibility** - `.mov` file has limited browser support, recommend `.mp4` or `.webm`
+
+---
+
+## Future Tasks
+
+### Upcoming
+- Enhanced Google Maps integration (interactive map vs iframe)
+
+### Backlog
+- Online shop functionality (full e-commerce)
+- Email notification system for new offers
+
+---
+
+## Session Log
+
+### 2026-02-27
+- Fixed production deployment issues
+- Migrated image storage from local filesystem to MongoDB for persistence
+- Verified "Filtrera efter kategori" working in production
+- Verified "2 För" badge displaying correctly in price box
+- Issue was browser cache showing old version
+
+### Previous Sessions
+- Implemented newsletter popup
+- Implemented customer reviews carousel
+- Implemented "Bästa Pris" feature
+- Created legal pages
+- Redesigned contact page layout
+- Updated email to info@mathallen.nu
+- Added TikTok to footer social links
+
+---
+
 ## Admin Credentials
+Stored in `backend/.env`:
 - Username: admin
 - Password: mathallen2024
