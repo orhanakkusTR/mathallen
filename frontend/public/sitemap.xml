@@ -1,39 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     
-    <!-- Homepage -->
+    <!-- Homepage - Highest Priority -->
     <url>
-        <loc>https://mathallen.se/</loc>
-        <lastmod>2026-02-26</lastmod>
+        <loc>https://mathallen.nu/</loc>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/3458r0m2_logo-mat.png</image:loc>
+            <image:title>Mathallen Malmö Logo</image:title>
+            <image:caption>Mathallen Malmö - Din lokala stormarknad i Skåne</image:caption>
+        </image:image>
     </url>
     
-    <!-- Weekly Offers - Updated frequently -->
+    <!-- Weekly Offers - Updated frequently, High Priority -->
     <url>
-        <loc>https://mathallen.se/erbjudanden</loc>
-        <lastmod>2026-02-26</lastmod>
+        <loc>https://mathallen.nu/erbjudanden</loc>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.9</priority>
+        <priority>0.95</priority>
     </url>
     
     <!-- About Us -->
     <url>
-        <loc>https://mathallen.se/om-oss</loc>
-        <lastmod>2026-02-26</lastmod>
+        <loc>https://mathallen.nu/om-oss</loc>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
-    <!-- Contact -->
+    <!-- Contact - Important for local SEO -->
     <url>
-        <loc>https://mathallen.se/kontakt</loc>
-        <lastmod>2026-02-26</lastmod>
+        <loc>https://mathallen.nu/kontakt</loc>
+        <lastmod>2026-02-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+    
+    <!-- Shop Page -->
+    <url>
+        <loc>https://mathallen.nu/shop</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://mathallen.nu/allmanna-villkor</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://mathallen.nu/dataskydd</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://mathallen.nu/integritetspolicy</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://mathallen.nu/tillganglighet</loc>
+        <lastmod>2026-02-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
     </url>
     
 </urlset>
