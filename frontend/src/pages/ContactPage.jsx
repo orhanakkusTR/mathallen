@@ -44,6 +44,12 @@ export default function ContactPage() {
 
   return (
     <div className="page-transition">
+      <SEO 
+        title="Kontakt - Hitta Oss"
+        description="Kontakta Mathallen Malmö. Besök oss på Lantmannagatan 59, Malmö. Öppet 07-22 alla dagar. Ring 040-92 44 20 eller maila info@mathallen.nu"
+        keywords="kontakt Mathallen Malmö, hitta Mathallen, adress stormarknad Malmö, öppettider Mathallen, Lantmannagatan 59"
+        url="/kontakt"
+      />
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
         <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
