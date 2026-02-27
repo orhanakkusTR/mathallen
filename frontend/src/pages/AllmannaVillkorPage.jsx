@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function AllmannaVillkorPage() {
   return (
     <div className="page-transition">
+      <SEO 
+        title="Allmänna Villkor"
+        description="Läs Mathallen Malmös allmänna villkor och köpvillkor."
+        url="/allmanna-villkor"
+        noindex={true}
+      />
       {/* Hero */}
       <section className="bg-stone-900 py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
