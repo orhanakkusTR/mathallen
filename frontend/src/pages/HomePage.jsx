@@ -152,6 +152,12 @@ export default function HomePage() {
 
   return (
     <div className="page-transition">
+      <SEO 
+        title="Stormarknad i Skåne - Veckans Erbjudanden"
+        description="Mathallen Malmö - Skånes största stormarknad med över 45.000 produkter. Färska varor, bästa priserna och nya veckokampanjer varje vecka. Öppet 07-22 alla dagar. Besök oss på Lantmannagatan 59!"
+        keywords="Mathallen Malmö, stormarknad Malmö, stormarknad Skåne, veckans erbjudanden, kampanjer Malmö, färska produkter, grönsaker, frukt, kött, chark, mejeri, billig mat Malmö"
+        url="/"
+      />
       {/* Hero Section - Full Width */}
       <section className="relative h-screen min-h-[500px] overflow-hidden -mt-[93px] md:-mt-[117px] pt-[93px] md:pt-[117px]">
         {/* Background Video */}
