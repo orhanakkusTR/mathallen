@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Tag, Calendar, ShoppingBasket, Filter, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
