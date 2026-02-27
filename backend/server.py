@@ -496,35 +496,75 @@ async def setup_admin():
 app.include_router(api_router)
 
 # Serve uploaded files at /api/uploads (to go through ingress properly)
+# Also keep local mount for backwards compatibility
 app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
 
-# ---- FILE UPLOAD ----
+# ---- FILE UPLOAD (Now saves to MongoDB for persistence) ----
 @app.post("/api/upload")
 async def upload_file(file: UploadFile = File(...), admin = Depends(get_current_admin)):
-    """Upload a product image"""
+    """Upload a product image - saves to MongoDB for persistence across deployments"""
     # Validate file type
     allowed_types = ["image/jpeg", "image/png", "image/webp", "image/gif"]
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail="Endast bildformat är tillåtna (JPG, PNG, WebP, GIF)")
     
+    # Validate file size (max 5MB)
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="Filen är för stor. Max 5MB tillåtet.")
+    
     # Generate unique filename
     file_ext = file.filename.split(".")[-1] if "." in file.filename else "jpg"
     unique_filename = f"{uuid.uuid4()}.{file_ext}"
-    file_path = UPLOAD_DIR / unique_filename
     
-    # Save file
     try:
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+        # Save to MongoDB for persistence
+        image_doc = {
+            "id": unique_filename,
+            "filename": file.filename,
+            "content_type": file.content_type,
+            "data": base64.b64encode(contents).decode('utf-8'),
+            "size": len(contents),
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        await db.images.insert_one(image_doc)
+        logger.info(f"Image saved to MongoDB: {unique_filename}")
         
-        # Return the URL path (using /api/uploads for ingress routing)
+        # Also save locally for immediate access in preview
+        file_path = UPLOAD_DIR / unique_filename
+        with open(file_path, "wb") as buffer:
+            buffer.write(contents)
+        
+        # Return the URL path (using /api/images for DB-served images)
         return {
-            "url": f"/api/uploads/{unique_filename}",
+            "url": f"/api/images/{unique_filename}",
             "filename": unique_filename
         }
     except Exception as e:
         logger.error(f"File upload error: {str(e)}")
         raise HTTPException(status_code=500, detail="Kunde inte ladda upp filen")
+
+# ---- SERVE IMAGES FROM MONGODB ----
+@app.get("/api/images/{image_id}")
+async def get_image(image_id: str):
+    """Serve image from MongoDB - persistent across deployments"""
+    # First try MongoDB
+    image = await db.images.find_one({"id": image_id}, {"_id": 0})
+    if image:
+        image_data = base64.b64decode(image["data"])
+        return Response(content=image_data, media_type=image["content_type"])
+    
+    # Fallback to local file (for backwards compatibility)
+    file_path = UPLOAD_DIR / image_id
+    if file_path.exists():
+        with open(file_path, "rb") as f:
+            content = f.read()
+        # Determine content type from extension
+        ext = image_id.split(".")[-1].lower()
+        content_types = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp", "gif": "image/gif"}
+        return Response(content=content, media_type=content_types.get(ext, "image/jpeg"))
+    
+    raise HTTPException(status_code=404, detail="Bilden hittades inte")
 
 app.add_middleware(
     CORSMiddleware,
