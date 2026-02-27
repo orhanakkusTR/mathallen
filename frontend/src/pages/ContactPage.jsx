@@ -317,7 +317,7 @@ export default function ContactPage() {
             <h3 className="text-2xl md:text-3xl font-bold mb-6">Håll dig uppdaterad – följ oss</h3>
             <div className="flex gap-4 mb-6">
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/__mathallen" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -328,7 +328,7 @@ export default function ContactPage() {
                 </svg>
               </a>
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/MathallenMalmo/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -339,7 +339,7 @@ export default function ContactPage() {
                 </svg>
               </a>
               <a 
-                href="https://tiktok.com" 
+                href="https://tiktok.com/@mathallen" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
