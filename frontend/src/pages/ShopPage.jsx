@@ -20,6 +20,12 @@ export default function ShopPage() {
 
   return (
     <div className="page-transition">
+      <SEO 
+        title="Online Shop - Kommer Snart"
+        description="Mathallen Malmös online shop kommer snart! Anmäl dig för att bli först att få veta när vi lanserar."
+        keywords="Mathallen online shop, handla mat online Malmö, matbutik online"
+        url="/shop"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 overflow-hidden">
         {/* Background Pattern */}
