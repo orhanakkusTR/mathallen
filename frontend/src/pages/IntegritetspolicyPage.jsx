@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function IntegritetspolicyPage() {
   return (
     <div className="page-transition">
+      <SEO 
+        title="Integritetspolicy"
+        description="Läs Mathallen Malmös integritetspolicy och hur vi hanterar dina personuppgifter."
+        url="/integritetspolicy"
+        noindex={true}
+      />
       {/* Hero */}
       <section className="bg-stone-900 py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8">

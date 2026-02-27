@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function TillganglighetPage() {
   return (
     <div className="page-transition">
+      <SEO 
+        title="Tillgänglighet"
+        description="Information om tillgänglighet på Mathallen Malmös webbplats och i våra butiker."
+        url="/tillganglighet"
+        noindex={true}
+      />
       {/* Hero */}
       <section className="bg-stone-900 py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
