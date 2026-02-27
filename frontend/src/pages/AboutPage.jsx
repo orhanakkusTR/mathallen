@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 

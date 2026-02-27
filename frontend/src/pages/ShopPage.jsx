@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 
 export default function ShopPage() {
   const [email, setEmail] = useState("");
