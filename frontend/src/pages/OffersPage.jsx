@@ -36,7 +36,12 @@ const allCategories = [
 function getImageUrl(url) {
   if (!url) return null;
   
-  // If it starts with /uploads or /api/uploads, prepend the base URL
+  // If it starts with /api/images (new MongoDB storage), prepend the base URL
+  if (url.startsWith('/api/images')) {
+    return `${BASE_URL}${url}`;
+  }
+  
+  // If it starts with /uploads or /api/uploads (legacy), prepend the base URL
   if (url.startsWith('/uploads')) {
     return `${BASE_URL}/api${url}`;
   }
