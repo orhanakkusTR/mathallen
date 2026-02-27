@@ -1,22 +1,57 @@
 # Mathallen Malmö - robots.txt
-# https://mathallen.se
+# https://mathallen.nu
 
+# Allow all search engines
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://mathallen.se/sitemap.xml
-
-# Disallow admin pages
 Disallow: /admin
 Disallow: /admin/
+Disallow: /api/
 
-# Allow search engine crawlers
+# Sitemap location
+Sitemap: https://mathallen.nu/sitemap.xml
+
+# Google specific
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
-User-agent: Bingbot
+User-agent: Googlebot-Image
 Allow: /
 
-# Crawl-delay for respectful crawling
+# Bing specific
+User-agent: Bingbot
+Allow: /
 Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Social Media Crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Host directive
+Host: https://mathallen.nu
