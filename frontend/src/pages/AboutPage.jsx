@@ -100,6 +100,12 @@ export default function AboutPage() {
 
   return (
     <div className="page-transition">
+      <SEO 
+        title="Om Oss - Vår Historia"
+        description="Lär känna Mathallen Malmö - din lokala stormarknad sedan 2020. Vi erbjuder mångfald, kvalitet och bra priser med ett brett sortiment och attraktiva veckokampanjer."
+        keywords="om Mathallen Malmö, stormarknad historia, matbutik Malmö, lokal stormarknad, kvalitet mat Malmö"
+        url="/om-oss"
+      />
       {/* Hero - Split Layout */}
       <section className="relative bg-stone-900 overflow-hidden">
         <div className="grid md:grid-cols-2 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
