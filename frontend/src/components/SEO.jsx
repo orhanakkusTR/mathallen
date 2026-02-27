@@ -7,15 +7,16 @@ export default function SEO({
   title, 
   description, 
   keywords,
-  image = DEFAULT_IMAGE,
+  image,
   url,
-  type = 'website',
-  noindex = false,
-  structuredData = null
+  type,
+  noindex,
+  structuredData
 }) {
+  const siteTitle = 'Mathallen Malmö';
   const fullTitle = title 
-    ? `${title} | Mathallen Malmö` 
-    : 'Mathallen Malmö | Stormarknad i Skåne - Veckans Erbjudanden';
+    ? `${title} | ${siteTitle}` 
+    : `${siteTitle} | Stormarknad i Skåne - Veckans Erbjudanden`;
   
   const fullUrl = url ? `${BASE_URL}${url}` : BASE_URL;
   
@@ -26,41 +27,30 @@ export default function SEO({
   const defaultKeywords = 'Mathallen Malmö, stormarknad Malmö, stormarknad Skåne, veckans erbjudanden, kampanjer, färska produkter, matbutik Malmö';
   
   const metaKeywords = keywords || defaultKeywords;
+  
+  const ogImage = image || DEFAULT_IMAGE;
+  const ogType = type || 'website';
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="title" content={fullTitle} />
       <meta name="description" content={metaDescription} />
       <meta name="keywords" content={metaKeywords} />
-      {noindex && <meta name="robots" content="noindex, nofollow" />}
-      
-      {/* Canonical URL */}
+      {noindex === true && <meta name="robots" content="noindex, nofollow" />}
       <link rel="canonical" href={fullUrl} />
-      
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
+      <meta property="og:type" content={ogType} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={ogImage} />
       <meta property="og:locale" content="sv_SE" />
-      <meta property="og:site_name" content="Mathallen Malmö" />
-      
-      {/* Twitter */}
+      <meta property="og:site_name" content={siteTitle} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={image} />
-      
-      {/* Structured Data */}
-      {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      )}
+      <meta name="twitter:image" content={ogImage} />
     </Helmet>
   );
 }
