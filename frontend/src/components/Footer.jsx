@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/MathallenMalmo/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-red-600 transition-colors"
@@ -36,7 +36,7 @@ export default function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/__mathallen" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-red-600 transition-colors"
@@ -46,7 +46,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a 
-                href="https://tiktok.com" 
+                href="https://tiktok.com/@mathallen" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-red-600 transition-colors"
