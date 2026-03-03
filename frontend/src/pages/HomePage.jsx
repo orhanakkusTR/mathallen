@@ -448,12 +448,16 @@ export default function HomePage() {
                               <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
                                 {Math.floor(offer.offer_price)}
                               </span>
-                              {offer.offer_price % 1 !== 0 && (
-                                <sup className="text-red-700 font-bold text-sm md:text-base">
-                                  {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
-                                </sup>
+                              {offer.offer_price % 1 !== 0 ? (
+                                <>
+                                  <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">.</span>
+                                  <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-1">
+                                    {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
+                                  </span>
+                                </>
+                              ) : (
+                                <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">:-</span>
                               )}
-                              <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">:-</span>
                             </div>
                           </div>
                         </>
@@ -464,12 +468,16 @@ export default function HomePage() {
                             <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
                               {Math.floor(offer.offer_price)}
                             </span>
-                            {offer.offer_price % 1 !== 0 && (
-                              <sup className="text-red-700 font-bold text-sm md:text-base">
-                                {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
-                              </sup>
+                            {offer.offer_price % 1 !== 0 ? (
+                              <>
+                                <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">.</span>
+                                <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-1">
+                                  {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
+                                </span>
+                              </>
+                            ) : (
+                              <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">:-</span>
                             )}
-                            <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">:-</span>
                             {offer.unit && (
                               <span className="text-red-700 font-semibold text-lg md:text-xl ml-0.5">/{offer.unit}</span>
                             )}
