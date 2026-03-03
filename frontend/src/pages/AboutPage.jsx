@@ -391,7 +391,7 @@ export default function AboutPage() {
             {/* Färska delikatesser */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
-                src="https://images.unsplash.com/photo-1719512039766-ca2f92cad537?auto=format&fit=crop&w=600&q=80"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/84fkzuau_mmathallen-baklava-malmo.png"
                 alt="Färska delikatesser"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
