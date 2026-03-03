@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket, Star, ExternalLink } from "lucide-react";
+import { Heart, Award, Users, Leaf, ArrowRight, ShoppingBasket, Star, ExternalLink, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import SEO from "@/components/SEO";
@@ -153,6 +153,37 @@ export default function AboutPage() {
                 <p>
                   Vårt mål är enkelt: att vara en trygg och självklar matdestination för både Malmö och Skåne – en plats där du alltid hittar det du söker och känner dig välkommen varje gång du besöker oss.
                 </p>
+              </div>
+              
+              {/* Contact Info Boxes */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <div className="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-red-300 hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 text-red-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-stone-500 uppercase tracking-wide font-medium">Ring oss</p>
+                      <a href="tel:+46409244200" className="text-stone-900 font-semibold hover:text-red-600 transition-colors">
+                        040-92 44 200
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-red-300 hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-red-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-stone-500 uppercase tracking-wide font-medium">Besök oss</p>
+                      <p className="text-stone-900 font-semibold">
+                        Lantmannagatan 59, Malmö
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="order-1 lg:order-2">
