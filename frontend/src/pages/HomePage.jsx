@@ -167,19 +167,15 @@ export default function HomePage() {
       />
       {/* Hero Section - Full Width */}
       <section className="relative h-screen min-h-[500px] overflow-hidden -mt-[93px] md:-mt-[117px] pt-[93px] md:pt-[117px]">
-        {/* Background Video */}
+        {/* Background Image */}
         <div className="absolute inset-0 bg-stone-900">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <img
+            src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/kfn1ijyr_mathallen-om-oss.png"
+            alt="Mathallen Malmö"
             className="w-full h-full object-cover"
-          >
-            <source src="/mat-video.mov" type="video/mp4" />
-          </video>
+          />
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
 
         {/* Content */}
