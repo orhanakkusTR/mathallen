@@ -688,7 +688,7 @@ export default function HomePage() {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.pexels.com/photos/10360444/pexels-photo-10360444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/2hs2cddg_mathallen-malmo.png"
                   alt="Mathallen butik"
                   className="w-full aspect-[4/3] object-cover"
                 />
