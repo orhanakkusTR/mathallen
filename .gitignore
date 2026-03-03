@@ -103,3 +103,7 @@ frontend/public/mat-video.mov
 # Environment files
 *.env
 *.env.*
+-e 
+# Environment files
+*.env
+*.env.*
