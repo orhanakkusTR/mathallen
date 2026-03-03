@@ -446,8 +446,14 @@ export default function HomePage() {
                             </span>
                             <div className="flex items-start">
                               <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                                {Math.floor(offer.offer_price)}:-
+                                {Math.floor(offer.offer_price)}
                               </span>
+                              <div className="flex flex-col items-start ml-0.5">
+                                <span className="text-red-700 font-bold text-sm md:text-base leading-none">
+                                  {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
+                                </span>
+                                <span className="text-red-700 font-bold text-sm md:text-base leading-none">:-</span>
+                              </div>
                             </div>
                           </div>
                         </>
@@ -456,8 +462,14 @@ export default function HomePage() {
                           <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
                           <div className="flex items-start justify-center">
                             <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
-                              {Math.floor(offer.offer_price)}:-
+                              {Math.floor(offer.offer_price)}
                             </span>
+                            <div className="flex flex-col items-start ml-0.5">
+                              <span className="text-red-700 font-bold text-sm md:text-base leading-none">
+                                {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
+                              </span>
+                              <span className="text-red-700 font-bold text-sm md:text-base leading-none">:-</span>
+                            </div>
                             {offer.unit && (
                               <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
                             )}
@@ -478,7 +490,9 @@ export default function HomePage() {
                         <div className="bg-stone-100 rounded-lg py-2 px-3">
                           <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
                           <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">
-                            {Math.floor(offer.original_price)}:-{offer.unit ? `/${offer.unit}` : ''}
+                            {Math.floor(offer.original_price)}
+                            <sup className="text-xs">{offer.original_price % 1 !== 0 ? Math.round((offer.original_price % 1) * 100).toString().padStart(2, '0') : '-'}</sup>
+                            :-{offer.unit ? `/${offer.unit}` : ''}
                           </span>
                         </div>
                       )}
