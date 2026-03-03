@@ -497,7 +497,7 @@ export default function HomePage() {
                       {offer.original_price && (
                         <div className="bg-stone-100 rounded-lg py-2 px-3">
                           <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
-                          <span className="text-red-600 text-sm md:text-base font-bold line-through whitespace-nowrap">
+                          <span className="text-stone-700 text-sm md:text-base font-bold whitespace-nowrap">
                             {Math.floor(offer.original_price)}
                             <sup className="text-xs">{offer.original_price % 1 !== 0 ? Math.round((offer.original_price % 1) * 100).toString().padStart(2, '0') : '-'}</sup>
                             :-{offer.unit ? `/${offer.unit}` : ''}
