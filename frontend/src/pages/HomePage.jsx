@@ -337,7 +337,7 @@ export default function HomePage() {
               data-testid="value-card-3"
             >
               <img
-                src="https://images.unsplash.com/photo-1760463921690-9bec0cc7d434?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxzdXBlcm1hcmtldCUyMGFpc2xlJTIwcHJvZHVjdHMlMjB2YXJpZXR5fGVufDB8fHx8MTc3MjA1NDg1NXww&ixlib=rb-4.1.0&q=85"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/6v61eqiw_mathallen-Mangkulturellt.png"
                 alt="Mångkulturellt sortiment"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
