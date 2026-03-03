@@ -293,7 +293,7 @@ export default function HomePage() {
               data-testid="value-card-1"
             >
               <img
-                src="https://images.unsplash.com/photo-1693505628207-dbeb3d882c92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwyfHxncm9jZXJ5JTIwc2hvcHBpbmclMjBiYXNrZXQlMjBkaXNjb3VudCUyMHNhbGV8ZW58MHx8fHwxNzcyMDU0ODUyfDA&ixlib=rb-4.1.0&q=85"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/pwjk9bwu_mathallen-mejeri.png"
                 alt="Bra priser"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
