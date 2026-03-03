@@ -83,6 +83,7 @@ class Offer(BaseModel):
     year: int
     is_active: bool = True
     sort_order: int = 0
+    home_order: Optional[int] = None  # 1-4 for homepage display order
     multi_buy: Optional[int] = None  # 2 för, 3 för, 4 för - null means no multi-buy
     is_best_price: bool = False  # Bästa Pris badge
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -98,6 +99,7 @@ class OfferCreate(BaseModel):
     year: int
     is_active: bool = True
     sort_order: int = 0
+    home_order: Optional[int] = None
     multi_buy: Optional[int] = None
     is_best_price: bool = False
 
@@ -112,6 +114,7 @@ class OfferUpdate(BaseModel):
     year: Optional[int] = None
     is_active: Optional[bool] = None
     sort_order: Optional[int] = None
+    home_order: Optional[int] = None
     multi_buy: Optional[int] = None
     is_best_price: Optional[bool] = None
 
@@ -243,6 +246,19 @@ async def get_current_offers():
         {"week_number": current_week, "year": current_year, "is_active": True},
         {"_id": 0}
     ).sort("sort_order", 1).to_list(100)
+    
+    for offer in offers:
+        if isinstance(offer.get('created_at'), str):
+            offer['created_at'] = datetime.fromisoformat(offer['created_at'])
+    return offers
+
+@api_router.get("/offers/homepage", response_model=List[Offer])
+async def get_homepage_offers():
+    """Get offers for homepage - only those with home_order set (1-4), sorted by home_order"""
+    offers = await db.offers.find(
+        {"home_order": {"$ne": None}, "is_active": True},
+        {"_id": 0}
+    ).sort("home_order", 1).to_list(4)
     
     for offer in offers:
         if isinstance(offer.get('created_at'), str):

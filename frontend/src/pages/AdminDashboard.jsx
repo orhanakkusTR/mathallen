@@ -143,6 +143,7 @@ export default function AdminDashboard() {
     year: currentYear,
     is_active: true,
     sort_order: 0,
+    home_order: "",
     multi_buy: "",
     is_best_price: false,
   });
@@ -222,6 +223,7 @@ export default function AdminDashboard() {
       year: currentYear,
       is_active: true,
       sort_order: offers.length,
+      home_order: "",
       multi_buy: "",
       is_best_price: false,
     });
@@ -242,6 +244,7 @@ export default function AdminDashboard() {
       year: offer.year,
       is_active: offer.is_active,
       sort_order: offer.sort_order || 0,
+      home_order: offer.home_order?.toString() || "",
       multi_buy: offer.multi_buy?.toString() || "",
       is_best_price: offer.is_best_price || false,
     });
@@ -295,6 +298,7 @@ export default function AdminDashboard() {
       offer_price: parseFloat(formData.offer_price),
       original_price: formData.original_price ? parseFloat(formData.original_price) : null,
       multi_buy: formData.multi_buy ? parseInt(formData.multi_buy) : null,
+      home_order: formData.home_order ? parseInt(formData.home_order) : null,
       unit: formData.unit === "none" ? "" : formData.unit,
     };
 
@@ -643,6 +647,7 @@ export default function AdminDashboard() {
                   <thead>
                     <tr className="border-b border-stone-100 bg-stone-50">
                       <th className="text-left py-3 px-3 text-stone-600 text-sm font-medium w-24">Sıra</th>
+                      <th className="text-left py-3 px-2 text-stone-600 text-sm font-medium w-16">Ana</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Produkt</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium hidden md:table-cell">Kategori</th>
                       <th className="text-left py-3 px-4 text-stone-600 text-sm font-medium">Pris</th>
@@ -677,6 +682,26 @@ export default function AdminDashboard() {
                               data-testid={`sort-order-${offer.id}`}
                             />
                           </div>
+                        </td>
+                        <td className="py-3 px-2">
+                          <input
+                            type="number"
+                            min="1"
+                            max="4"
+                            placeholder="-"
+                            value={offer.home_order || ""}
+                            onChange={async (e) => {
+                              const val = e.target.value ? parseInt(e.target.value) : null;
+                              try {
+                                await axiosAuth.put(`/offers/${offer.id}`, { home_order: val });
+                                fetchData();
+                              } catch (err) {
+                                console.error(err);
+                              }
+                            }}
+                            className="w-12 h-8 text-center text-sm font-medium border border-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                            data-testid={`home-order-${offer.id}`}
+                          />
                         </td>
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-3">

@@ -121,11 +121,18 @@ export default function HomePage() {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await axios.get(`${API}/offers/current`);
-        // Always show max 4 offers on homepage
-        setOffers(response.data.slice(0, 4));
+        // Fetch homepage-specific offers (with home_order set)
+        const response = await axios.get(`${API}/offers/homepage`);
+        setOffers(response.data);
       } catch (error) {
         console.error("Error fetching offers:", error);
+        // Fallback to current offers if homepage endpoint fails
+        try {
+          const fallback = await axios.get(`${API}/offers/current`);
+          setOffers(fallback.data.slice(0, 4));
+        } catch (e) {
+          console.error("Fallback also failed:", e);
+        }
       } finally {
         setLoading(false);
       }
