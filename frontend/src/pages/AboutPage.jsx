@@ -156,21 +156,12 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-2xl overflow-hidden shadow-lg">
-                  <img
-                    src="https://images.pexels.com/photos/10360444/pexels-photo-10360444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Mathallen interiör"
-                    className="w-full aspect-square object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl overflow-hidden shadow-lg">
-                  <img
-                    src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="Färska produkter"
-                    className="w-full aspect-square object-cover"
-                  />
-                </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/xmnxjndn_om-oss.png"
+                  alt="Mathallen Malmö butik"
+                  className="w-full aspect-[4/3] object-cover"
+                />
               </div>
             </div>
           </div>
