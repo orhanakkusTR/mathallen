@@ -271,7 +271,7 @@ export default function HomePage() {
               data-testid="value-card-0"
             >
               <img
-                src="https://images.unsplash.com/photo-1552825896-8059df63a1fb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHZlZ2V0YWJsZXMlMjBtYXJrZXQlMjBjb2xvcmZ1bHxlbnwwfHx8fDE3NzIwNTQ4NTJ8MA&ixlib=rb-4.1.0&q=85"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/7hy6ulnu_mahtallen-malmo-pris.png"
                 alt="Färska produkter"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
