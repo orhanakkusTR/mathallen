@@ -334,34 +334,30 @@ export default function OffersPage() {
                           <span className="bg-red-600 text-white font-bold text-sm md:text-base px-2 py-0.5 rounded">
                             {offer.multi_buy} För
                           </span>
-                          <div className="flex items-start">
+                          <div className="flex items-baseline">
                             <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
                               {Math.floor(offer.offer_price)}
                             </span>
-                            <div className="flex flex-col items-start ml-0.5">
-                              <span className="text-red-700 font-bold text-sm md:text-base leading-none">
-                                {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
-                              </span>
-                              <span className="text-red-700 font-bold text-sm md:text-base leading-none">:-</span>
-                            </div>
+                            <sup className="text-red-700 font-bold text-base md:text-lg relative -top-3">
+                              {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
+                            </sup>
+                            <span className="text-red-700 font-bold text-xl md:text-2xl">:-</span>
                           </div>
                         </div>
                       </>
                     ) : (
                       <>
                         <span className="text-red-700 font-bold text-xs md:text-sm block leading-tight">Kampanj</span>
-                        <div className="flex items-start justify-center">
+                        <div className="flex items-baseline justify-center">
                           <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">
                             {Math.floor(offer.offer_price)}
                           </span>
-                          <div className="flex flex-col items-start ml-0.5">
-                            <span className="text-red-700 font-bold text-sm md:text-base leading-none">
-                              {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
-                            </span>
-                            <span className="text-red-700 font-bold text-sm md:text-base leading-none">:-</span>
-                          </div>
+                          <sup className="text-red-700 font-bold text-base md:text-lg relative -top-3">
+                            {offer.offer_price % 1 !== 0 ? Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0') : '-'}
+                          </sup>
+                          <span className="text-red-700 font-bold text-xl md:text-2xl">:-</span>
                           {offer.unit && (
-                            <span className="text-red-700 font-semibold text-sm md:text-base self-end mb-1 ml-0.5">/{offer.unit}</span>
+                            <span className="text-red-700 font-semibold text-sm md:text-base ml-0.5">/{offer.unit}</span>
                           )}
                         </div>
                       </>
