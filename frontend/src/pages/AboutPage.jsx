@@ -234,7 +234,7 @@ export default function AboutPage() {
             {/* Prisvärdhet */}
             <div className="group relative overflow-hidden rounded-2xl aspect-[3/4]">
               <img
-                src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/vet1k493_pris-malmo-mathallen.png"
                 alt="Prisvärdhet"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
