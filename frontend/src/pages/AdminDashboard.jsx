@@ -121,6 +121,12 @@ export default function AdminDashboard() {
   const [editingOffer, setEditingOffer] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
+  const [siteSettings, setSiteSettings] = useState({
+    campaign_week: "v.10",
+    campaign_date: "03/03 - 09/03",
+    campaign_year: 2026
+  });
+  const [savingSettings, setSavingSettings] = useState(false);
   const navigate = useNavigate();
 
   const currentWeek = getWeekNumber(new Date());
@@ -161,16 +167,18 @@ export default function AdminDashboard() {
 
   const fetchData = async () => {
     try {
-      const [offersRes, messagesRes, subscribersRes] = await Promise.all([
+      const [offersRes, messagesRes, subscribersRes, settingsRes] = await Promise.all([
         axiosAuth.get("/offers?active_only=false"),
         axiosAuth.get("/contact/messages"),
         axiosAuth.get("/newsletter/subscribers"),
+        axios.get(`${API}/settings`),
       ]);
       // Sort offers by sort_order
       const sortedOffers = offersRes.data.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
       setOffers(sortedOffers);
       setMessages(messagesRes.data);
       setSubscribers(subscribersRes.data);
+      setSiteSettings(settingsRes.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response?.status === 401) {
@@ -185,6 +193,19 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("mathallen_admin_token");
     navigate("/admin");
+  };
+
+  const handleSaveSettings = async () => {
+    setSavingSettings(true);
+    try {
+      await axiosAuth.put("/settings", siteSettings);
+      toast.success("Inställningar sparade!");
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      toast.error("Kunde inte spara inställningar");
+    } finally {
+      setSavingSettings(false);
+    }
   };
 
   const openCreateDialog = () => {
@@ -522,7 +543,82 @@ export default function AdminDashboard() {
               <Mail className="w-4 h-4 mr-2" />
               Meddelanden
             </TabsTrigger>
+            <TabsTrigger value="settings" className="data-[state=active]:bg-red-600 data-[state=active]:text-white rounded-lg px-4 py-2">
+              <Calendar className="w-4 h-4 mr-2" />
+              Kampanjperiod
+            </TabsTrigger>
           </TabsList>
+
+          {/* Settings Tab */}
+          <TabsContent value="settings" className="space-y-4">
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <h2 className="text-xl font-semibold text-stone-900 mb-6">Kampanjperiod Inställningar</h2>
+              <p className="text-stone-500 text-sm mb-6">
+                Ändra veckonummer och datum som visas på erbjudanden-sidan
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <Label htmlFor="campaign_year">År</Label>
+                  <Input
+                    id="campaign_year"
+                    type="number"
+                    value={siteSettings.campaign_year}
+                    onChange={(e) => setSiteSettings({...siteSettings, campaign_year: parseInt(e.target.value) || 2026})}
+                    className="mt-1"
+                    data-testid="settings-year"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="campaign_week">Vecka (t.ex. v.10)</Label>
+                  <Input
+                    id="campaign_week"
+                    value={siteSettings.campaign_week}
+                    onChange={(e) => setSiteSettings({...siteSettings, campaign_week: e.target.value})}
+                    placeholder="v.10"
+                    className="mt-1"
+                    data-testid="settings-week"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="campaign_date">Datum (t.ex. 03/03 - 09/03)</Label>
+                  <Input
+                    id="campaign_date"
+                    value={siteSettings.campaign_date}
+                    onChange={(e) => setSiteSettings({...siteSettings, campaign_date: e.target.value})}
+                    placeholder="03/03 - 09/03"
+                    className="mt-1"
+                    data-testid="settings-date"
+                  />
+                </div>
+              </div>
+
+              <div className="bg-stone-50 rounded-lg p-4 mb-6">
+                <p className="text-sm text-stone-600 mb-2">Förhandsvisning:</p>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-stone-500" />
+                  <span className="font-semibold text-stone-900">
+                    Gäller {siteSettings.campaign_year} {siteSettings.campaign_week}
+                  </span>
+                </div>
+                <p className="text-stone-700 mt-1 ml-7">{siteSettings.campaign_date}</p>
+              </div>
+
+              <Button
+                onClick={handleSaveSettings}
+                disabled={savingSettings}
+                className="bg-red-600 hover:bg-red-700 text-white"
+                data-testid="save-settings-button"
+              >
+                {savingSettings ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Save className="w-4 h-4 mr-2" />
+                )}
+                Spara inställningar
+              </Button>
+            </div>
+          </TabsContent>
 
           {/* Offers Tab */}
           <TabsContent value="offers" className="space-y-4">

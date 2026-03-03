@@ -474,6 +474,43 @@ async def get_leads(admin = Depends(get_current_admin)):
     leads = await db.leads.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
     return leads
 
+# ---- SITE SETTINGS ----
+
+class SiteSettings(BaseModel):
+    campaign_week: str = "v.10"
+    campaign_date: str = "03/03 - 09/03"
+    campaign_year: int = 2026
+
+@api_router.get("/settings")
+async def get_settings():
+    """Get site settings (public)"""
+    settings = await db.settings.find_one({"id": "site_settings"}, {"_id": 0})
+    if not settings:
+        # Return default settings
+        return {
+            "campaign_week": "v.10",
+            "campaign_date": "03/03 - 09/03",
+            "campaign_year": 2026
+        }
+    return settings
+
+@api_router.put("/settings")
+async def update_settings(settings: SiteSettings, admin = Depends(get_current_admin)):
+    """Update site settings (admin only)"""
+    settings_doc = {
+        "id": "site_settings",
+        "campaign_week": settings.campaign_week,
+        "campaign_date": settings.campaign_date,
+        "campaign_year": settings.campaign_year,
+        "updated_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.settings.update_one(
+        {"id": "site_settings"},
+        {"$set": settings_doc},
+        upsert=True
+    )
+    return {"message": "Settings updated", "settings": settings_doc}
+
 # ---- ADMIN SETUP ----
 
 @api_router.post("/setup/admin")

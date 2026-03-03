@@ -59,10 +59,11 @@ export default function OffersPage() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-
-  const currentWeek = new Date().toLocaleDateString("sv-SE", {
-    year: "numeric",
-  }).split("-")[0] + " v." + getWeekNumber(new Date());
+  const [siteSettings, setSiteSettings] = useState({
+    campaign_week: "v.10",
+    campaign_date: "03/03 - 09/03",
+    campaign_year: 2026
+  });
 
   // Get unique categories that exist in offers
   const availableCategories = useMemo(() => {
@@ -85,17 +86,21 @@ export default function OffersPage() {
   }
 
   useEffect(() => {
-    const fetchOffers = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`${API}/offers/current`);
-        setOffers(response.data);
+        const [offersRes, settingsRes] = await Promise.all([
+          axios.get(`${API}/offers/current`),
+          axios.get(`${API}/settings`)
+        ]);
+        setOffers(offersRes.data);
+        setSiteSettings(settingsRes.data);
       } catch (error) {
-        console.error("Error fetching offers:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchOffers();
+    fetchData();
   }, []);
 
   return (
@@ -121,9 +126,12 @@ export default function OffersPage() {
             <p className="text-base md:text-lg text-stone-300 leading-relaxed max-w-lg mb-6">
               Upptäck veckans bästa priser på utvalda favoriter – passa på att spara mer.
             </p>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-5 py-3 w-fit">
-              <Calendar className="w-5 h-5 text-red-400" />
-              <span className="font-semibold text-white">Gäller {currentWeek}</span>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 w-fit">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-red-400" />
+                <span className="font-semibold text-white">Gäller {siteSettings.campaign_year} {siteSettings.campaign_week}</span>
+              </div>
+              <p className="text-stone-300 text-sm mt-1 ml-7">{siteSettings.campaign_date}</p>
             </div>
           </div>
           
