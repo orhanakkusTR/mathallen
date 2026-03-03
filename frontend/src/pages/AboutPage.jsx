@@ -156,11 +156,11 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-stone-100">
                 <img
                   src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/xmnxjndn_om-oss.png"
                   alt="Mathallen Malmö butik"
-                  className="w-full aspect-[4/3] object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
