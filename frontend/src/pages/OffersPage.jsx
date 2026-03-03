@@ -136,14 +136,13 @@ export default function OffersPage() {
           </div>
           
           {/* Right - Video (full bleed) */}
-          <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2">
+          <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2 bg-stone-800">
             <video
               autoPlay
               muted
               loop
               playsInline
               className="w-full h-full object-cover"
-              poster="https://images.unsplash.com/photo-1632175771754-4c413217669f?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1200"
             >
               <source src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/xpnxhyg9_video-1.mov" type="video/mp4" />
             </video>
