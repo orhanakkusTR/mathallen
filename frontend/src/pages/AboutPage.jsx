@@ -126,7 +126,7 @@ export default function AboutPage() {
           {/* Right - Image (full bleed) */}
           <div className="relative h-56 sm:h-64 md:h-auto order-1 md:order-2">
             <img
-              src="https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/kfn1ijyr_mathallen-om-oss.png"
               alt="Mathallen butik"
               className="w-full h-full object-cover"
             />
