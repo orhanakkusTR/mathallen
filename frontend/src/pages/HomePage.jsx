@@ -161,13 +161,12 @@ export default function HomePage() {
       {/* Hero Section - Full Width */}
       <section className="relative h-screen min-h-[500px] overflow-hidden -mt-[93px] md:-mt-[117px] pt-[93px] md:pt-[117px]">
         {/* Background Video */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-stone-900">
           <video
             autoPlay
             muted
             loop
             playsInline
-            poster="https://images.pexels.com/photos/3985093/pexels-photo-3985093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=1920"
             className="w-full h-full object-cover"
           >
             <source src="/mat-video.mov" type="video/mp4" />
