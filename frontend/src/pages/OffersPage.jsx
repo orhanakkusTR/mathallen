@@ -341,7 +341,7 @@ export default function OffersPage() {
                             {offer.offer_price % 1 !== 0 ? (
                               <>
                                 <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">.</span>
-                                <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-1">
+                                <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-2 -ml-0.5">
                                   {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
                                 </span>
                               </>
@@ -361,7 +361,7 @@ export default function OffersPage() {
                           {offer.offer_price % 1 !== 0 ? (
                             <>
                               <span className="text-red-700 font-black text-3xl md:text-4xl leading-none">.</span>
-                              <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-1">
+                              <span className="text-red-700 font-bold text-xl md:text-2xl relative -top-2 -ml-0.5">
                                 {Math.round((offer.offer_price % 1) * 100).toString().padStart(2, '0')}
                               </span>
                             </>
