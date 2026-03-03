@@ -363,7 +363,7 @@ export default function AboutPage() {
             {/* Kolonial */}
             <div className="group relative overflow-hidden rounded-2xl aspect-square">
               <img
-                src="https://images.pexels.com/photos/458796/pexels-photo-458796.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/v3q463oo_koloniar-malmo.png"
                 alt="Kolonial"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
