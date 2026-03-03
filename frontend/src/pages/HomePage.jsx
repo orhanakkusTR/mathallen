@@ -499,8 +499,17 @@ export default function HomePage() {
                           <span className="text-stone-600 text-xs md:text-sm font-medium">Ord pris </span>
                           <span className="text-stone-700 text-sm md:text-base font-bold whitespace-nowrap">
                             {Math.floor(offer.original_price)}
-                            <sup className="text-xs">{offer.original_price % 1 !== 0 ? Math.round((offer.original_price % 1) * 100).toString().padStart(2, '0') : '-'}</sup>
-                            :-{offer.unit ? `/${offer.unit}` : ''}
+                            {offer.original_price % 1 !== 0 ? (
+                              <>
+                                <span>.</span>
+                                <span className="text-xs relative -top-1">
+                                  {Math.round((offer.original_price % 1) * 100).toString().padStart(2, '0')}
+                                </span>
+                              </>
+                            ) : (
+                              <span>:-</span>
+                            )}
+                            {offer.unit ? `/${offer.unit}` : ''}
                           </span>
                         </div>
                       )}
