@@ -170,7 +170,7 @@ export default function HomePage() {
         {/* Background Image */}
         <div className="absolute inset-0 bg-stone-900">
           <img
-            src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/kfn1ijyr_mathallen-om-oss.png"
+            src="https://customer-assets.emergentagent.com/job_stormarknad-malmo/artifacts/xmnxjndn_om-oss.png"
             alt="Mathallen Malmö"
             className="w-full h-full object-cover"
           />
