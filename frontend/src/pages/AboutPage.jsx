@@ -171,7 +171,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 
-                <div className="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-red-300 hover:shadow-md transition-all duration-300">
+                <a href="https://maps.app.goo.gl/g6sQ4pxxVY1qVkDj6" target="_blank" rel="noopener noreferrer" className="bg-stone-50 rounded-xl p-5 border border-stone-200 hover:border-red-300 hover:shadow-md transition-all duration-300 block">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-5 h-5 text-red-600" />
@@ -183,7 +183,7 @@ export default function AboutPage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
             <div className="order-1 lg:order-2">

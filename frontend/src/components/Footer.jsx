@@ -92,10 +92,10 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">
+                <a href="https://maps.app.goo.gl/g6sQ4pxxVY1qVkDj6" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-red-400 transition-colors">
                   Lantmannagatan 59,<br />
                   214 48 Malmö
-                </span>
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-red-500 flex-shrink-0" />

@@ -294,10 +294,10 @@ export default function ContactPage() {
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                <p className="text-stone-300">
+                <a href="https://maps.app.goo.gl/g6sQ4pxxVY1qVkDj6" target="_blank" rel="noopener noreferrer" className="text-stone-300 hover:text-white transition-colors">
                   Lantmannagatan 59,<br />
                   214 48 Malmö
-                </p>
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-red-400 flex-shrink-0" />

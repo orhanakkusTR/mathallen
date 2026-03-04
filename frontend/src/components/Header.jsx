@@ -25,10 +25,10 @@ export default function Header() {
           {/* Desktop */}
           <div className="hidden sm:flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <Link to="/kontakt" className="flex items-center gap-2 hover:text-red-700 transition-colors">
+              <a href="https://maps.app.goo.gl/g6sQ4pxxVY1qVkDj6" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-red-700 transition-colors">
                 <MapPin className="w-4 h-4 text-red-500" />
                 <span>Lantmannagatan 59, Malmö</span>
-              </Link>
+              </a>
               <span className="w-px h-4 bg-red-200" />
               <span className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-red-500" />
@@ -47,10 +47,10 @@ export default function Header() {
           
           {/* Mobile */}
           <div className="sm:hidden flex items-center justify-center gap-3 text-xs">
-            <Link to="/kontakt" className="flex items-center gap-1.5 hover:text-red-700">
+            <a href="https://maps.app.goo.gl/g6sQ4pxxVY1qVkDj6" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-red-700">
               <MapPin className="w-3.5 h-3.5 text-red-500" />
-              <span>Malmö</span>
-            </Link>
+              <span>Lantmannagatan 59</span>
+            </a>
             <span className="w-px h-3.5 bg-red-200" />
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-red-500" />
