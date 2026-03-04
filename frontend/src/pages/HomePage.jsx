@@ -555,7 +555,7 @@ export default function HomePage() {
               className="bg-red-600 hover:bg-red-700 text-white rounded-full px-6"
               data-testid="write-review-button"
             >
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://g.page/r/CSeTPWnEBFkLEAE/review" target="_blank" rel="noopener noreferrer">
                 Skriv ett omdöme
                 <ExternalLink className="w-4 h-4 ml-2" />
               </a>
