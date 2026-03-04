@@ -19,12 +19,14 @@ import IntegritetspolicyPage from "@/pages/IntegritetspolicyPage";
 import Layout from "@/components/Layout";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieConsent from "@/components/CookieConsent";
+import PromoPopup from "@/components/PromoPopup";
 
 function App() {
   return (
     <div className="App min-h-screen bg-background">
       <BrowserRouter>
         <ScrollToTop />
+        <PromoPopup />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
