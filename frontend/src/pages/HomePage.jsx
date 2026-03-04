@@ -117,15 +117,22 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [subscribing, setSubscribing] = useState(false);
+  const [campaignDate, setCampaignDate] = useState("");
 
   useEffect(() => {
-    const fetchOffers = async () => {
+    const fetchData = async () => {
       try {
-        // Fetch homepage-specific offers (with home_order set)
-        const response = await axios.get(`${API}/offers/homepage`);
-        setOffers(response.data);
+        // Fetch homepage-specific offers and settings in parallel
+        const [offersRes, settingsRes] = await Promise.all([
+          axios.get(`${API}/offers/homepage`),
+          axios.get(`${API}/settings`)
+        ]);
+        setOffers(offersRes.data);
+        if (settingsRes.data?.campaign_date) {
+          setCampaignDate(settingsRes.data.campaign_date);
+        }
       } catch (error) {
-        console.error("Error fetching offers:", error);
+        console.error("Error fetching data:", error);
         // Fallback to current offers if homepage endpoint fails
         try {
           const fallback = await axios.get(`${API}/offers/current`);
@@ -137,7 +144,7 @@ export default function HomePage() {
         setLoading(false);
       }
     };
-    fetchOffers();
+    fetchData();
   }, []);
 
   const handleSubscribe = async (e) => {
@@ -223,11 +230,14 @@ export default function HomePage() {
           {/* Weekly Offer Card - Floating */}
           <Link 
             to="/erbjudanden"
-            className="hidden lg:flex absolute right-8 xl:right-16 bottom-16 flex-col items-center justify-center w-44 h-44 bg-red-600 hover:bg-red-700 transition-colors rounded-2xl shadow-2xl text-white group"
+            className="hidden lg:flex absolute right-8 xl:right-16 bottom-16 flex-col items-center justify-center w-44 h-48 bg-red-600 hover:bg-red-700 transition-colors rounded-2xl shadow-2xl text-white group"
             data-testid="hero-weekly-offer-box"
           >
             <p className="text-white/80 text-xs font-medium uppercase tracking-wider mb-1">Erbjudanden</p>
             <p className="text-white font-bold text-3xl">VECKA {getWeekNumber()}</p>
+            {campaignDate && (
+              <p className="text-white/70 text-xs mt-1">{campaignDate}</p>
+            )}
             <div className="mt-2 flex items-center gap-1 text-white/90 text-xs font-medium group-hover:text-white transition-colors">
               <span>Se alla</span>
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
@@ -246,6 +256,9 @@ export default function HomePage() {
           <div>
             <p className="text-white/80 text-xs font-medium uppercase tracking-wider">Erbjudanden</p>
             <p className="text-white font-bold text-2xl">VECKA {getWeekNumber()}</p>
+            {campaignDate && (
+              <p className="text-white/70 text-xs mt-0.5">{campaignDate}</p>
+            )}
           </div>
           <div className="flex items-center gap-2 text-white/90 text-sm font-medium">
             <span>Se veckans erbjudanden</span>
