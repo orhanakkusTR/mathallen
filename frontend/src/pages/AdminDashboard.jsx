@@ -159,11 +159,23 @@ export default function AdminDashboard() {
   });
 
   useEffect(() => {
+    // Prevent indexing of admin pages
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    document.title = "Admin Dashboard - Mathallen Malmö";
+    
     if (!token) {
       navigate("/admin");
       return;
     }
     fetchData();
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
   }, [token, navigate]);
 
   const fetchData = async () => {

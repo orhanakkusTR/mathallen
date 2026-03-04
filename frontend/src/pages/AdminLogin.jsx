@@ -19,11 +19,23 @@ export default function AdminLogin() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Prevent indexing of admin pages
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+    
+    document.title = "Admin Login - Mathallen Malmö";
+    
     // Check if already logged in
     const token = localStorage.getItem("mathallen_admin_token");
     if (token) {
       navigate("/admin/dashboard");
     }
+    
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
   }, [navigate]);
 
   const handleSubmit = async (e) => {
